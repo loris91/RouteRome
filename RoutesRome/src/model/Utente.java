@@ -6,11 +6,11 @@ public class Utente {
 	private String email;
 	private String nome;
 	private String cognome;
-	
+
 	public Utente() {
-		super();		
+		super();
 	}
-	
+
 	public Utente(String username, String password, String email, String nome,
 			String cognome) {
 		super();
@@ -117,6 +117,6 @@ public class Utente {
 		return "Utente [username=" + username + ", password=" + password
 				+ ", email=" + email + ", nome=" + nome + ", cognome="
 				+ cognome + "]";
-	}	
+	}
 
 }

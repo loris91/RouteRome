@@ -26,7 +26,7 @@ public class Item {
 		this.durata = durata;
 		this.coordinata = coordinata;
 	}
-	
+
 	public String getId() {
 		return this.id;
 	}
