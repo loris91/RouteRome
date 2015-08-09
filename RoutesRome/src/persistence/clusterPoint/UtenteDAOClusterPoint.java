@@ -40,7 +40,7 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 
 			List<String> docs = new ArrayList<String>();
 			docs.add("<document><id>" + username + "</id><password>" + password
-					+ "</password>");
+					+ "</password></document>");
 
 			// Create Insert request
 			CPSInsertRequest insert_req = new CPSInsertRequest();
