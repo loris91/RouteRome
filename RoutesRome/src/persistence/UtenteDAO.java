@@ -4,9 +4,9 @@ import model.Utente;
 
 public interface UtenteDAO {
 
-	boolean insert(Utente Utente);
+	boolean insert(Utente utente);
 
-	boolean delete(Utente Utente);
+	boolean delete(Utente utente);
 
 	boolean deleteAll();
 

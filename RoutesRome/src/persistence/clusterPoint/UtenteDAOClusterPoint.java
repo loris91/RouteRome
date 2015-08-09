@@ -1,6 +1,7 @@
 package persistence.clusterPoint;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,8 +10,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.clusterpoint.api.CPSConnection;
+import com.clusterpoint.api.request.CPSDeleteRequest;
 import com.clusterpoint.api.request.CPSInsertRequest;
 import com.clusterpoint.api.request.CPSSearchRequest;
+import com.clusterpoint.api.response.CPSModifyResponse;
 import com.clusterpoint.api.response.CPSSearchResponse;
 
 import model.Item;
@@ -23,7 +26,7 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 	public UtenteDAOClusterPoint() {
 		this.data = new DataSource();
 	}
-	
+
 	@Override
 	public boolean insert(Utente utente) {
 		boolean esito = false;
@@ -55,9 +58,23 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 	}
 
 	@Override
-	public boolean delete(Utente Utente) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(Utente utente) {
+		Boolean esito = false;
+
+		CPSConnection connessione;
+		try {
+			connessione = this.data.getConnection("User");
+
+			String usernname = utente.getUsername();
+			CPSDeleteRequest delete_req = new CPSDeleteRequest(usernname);
+			connessione.sendRequest(delete_req);
+
+			esito = true;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return esito;
 	}
 
 	@Override
@@ -70,7 +87,7 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 	public Utente findByUsername(String username) {
 
 		Utente utente = new Utente();
-		
+
 		CPSConnection connessione;
 
 		try {
