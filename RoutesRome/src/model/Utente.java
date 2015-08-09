@@ -117,10 +117,6 @@ public class Utente {
 		return "Utente [username=" + username + ", password=" + password
 				+ ", email=" + email + ", nome=" + nome + ", cognome="
 				+ cognome + "]";
-	}
-	
-	
-	
-	
+	}	
 
 }
