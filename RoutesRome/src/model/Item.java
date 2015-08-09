@@ -8,7 +8,15 @@ public class Item {
 	private int durata;
 	private Coordinata coordinata;
 	
-	public Item(String nome, String via, String categoria, int durata,
+	public Item(String id, String nome, String via, int durata) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.via = via;
+		this.durata = durata;
+	}
+	
+	public Item(String id, String nome, String via, String categoria, int durata,
 			Coordinata coordinata) {
 		super();
 		this.id = id;

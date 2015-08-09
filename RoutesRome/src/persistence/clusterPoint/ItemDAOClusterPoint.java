@@ -2,11 +2,18 @@ package persistence.clusterPoint;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 import com.clusterpoint.api.CPSConnection;
 import com.clusterpoint.api.request.CPSInsertRequest;
+import com.clusterpoint.api.request.CPSSearchRequest;
 import com.clusterpoint.api.response.CPSModifyResponse;
+import com.clusterpoint.api.response.CPSSearchResponse;
 
 import model.Item;
 import persistence.ItemDAO;
@@ -59,8 +66,48 @@ public class ItemDAOClusterPoint implements ItemDAO {
 
 	@Override
 	public List<Item> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Item> items = new ArrayList<Item>();
+		
+		CPSConnection connessione;
+
+		try {
+			connessione = this.data.getConnection("Luoghi");
+
+			String query = "*";
+
+			// return documents starting with the first one - offset 0
+			int offset = 0;
+			// return not more than 5 documents
+			int docs = 5;
+			// return these fields from the documents
+			Map<String, String> list = new HashMap<String, String>();
+			list.put("id", "yes");
+
+			CPSSearchRequest search_req = new CPSSearchRequest(query, offset,
+					docs, list);
+			CPSSearchResponse search_resp = (CPSSearchResponse) connessione
+					.sendRequest(search_req);
+
+			if (search_resp.getHits() > 0) {
+				List<Element> documents = search_resp.getDocuments();
+
+				for (Element element : documents) {
+					NodeList attributes = element.getChildNodes();
+					String id = attributes.item(0).getTextContent();
+					String nome = attributes.item(1).getTextContent();
+					String via = attributes.item(2).getTextContent();
+					int durata = Integer.parseInt(attributes.item(3).getTextContent());
+					Item item = new Item(id, nome, via, durata);
+					items.add(item);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return items;
+
 	}
 
 }
