@@ -3,14 +3,14 @@ package model.facade;
 import java.util.List;
 
 import model.Item;
-import persistence.postgres.ItemDAOPostgres;
+import persistence.clusterPoint.ItemDAOClusterPoint;
 
 public class FacadeItem {
-	private ItemDAOPostgres dao;
+	private ItemDAOClusterPoint dao;
 
 	public FacadeItem() {
 		super();
-		this.dao = new ItemDAOPostgres();
+		this.dao = new ItemDAOClusterPoint();
 	}
 
 	public boolean addItem(int key, Item item) {
