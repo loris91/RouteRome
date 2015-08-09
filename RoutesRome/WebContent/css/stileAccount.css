@@ -1,0 +1,28 @@
+@CHARSET "ISO-8859-1";
+
+fieldset img {
+	display: inline;
+	float: left;
+	margin: 10px 10px 10px 10px;
+}
+
+fieldset span{
+	margin: 10px 10px 10px 10px;	
+}
+
+fieldset a {
+	display: block;
+	padding-left: 150px;
+	margin: 10px 10px 10px 10px;
+	text-decoration: none;
+	colore:navy;
+	font-size: large;
+}
+
+fieldset h3{
+	color: blue;
+}
+
+fieldset input{
+	margin: 10px 10px 10px 50px;
+}

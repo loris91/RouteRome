@@ -1,0 +1,49 @@
+@CHARSET "ISO-8859-1";
+
+#confermaOrdine a{
+	font-weight: bolder;
+}
+
+#destinatario {
+	width: 300px;
+	float :left;
+	margin : 10px 10px 10px 10px;
+	padding: 10px 10px 10px 10px;
+}
+
+#pagamento {
+	width: 300px;
+	float :left;
+	margin : 10px 10px 10px 10px;
+	padding: 10px 10px 10px 10px;
+	
+}
+
+#ordina {
+	width: 300px;
+	float :left;
+	margin : 10px 10px 10px 10px;
+	padding: 10px 10px 10px 10px;
+	background-color:#EBF3FE;
+	border-style: groove;
+	border-color: navy;
+	border-radius: 10px 10px 10px 10px;
+	
+}
+
+#ordina button {
+	margin-left: 50px;
+	margin-top:8px;
+	width:150px;
+	height:25px;
+	position: relative;
+	border-radius: 10px 10px 10px 10px;
+	border-color: blue;
+	background-image: url("../images/button.jpg");
+}
+
+#ordina p {
+	color:#C41818;
+	margin-left: 50px;
+	margin-top:8px;
+}

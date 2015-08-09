@@ -1,0 +1,101 @@
+@CHARSET "ISO-8859-1";
+
+#boxCarrello td  {
+	padding: 10px 20px 10px 10px
+}
+
+#boxCarrello {
+	width: 790px;
+	padding: 5px 5px 5px 5px;
+	margin: 10px;
+	display:inline;
+	float: left;
+}
+
+
+#intestazione #colonnaArticolo {
+	color:gray;
+	width: 750px;
+}
+
+#intestazione #colonnaQuantita {
+	color:gray;
+	text-align:left;
+	width:80px;
+}
+
+#intestazione #colonnaPrezzo{
+	color:gray;
+	text-align:left;
+	width:80px;
+}
+
+#tabellaCarrello #colonnaImmagine{
+	width:140px;	
+}
+
+#tabellaCarrello #colonnaNome{
+	font-weight:bold;
+	font-size:large;
+	color:blue;
+	width:500px;
+}
+
+#tabellaCarrello #colonnaQuantita {
+	width:100px;
+}
+
+#tabellaCarrello #colonnaPrezzo{
+	width:100px;
+	font-weight:bolder;
+	color:#C41818;
+}
+
+#totaleProvvisorioCarrello {
+	font-weight: bolder;
+	font-size: large;
+	padding-left: 500px;
+	
+}
+
+#boxVendita {
+	float:right;
+	width:240px;
+	height:180px;
+	border-color: navy;
+	background-color: #C0DBF2;
+	padding: 10px 10px 10px 10px;
+	border-style: groove;
+	border-radius: 10px 10px 10px 10px;
+}
+
+#boxVendita #totaleProvvisorioVendita{
+	background-color: #EBF3FE;
+	border-radius: 10px 10px 10px 10px;
+}
+
+#boxVendita button {
+	margin-left: 50px;
+	margin-top:8px;
+	width:150px;
+	height:25px;
+	position: relative;
+	border-radius: 10px 10px 10px 10px;
+	border-color: blue;
+	background-image: url("../images/button.jpg");
+}
+
+
+#boxVendita #text{
+	padding: 5px 5px 0px 5px; 
+	margin-left: 10px;
+}
+
+#boxVendita #total {
+	color:#C41818;
+	padding: 0px 5px 5px 5px;
+	margin-left: 80px;
+	font-weight: bold;
+}
+
+

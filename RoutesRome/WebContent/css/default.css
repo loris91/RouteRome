@@ -1,0 +1,43 @@
+@CHARSET "ISO-8859-1";
+
+body {
+	margin: 50px;
+	padding: 50px;
+	background-color: window;
+	font-family: Trebuchet MS;
+	border-style: outset;
+	border-color: silver;
+	border-radius: 100px 20px 100px 20px
+}
+
+
+
+html {
+	background-attachment: fixed;
+	background-position: center;
+	background-position: top;
+	background: #2cd211;
+	background-image: url("../images/zenbg-1.png"), url("../images/zenbg-2.png");
+	background-repeat: repeat-x, repeat;
+}
+
+button {
+	border-radius: 10px 10px 10px 10px;
+}
+
+fieldset {
+	border-color: lime;
+	margin: 10px 10px 10px 10px;
+}
+
+
+h1 {
+	font-family: 'Fredericka the Great', cursive;
+}
+
+h2 {
+	font-family: 'Fredericka the Great', cursive;
+}
+
+
+

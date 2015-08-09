@@ -1,0 +1,114 @@
+@CHARSET "ISO-8859-1";
+
+
+#prodotti {
+	margin: 5px 5px 5px 5px;
+	padding: 5px 5px 5px 5px;
+}
+
+
+
+#prodotto {
+	float: left;
+	margin: 5px 5px 5px 5px;
+	padding: 5px 5px 5px 5px;
+	width: 320px;
+	height: 150px;
+}
+
+#prodotto #image {
+	float: left;
+	width: 80px;
+	height: 80px;
+	margin: 5px 5px 5px 5px;
+	padding:5px 5px 5px 5px;
+	display: inline-block;
+}
+
+
+#prodotto div {	
+	float :none;
+	height: 80 px;
+	margin: 10px 10px 10px 10px;
+	padding: 10px 10px 10px;
+}
+
+#prodotto #name {
+	display: block;
+	font-size: medium;
+	color: blue;
+	font-weight: bolder;	
+}
+
+#prodotto #price {
+	float: none;
+	display: block;
+	color:#C41818;
+	font-size: small;
+}
+
+#prodotto button {
+	display: block;
+}
+
+
+#prodottoAggiunto {
+	display:inline-block;
+	height: 250px;
+	width: 800px;
+}
+#prodottoAggiunto #numeroArticoli{
+	display: block;	
+	color:green;
+	font-weight: bolder;
+	padding-left: 20px;
+}
+
+#prodottoAggiunto img {
+	float: left;
+	margin: 10px 10px 10px 10px;
+}
+
+
+#prodottoAggiunto #nome {
+	display: block;
+	padding-left: 150px;
+	margin: 50px 10px 10px 10px;
+	color:blue;
+	font-weight: bolder;	
+}
+
+#prodottoAggiunto #prezzo {
+	display: block;
+	padding-left: 150px;
+	margin: 10px 10px 10px 10px;
+	color:#C41818;
+	font-weight: bolder;	
+}
+
+#carrello {
+	height: 150px;
+	width: 250px;
+	border-color: navy;
+	border-style: groove;
+	background-color: #EBF3FE;
+	float: right;
+	border-radius: 10px 10px 10px 10px;
+	
+}
+
+#carrello p {
+	margin-left:30px;
+	margin-top: 50px;
+}
+
+#carrello button {
+	margin-left: 50px;
+	margin-top:8px;
+	width:150px;
+	height:25px;
+	position: relative;
+	border-radius: 10px 10px 10px 10px;
+	border-color: blue;
+	background-image: url("../images/button.jpg");
+}
