@@ -79,8 +79,16 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 
 	@Override
 	public boolean deleteAll() {
-		// TODO Auto-generated method stub
-		return false;
+		Boolean esito = false;
+
+		List<Utente> utenti = this.findAll();
+
+		for (Utente utente : utenti) {
+			this.delete(utente);
+		}
+
+		esito = true;
+		return esito;
 	}
 
 	@Override
@@ -131,6 +139,49 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 	public boolean findByEmail(String email) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<Utente> findAll() {
+		List<Utente> utenti = new ArrayList<Utente>();
+
+		CPSConnection connessione;
+
+		try {
+			connessione = this.data.getConnection("Luoghi");
+
+			String query = "*";
+
+			// return documents starting with the first one - offset 0
+			int offset = 0;
+			// return not more than 5 documents
+			int docs = 5;
+			// return these fields from the documents
+			Map<String, String> list = new HashMap<String, String>();
+			list.put("id", "yes");
+
+			CPSSearchRequest search_req = new CPSSearchRequest(query, offset,
+					docs, list);
+			CPSSearchResponse search_resp = (CPSSearchResponse) connessione
+					.sendRequest(search_req);
+
+			if (search_resp.getHits() > 0) {
+				List<Element> documents = search_resp.getDocuments();
+
+				for (Element element : documents) {
+					NodeList attributes = element.getChildNodes();
+					String id = attributes.item(0).getTextContent();
+					String password = attributes.item(1).getTextContent();
+					Utente utente = new Utente(id, password);
+					utenti.add(utente);
+				}
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return utenti;
+
 	}
 
 }

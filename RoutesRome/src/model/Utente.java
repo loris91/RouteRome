@@ -11,6 +11,12 @@ public class Utente {
 		super();
 	}
 
+	public Utente(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;	
+	}
+	
 	public Utente(String username, String password, String email, String nome,
 			String cognome) {
 		super();

@@ -1,5 +1,7 @@
 package persistence;
 
+import java.util.List;
+
 import model.Utente;
 
 public interface UtenteDAO {
@@ -13,5 +15,8 @@ public interface UtenteDAO {
 	Utente findByUsername(String username);
 
 	public boolean findByEmail(String email);
+	
+	List<Utente> findAll();
+
 
 }
