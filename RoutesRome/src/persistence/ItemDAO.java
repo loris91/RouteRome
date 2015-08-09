@@ -6,7 +6,7 @@ import model.Item;
 
 public interface ItemDAO {
 	
-	boolean insert(int key,Item item);
+	boolean insert(Item item);
 	
 	List<Item> findByCategoria(String tag);	
 	

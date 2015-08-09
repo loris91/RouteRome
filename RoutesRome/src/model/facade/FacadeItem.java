@@ -14,7 +14,7 @@ public class FacadeItem {
 	}
 
 	public boolean addItem(int key, Item item) {
-		return this.dao.insert(key,item);
+		return this.dao.insert(item);
 	}
 
 	public List<Item> getItemByCategoria(String tag) {
