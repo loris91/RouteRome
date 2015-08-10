@@ -41,7 +41,8 @@ public class Itinerario {
 	}
 	
 	public Item nextStop() {
+		Item nextStop = null;
 		//TODO
-		return null;
+		return nextStop;
 	}
 }
