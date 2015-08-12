@@ -7,10 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css\default.css" rel="stylesheet" type="text/css" />
 <title>2MSoft-Racommendation - Seleziona Orari</title>
+<script src="script/geolocalization.js"></script>
 </head>
 <body>
+	<p align="center">
+	<a href="index.jsp"> <img alt="RouteRome - Logo" src="images\copertina.png" width="100%">
+	</a></p>
 	<form action="raccomanda.do" method="post">
-
+	
 		<fieldset>
 			<legend>
 				<h1>Selezione Orari</h1>
@@ -147,14 +151,18 @@
    				</c:if>
 			</h5>
 			
-			<p>Inserisci l'indirizzo della tua posizione!</p>
+			<p>Inserisci un indirizzo o fatti geolocalizzare e poi conferma!</p>
 			<h5>
-				<input type="text" placeholder="Indirizzo" name="indirizzo" />
+				<input id="idText" type="text" placeholder="Punto di partenza" name="indirizzo" />
 				<c:if test="${erroreIndirizzo!=null}">
    					${erroreIndirizzo}
    				</c:if>
 			</h5>
 			<input type="submit" value="Conferma!" name="bottone" />
+			
+			<input type="button" onclick="getLocation();" value="Get Location" />			
+
+
 		</fieldset>
 	</form>
 	<%@ include file="diritti.jsp" %>

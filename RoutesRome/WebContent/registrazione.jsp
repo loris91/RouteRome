@@ -9,6 +9,9 @@
 <title>2MSoft-Racommendation - Registrazione</title>
 </head>
 <body>
+	<p align="center">
+	<a href="index.jsp"> <img alt="RouteRome - Logo" src="images\copertina.png" width="100%">
+	</a></p>
 	<form action="registra.do" method="post">
 
 		<ul>

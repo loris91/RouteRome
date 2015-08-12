@@ -13,6 +13,9 @@
 <title>2MSoft-Racommendation - Home Page</title>
 </head>
 <body>
+	<p align="center">
+	<a href="index.jsp"> <img alt="RouteRome - Logo" src="images\copertina.png" width="100%">
+	</a></p>
 	<form action="login.do" method="post">
 		<fieldset>
 			<legend>
