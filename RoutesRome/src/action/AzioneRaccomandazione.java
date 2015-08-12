@@ -22,6 +22,10 @@ public class AzioneRaccomandazione extends Azione{
 		HttpSession sessione = request.getSession();
 		Utente utente = (Utente) sessione.getAttribute("utente");
 		
+		System.out.println(inizio);
+		System.out.println(fine);
+		System.out.println(posizione);
+		
 		if (inizio.equals("null")){
 			request.setAttribute("erroreInizio", "Devi selezionare un orario di inizio visita.");
 			return "raccomandazioneFallita";
@@ -38,10 +42,7 @@ public class AzioneRaccomandazione extends Azione{
 		}
 		
 		
-		DateTimeFormatter parseFormat = new DateTimeFormatterBuilder().appendPattern("h:mm").toFormatter();
-		LocalTime localTime = LocalTime.parse(inizio, parseFormat);
 		
-		System.out.println(localTime);
 		
 		
 		//Creare una classe di supporto? che sulla base dell'orario e dell'indirizzo
