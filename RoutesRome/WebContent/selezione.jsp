@@ -153,7 +153,7 @@
 			
 			<p>Inserisci un indirizzo o fatti geolocalizzare e poi conferma!</p>
 			<h5>
-				<input id="idText" type="text" placeholder="Punto di partenza" name="indirizzo" />
+				<input id="idText" type="text" placeholder="Punto di partenza" name="posizione" />
 				<c:if test="${erroreIndirizzo!=null}">
    					${erroreIndirizzo}
    				</c:if>

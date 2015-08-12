@@ -12,13 +12,20 @@ public class Itinerario {
 	private Coordinata coordinataCorrente;
 	private LocalTime oraCorrente;
 	private List<Item> itinerario;
+	private LocalTime inizio;
+	private LocalTime fine;
 	
-	public Itinerario() {}
-	
-	public Itinerario(Utente utente, Coordinata coordinata) {
+	public Itinerario() {
+		super();
+	}
+
+	public Itinerario(Utente utente, Coordinata coordinataCorrente,
+			LocalTime inizio, LocalTime fine) {
 		super();
 		this.utente = utente;
-		this.coordinataCorrente = coordinata;
+		this.coordinataCorrente = coordinataCorrente;
+		this.inizio = inizio;
+		this.fine = fine;
 	}
 
 	public Utente getUtente() {
