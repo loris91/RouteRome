@@ -1,11 +1,16 @@
 package model;
 
+import java.time.Duration;
+import java.time.LocalTime;
+import java.time.temporal.TemporalAmount;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Itinerario {
 
 	private Utente utente;
-	private Coordinata coordinata;
+	private Coordinata coordinataCorrente;
+	private LocalTime oraCorrente;
 	private List<Item> itinerario;
 	
 	public Itinerario() {}
@@ -13,7 +18,7 @@ public class Itinerario {
 	public Itinerario(Utente utente, Coordinata coordinata) {
 		super();
 		this.utente = utente;
-		this.coordinata = coordinata;
+		this.coordinataCorrente = coordinata;
 	}
 
 	public Utente getUtente() {
@@ -21,7 +26,7 @@ public class Itinerario {
 	}
 
 	public Coordinata getCoordinata() {
-		return this.coordinata;
+		return this.coordinataCorrente;
 	}
 	
 	public List<Item> getItinerario() {
@@ -33,16 +38,38 @@ public class Itinerario {
 	}
 
 	public void setCoordinata(Coordinata coordinata) {
-		this.coordinata = coordinata;
+		this.coordinataCorrente = coordinata;
 	}
 
 	public void calcolaItinerario() {
-		//TODO
+		List<Item> luoghiVisitabili = this.utente.getLuoghiVisitabili();
+		int ora = this.oraCorrente.getHour();
+		if(12<ora || ora<15) {
+			//RISTORANTE
+		}
+		else {
+			Item nextStop = this.nextStop(luoghiVisitabili);
+			this.itinerario.add(nextStop);
+		}
 	}
 	
-	public Item nextStop() {
+	public Item nextStop(List<Item> luoghiVisitabili) {
 		Item nextStop = null;
-		//TODO
+		float minDistance = 500000; //MAXDISTANCE
+		float distance;
+		for (Item item : luoghiVisitabili) {
+			distance = this.coordinataCorrente.distFrom(item.getCoordinata());
+			if(distance < minDistance) {
+				nextStop = item;
+				minDistance = distance;
+			}
+		}
+		if (nextStop != null) {
+			this.coordinataCorrente = nextStop.getCoordinata();
+			LocalTime tempoDiVisita = LocalTime.of(0, 0);
+			tempoDiVisita.plusMinutes(nextStop.getDurata());
+			this.oraCorrente = this.oraCorrente.plusMinutes(tempoDiVisita.getMinute());
+		}
 		return nextStop;
 	}
 }

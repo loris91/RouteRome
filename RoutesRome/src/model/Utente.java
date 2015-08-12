@@ -1,11 +1,14 @@
 package model;
 
+import java.util.List;
+
 public class Utente {
 	private String username;
 	private String password;
 	private String email;
 	private String nome;
 	private String cognome;
+	private List<Item> luoghiVisitabili;
 
 	public Utente() {
 		super();
@@ -66,6 +69,15 @@ public class Utente {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
+	
+	public List<Item> getLuoghiVisitabili() {
+		return luoghiVisitabili;
+	}
+
+	public void setLuoghiVisitabili(List<Item> luoghiVisitabili) {
+		this.luoghiVisitabili = luoghiVisitabili;
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -124,5 +136,4 @@ public class Utente {
 				+ ", email=" + email + ", nome=" + nome + ", cognome="
 				+ cognome + "]";
 	}
-
 }
