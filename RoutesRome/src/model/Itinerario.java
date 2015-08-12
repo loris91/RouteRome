@@ -3,14 +3,16 @@ package model;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.time.temporal.TemporalAmount;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
+import bho.CoordinateHelper;
 
 public class Itinerario {
 
 	private Utente utente;
 	private Coordinata coordinataCorrente;
-	private LocalTime oraCorrente;
 	private List<Item> itinerario;
 	private LocalTime inizio;
 	private LocalTime fine;
@@ -25,7 +27,8 @@ public class Itinerario {
 		this.utente = utente;
 		this.coordinataCorrente = coordinataCorrente;
 		this.inizio = inizio;
-		this.fine = fine;
+		this.fine = fine;	
+		this.itinerario = new ArrayList<Item>();
 	}
 
 	public Utente getUtente() {
@@ -48,24 +51,33 @@ public class Itinerario {
 		this.coordinataCorrente = coordinata;
 	}
 
-	public void calcolaItinerario() {
+	public List<Item> calcolaItinerario() {
 		List<Item> luoghiVisitabili = this.utente.getLuoghiVisitabili();
-		int ora = this.oraCorrente.getHour();
-		if(12<ora || ora<15) {
+		System.out.println(luoghiVisitabili.size());
+		LocalTime oraCorrente = this.inizio;
+		int ora = oraCorrente.getHour();
+		
+		if(12<ora && ora<15) {
 			//RISTORANTE
+			System.out.println("Scelta ristorante");
 		}
 		else {
-			Item nextStop = this.nextStop(luoghiVisitabili);
+			Item nextStop = this.nextStop(luoghiVisitabili,oraCorrente);
 			this.itinerario.add(nextStop);
 		}
+		
+		return this.itinerario;
 	}
 	
-	public Item nextStop(List<Item> luoghiVisitabili) {
+	public Item nextStop(List<Item> luoghiVisitabili, LocalTime oraCorrente) {
+		CoordinateHelper helper = new CoordinateHelper();
+		
 		Item nextStop = null;
 		float minDistance = 500000; //MAXDISTANCE
 		float distance;
 		for (Item item : luoghiVisitabili) {
-			distance = this.coordinataCorrente.distFrom(item.getCoordinata());
+			Coordinata coord = helper.getCoordinate(item.getVia());
+			distance = this.coordinataCorrente.distFrom(coord);
 			if(distance < minDistance) {
 				nextStop = item;
 				minDistance = distance;
@@ -75,8 +87,9 @@ public class Itinerario {
 			this.coordinataCorrente = nextStop.getCoordinata();
 			LocalTime tempoDiVisita = LocalTime.of(0, 0);
 			tempoDiVisita.plusMinutes(nextStop.getDurata());
-			this.oraCorrente = this.oraCorrente.plusMinutes(tempoDiVisita.getMinute());
+			oraCorrente = oraCorrente.plusMinutes(tempoDiVisita.getMinute());
 		}
 		return nextStop;
 	}
+	
 }

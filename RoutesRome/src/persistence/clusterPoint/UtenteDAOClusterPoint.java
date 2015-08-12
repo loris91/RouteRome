@@ -123,8 +123,7 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 					NodeList attributes = element.getChildNodes();
 					String id = attributes.item(0).getTextContent();
 					String password = attributes.item(1).getTextContent();
-					utente.setUsername(id);
-					utente.setPassword(password);
+					utente = new Utente(id, password);
 				}
 			}
 		} catch (Exception e) {

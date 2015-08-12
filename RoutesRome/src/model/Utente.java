@@ -2,6 +2,8 @@ package model;
 
 import java.util.List;
 
+import model.facade.FacadeItem;
+
 public class Utente {
 	private String username;
 	private String password;
@@ -16,18 +18,22 @@ public class Utente {
 
 	public Utente(String username, String password) {
 		super();
+		FacadeItem facadeItem = new FacadeItem();
 		this.username = username;
 		this.password = password;	
+		this.luoghiVisitabili = facadeItem.getItems();	
 	}
 	
 	public Utente(String username, String password, String email, String nome,
 			String cognome) {
 		super();
+		FacadeItem facadeItem = new FacadeItem();
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.nome = nome;
 		this.cognome = cognome;
+		this.luoghiVisitabili = facadeItem.getItems();		
 	}
 
 	public String getUsername() {

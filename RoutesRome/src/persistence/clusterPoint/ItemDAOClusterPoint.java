@@ -79,7 +79,7 @@ public class ItemDAOClusterPoint implements ItemDAO {
 			// return documents starting with the first one - offset 0
 			int offset = 0;
 			// return not more than 5 documents
-			int docs = 5;
+			int docs = 100;
 			// return these fields from the documents
 			Map<String, String> list = new HashMap<String, String>();
 			list.put("id", "yes");
