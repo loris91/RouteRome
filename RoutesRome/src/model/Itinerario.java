@@ -82,17 +82,17 @@ public class Itinerario {
 
 	public Item nextStop(List<Item> luoghiVisitabili, LocalTime oraCorrente) {
 		System.out.println("\n***NEXT STOP***");
-		CoordinateHelper helper = new CoordinateHelper();
+		//CoordinateHelper helper = new CoordinateHelper();
 
 		Item nextStop = null;
 		float minDistance = 500000; // MAXDISTANCE
 		float distance;
 		for (Item item : luoghiVisitabili) {
-			Coordinata coord = helper.getCoordinate(item.getVia());
-			distance = this.coordinataCorrente.distFrom(coord);
+			//Coordinata coord = helper.getCoordinate(item.getVia());
+			distance = this.coordinataCorrente.distFrom(item.getCoordinata());
 			if (distance < minDistance) {
 				minDistance = distance;
-				this.coordinataCorrente = coord;
+				this.coordinataCorrente = item.getCoordinata();
 				nextStop = item;
 				nextStop.setCoordinata(this.coordinataCorrente);
 			}

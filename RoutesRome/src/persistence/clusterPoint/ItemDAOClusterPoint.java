@@ -99,7 +99,10 @@ public class ItemDAOClusterPoint implements ItemDAO {
 					String nome = attributes.item(1).getTextContent();
 					String via = attributes.item(2).getTextContent();
 					int durata = Integer.parseInt(attributes.item(3).getTextContent());
-					Item item = new Item(id, nome, via, durata);
+					double lat = Double.parseDouble(attributes.item(4).getChildNodes().item(0).getTextContent());
+					double lon = Double.parseDouble(attributes.item(4).getChildNodes().item(1).getTextContent());
+					Coordinata coordinata = new Coordinata(lat,lon); 
+					Item item = new Item(id, nome, via, "", durata, coordinata);
 					items.add(item);
 				}
 			}

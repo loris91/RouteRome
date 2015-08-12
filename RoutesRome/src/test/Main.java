@@ -23,7 +23,7 @@ public class Main {
 			System.out.println(item.getCoordinata().getLatitudine());
 			System.out.println(item.getCoordinata().getLongitudine());
 		}
-		
 	}
+		
 
 }
