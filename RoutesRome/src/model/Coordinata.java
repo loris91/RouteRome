@@ -31,5 +31,9 @@ public class Coordinata {
 
 		return dist;
 	} 
+	
+	public String toString() {
+		return this.latitudine + " , " + this.longitudine + "\n";
+	}
 
 }

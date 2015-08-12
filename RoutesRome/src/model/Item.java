@@ -50,4 +50,28 @@ public class Item {
 	public Coordinata getCoordinata() {
 		return this.coordinata;
 	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setVia(String via) {
+		this.via = via;
+	}
+
+	public void setCategoria(String categoria) {
+		this.categoria = categoria;
+	}
+
+	public void setDurata(int durata) {
+		this.durata = durata;
+	}
+
+	public void setCoordinata(Coordinata coordinata) {
+		this.coordinata = coordinata;
+	}
 }

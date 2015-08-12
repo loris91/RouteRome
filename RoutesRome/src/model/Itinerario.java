@@ -16,7 +16,7 @@ public class Itinerario {
 	private List<Item> itinerario;
 	private LocalTime inizio;
 	private LocalTime fine;
-	
+
 	public Itinerario() {
 		super();
 	}
@@ -27,7 +27,7 @@ public class Itinerario {
 		this.utente = utente;
 		this.coordinataCorrente = coordinataCorrente;
 		this.inizio = inizio;
-		this.fine = fine;	
+		this.fine = fine;
 		this.itinerario = new ArrayList<Item>();
 	}
 
@@ -38,11 +38,11 @@ public class Itinerario {
 	public Coordinata getCoordinata() {
 		return this.coordinataCorrente;
 	}
-	
+
 	public List<Item> getItinerario() {
 		return this.itinerario;
 	}
-	
+
 	public void setUtente(Utente utente) {
 		this.utente = utente;
 	}
@@ -52,44 +52,57 @@ public class Itinerario {
 	}
 
 	public List<Item> calcolaItinerario() {
+		System.out.println("Ora Inizio: " + this.inizio);
+		System.out.println("Ora Fine: " + this.fine);
 		List<Item> luoghiVisitabili = this.utente.getLuoghiVisitabili();
 		System.out.println(luoghiVisitabili.size());
 		LocalTime oraCorrente = this.inizio;
-		int ora = oraCorrente.getHour();
-		
-		if(12<ora && ora<15) {
-			//RISTORANTE
-			System.out.println("Scelta ristorante");
+		int ora;
+		while (oraCorrente.isBefore(fine)) {
+			ora = oraCorrente.getHour();
+			if (12 < ora && ora < 15) {
+				// RISTORANTE
+				System.out.println("Scelta ristorante");
+			} else {
+				Item nextStop = this.nextStop(luoghiVisitabili, oraCorrente);
+				System.out.println(nextStop.getNome());
+				this.itinerario.add(nextStop);
+				int tempoDiVisita = nextStop.getDurata();
+				System.out.println("Durata Visita: "
+						+ tempoDiVisita);
+				oraCorrente = oraCorrente
+						.plusMinutes(tempoDiVisita);
+				System.out.println("Ora aggiornata: " + oraCorrente);
+				luoghiVisitabili.remove(nextStop);
+
+			}
 		}
-		else {
-			Item nextStop = this.nextStop(luoghiVisitabili,oraCorrente);
-			this.itinerario.add(nextStop);
-		}
-		
 		return this.itinerario;
 	}
-	
+
 	public Item nextStop(List<Item> luoghiVisitabili, LocalTime oraCorrente) {
+		System.out.println("\n***NEXT STOP***");
 		CoordinateHelper helper = new CoordinateHelper();
-		
+
 		Item nextStop = null;
-		float minDistance = 500000; //MAXDISTANCE
+		float minDistance = 500000; // MAXDISTANCE
 		float distance;
 		for (Item item : luoghiVisitabili) {
 			Coordinata coord = helper.getCoordinate(item.getVia());
 			distance = this.coordinataCorrente.distFrom(coord);
-			if(distance < minDistance) {
-				nextStop = item;
+			if (distance < minDistance) {
 				minDistance = distance;
+				this.coordinataCorrente = coord;
+				nextStop = item;
+				nextStop.setCoordinata(this.coordinataCorrente);
 			}
 		}
 		if (nextStop != null) {
 			this.coordinataCorrente = nextStop.getCoordinata();
-			LocalTime tempoDiVisita = LocalTime.of(0, 0);
-			tempoDiVisita.plusMinutes(nextStop.getDurata());
-			oraCorrente = oraCorrente.plusMinutes(tempoDiVisita.getMinute());
+			System.out.println("Coordinata Corrente : "
+					+ coordinataCorrente.toString());
 		}
 		return nextStop;
 	}
-	
+
 }

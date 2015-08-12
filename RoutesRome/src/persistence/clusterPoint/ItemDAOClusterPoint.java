@@ -15,6 +15,7 @@ import com.clusterpoint.api.request.CPSSearchRequest;
 import com.clusterpoint.api.response.CPSModifyResponse;
 import com.clusterpoint.api.response.CPSSearchResponse;
 
+import model.Coordinata;
 import model.Item;
 import persistence.ItemDAO;
 
