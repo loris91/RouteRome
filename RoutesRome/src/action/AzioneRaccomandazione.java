@@ -47,22 +47,25 @@ public class AzioneRaccomandazione extends Azione {
 			return "raccomandazioneFallita";
 		}
 
+		
+		// Conversione delle variabili da stringhe
 		LocalTime inizio = LocalTime.parse(inizioInput);
 		LocalTime fine = LocalTime.parse(fineInput);
 		Coordinata posizione = converti(posizioneInput);
 		
-		System.out.println("\nConversioni:");
-		System.out.println(inizio);
-		System.out.println(fine);
-		System.out.println(posizione.getLatitudine()+" , " + posizione.getLongitudine());
 		
 		Itinerario itinerario = new Itinerario(utente, posizione, inizio, fine);
 		List<Item> luoghiDaVisitare = itinerario.calcolaItinerario();
 		
-		System.out.println(luoghiDaVisitare.size());
-		for (Item item : luoghiDaVisitare) {
-			System.out.println(item.getNome());
-		}
+//		System.out.println(luoghiDaVisitare.size());
+//		for (Item item : luoghiDaVisitare) {
+//			System.out.println(item.getNome());
+//		}
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("utente", utente);
+		request.setAttribute("itinerario", luoghiDaVisitare);
+		request.setAttribute("prova", "Testo inserito nella action");
 		
 
 		return "raccomandazionePositiva";

@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css\default.css" rel="stylesheet" type="text/css" />
-<title>2MSoft-Racommendation - Seleziona Orari</title>
+<title>RouteRome - Seleziona Orari</title>
 <script src="script/geolocalization.js"></script>
 </head>
 <body>
@@ -17,7 +17,7 @@
 	
 		<fieldset>
 			<legend>
-				<h1>Selezione Orari</h1>
+				<h3>Selezione Orari</h3>
 			</legend>
 			<p>Ciao ${utente.nome}!</p>
 			<p>Seleziona l'orario in cui vuoi iniziare e finire di visitare Roma.</p>

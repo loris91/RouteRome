@@ -66,11 +66,11 @@ public class Itinerario {
 		while (this.oraCorrente.isBefore(this.fine)) {
 			ora = oraCorrente.getHour();
 			if (12 <= ora && ora < 15 && !pranzo) {
-				Item ristorante = new Item("40", "Da Zia Pina", "Via vattela appesca", 60);
-				this.itinerario.add(ristorante);
+				// Non inserisco il ristorante nell'itinerario perchè non ha coordinate
+//				Item ristorante = new Item("40", "Da Zia Pina", "Via vattela appesca", 60);
+//				this.itinerario.add(ristorante);
 				this.pranzo=true;
-				this.oraCorrente.plusMinutes(80);
-				
+				this.oraCorrente.plusMinutes(80);				
 				System.out.println("Ora di Pappa");
 			} else {
 				Item nextStop = this.nextStop(luoghiVisitabili);

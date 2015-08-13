@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css\default.css" rel="stylesheet" type="text/css" />
 <link href="css\cssbarra.css" rel="stylesheet" type="text/css" />
-<title>2MSoft-Racommendation - Home Page</title>
+<title>RouteRome - Home Page</title>
 </head>
 <body>
 	<p align="center">
@@ -19,7 +19,7 @@
 	<form action="login.do" method="post">
 		<fieldset>
 			<legend>
-				<h1>Home Page</h1>
+				<h3>Home Page</h3>
 			</legend>
 
 			<div style="text-align: center;">

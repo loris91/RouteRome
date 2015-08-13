@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css\default.css" rel="stylesheet" type="text/css" />
-<title>2MSoft-Racommendation - Registrazione</title>
+<title>RouteRome - Registrazione</title>
 </head>
 <body>
 	<p align="center">
@@ -26,7 +26,7 @@
 		</ul>
 		<fieldset>
 			<legend>
-				<h1>Registrazione</h1>
+				<h3>Registrazione</h3>
 			</legend>
 			Ciao! Inserisci i dati richiesti per attivare il tuo account!
 			<h5>

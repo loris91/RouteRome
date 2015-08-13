@@ -5,12 +5,12 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <link href="css\default.css" rel="stylesheet" type="text/css" />
-<title>3MSoft - Error Page</title>
+<title>RouteRome - Error Page</title>
 </head>
 <body>
 	<fieldset style="border-color: lime;">
 		<legend>
-			<h1> Errore!</h1>
+			<h3> Errore!</h3>
 		</legend>
 		<div style="text-align: center;">
 		
