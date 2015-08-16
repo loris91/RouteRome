@@ -1,13 +1,13 @@
 package action;
 
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
 
 import bho.CoordinateHelper;
 import model.Coordinata;
@@ -60,12 +60,15 @@ public class AzioneRaccomandazione extends Azione {
 //		System.out.println(luoghiDaVisitare.size());
 //		for (Item item : luoghiDaVisitare) {
 //			System.out.println(item.getNome());
-//		}
+//		}		
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("utente", utente);
-		request.setAttribute("itinerario", luoghiDaVisitare);
-		request.setAttribute("prova", "Testo inserito nella action");
+		request.setAttribute("itinerario", luoghiDaVisitare);		
+		
+		//Converto la lista con Json 
+		String json = new Gson().toJson(luoghiDaVisitare );
+		request.setAttribute("mete", json);
 		
 
 		return "raccomandazionePositiva";

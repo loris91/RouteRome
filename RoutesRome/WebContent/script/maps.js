@@ -1,5 +1,6 @@
 function initialize() {
 	var mapCanvas = document.getElementById('map-canvas');
+	
 	var mapOptions = {
 		center : new google.maps.LatLng(41.8902102, 12.4922309),
 		zoom : 15,
@@ -7,7 +8,29 @@ function initialize() {
 	}
 	var map = new google.maps.Map(mapCanvas, mapOptions)
 	var iconBase = 'http://maps.google.com/mapfiles/kml/paddle/';
-
+	
+	
+	alert("Prima del for");
+	// Importo il persorso
+	var path = '${mete}';	
+	document.writeln(path);
+	document.writeln("<br>");
+	
+	var json = JSON.stringify(eval('('+path+')'));
+	document.writeln(json);
+	document.writeln("<br>");
+	
+	json = JSON.parse(json);
+	document.writeln(json);
+	document.writeln("<br>");
+	
+	for (var i = 0; i < json.length; i++) {
+		document.writeln(json[i].nome);
+		document.writeln("</br>");
+		alert(json[i].nome);
+	}	
+	
+	
 	var place1 = new google.maps.LatLng(41.8902102, 12.4922309);
 	var place2 = new google.maps.LatLng(41.8936628, 12.4864929);
 	var place3 = new google.maps.LatLng(41.9030632, 12.466276);

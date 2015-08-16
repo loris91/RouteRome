@@ -23,5 +23,7 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/postgresql-9.4-1201.jdbc4.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/standard.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/w3c.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/gson-2.3.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/lib/json-20141113.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
