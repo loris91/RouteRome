@@ -60,6 +60,7 @@ public class Itinerario {
 	public List<Item> calcolaItinerario() {
 		System.out.println("Ora Inizio: " + this.inizio);
 		System.out.println("Ora Fine: " + this.fine);
+		System.out.println("Coordinata di partenza: " + this.coordinataCorrente);
 		List<Item> luoghiVisitabili = this.utente.getLuoghiVisitabili();
 		System.out.println(luoghiVisitabili.size());
 		int ora;
@@ -93,10 +94,8 @@ public class Itinerario {
 		for (Item item : luoghiVisitabili) {
 			distance = this.coordinataCorrente.distFrom(item.getCoordinata());
 			if (distance < minDistance) {
-				minDistance = distance;
-				this.coordinataCorrente = item.getCoordinata();
 				nextStop = item;
-				nextStop.setCoordinata(this.coordinataCorrente);
+				minDistance = distance;
 			}
 		}
 		if (nextStop != null) {
