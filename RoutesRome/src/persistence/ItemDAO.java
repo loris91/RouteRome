@@ -2,14 +2,14 @@ package persistence;
 
 import java.util.List;
 
-import model.Item;
+import model.Luogo;
 
 public interface ItemDAO {
 	
-	boolean insert(Item item);
+	boolean insert(Luogo item);
 	
-	List<Item> findByCategoria(String tag);	
+	List<Luogo> findByCategoria(String tag);	
 	
-	List<Item> findAll();
+	List<Luogo> findAll();
 
 }

@@ -1,6 +1,6 @@
 package model;
 
-public class Ristorante {
+public class Ristorante extends Item{
 	private String id;
 	private String nome;
 	private String via;

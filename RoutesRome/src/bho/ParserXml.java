@@ -5,7 +5,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import model.Coordinata;
-import model.Item;
+import model.Luogo;
 import model.facade.FacadeItem;
 
 import org.w3c.dom.Document;
@@ -23,7 +23,7 @@ public class ParserXml {
 		String via;
 		String categoria;
 		int durata;
-		Item item;
+		Luogo item;
 		FacadeItem facade = new FacadeItem();
 		
 		try {
@@ -46,7 +46,7 @@ public class ParserXml {
 							.item(0).getFirstChild().getNodeValue();
 					durata = Integer.parseInt(elemento.getElementsByTagName("durata").item(0).getFirstChild().getNodeValue());
 					coordinata = helper.getCoordinate(via);	
-					item = new Item(nome, via, categoria, categoria, durata, coordinata);
+					item = new Luogo(nome, via, categoria, categoria, durata, coordinata);
 					System.out.println(i);
 					facade.addItem(i,item);
 				}

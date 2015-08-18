@@ -14,7 +14,7 @@ import com.clusterpoint.api.request.CPSSearchRequest;
 import com.clusterpoint.api.response.CPSSearchResponse;
 
 import model.Coordinata;
-import model.Item;
+import model.Luogo;
 import persistence.ItemDAO;
 
 public class ItemDAOClusterPoint implements ItemDAO {
@@ -25,7 +25,7 @@ public class ItemDAOClusterPoint implements ItemDAO {
 	}
 
 	@Override
-	public boolean insert(Item item) {
+	public boolean insert(Luogo item) {
 		boolean esito = false;
 
 		CPSConnection connessione;
@@ -58,15 +58,15 @@ public class ItemDAOClusterPoint implements ItemDAO {
 	}
 
 	@Override
-	public List<Item> findByCategoria(String tag) {
+	public List<Luogo> findByCategoria(String tag) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Item> findAll() {
+	public List<Luogo> findAll() {
 
-		List<Item> items = new ArrayList<Item>();
+		List<Luogo> items = new ArrayList<Luogo>();
 		
 		CPSConnection connessione;
 
@@ -100,7 +100,7 @@ public class ItemDAOClusterPoint implements ItemDAO {
 					double lat = Double.parseDouble(attributes.item(4).getChildNodes().item(0).getTextContent());
 					double lon = Double.parseDouble(attributes.item(4).getChildNodes().item(1).getTextContent());
 					Coordinata coordinata = new Coordinata(lat,lon); 
-					Item item = new Item(id, nome, via, "", durata, coordinata);
+					Luogo item = new Luogo(id, nome, via, "", durata, coordinata);
 					items.add(item);
 				}
 			}

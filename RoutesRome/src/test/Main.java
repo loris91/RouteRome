@@ -2,7 +2,7 @@ package test;
 
 import java.util.List;
 
-import model.Item;
+import model.Luogo;
 import model.facade.FacadeItem;
 
 public class Main {
@@ -13,11 +13,11 @@ public class Main {
 		
 		FacadeItem facade = new FacadeItem();
 		
-		List<Item> lista = facade.getItems();
+		List<Luogo> lista = facade.getItems();
 		
 		System.out.println(lista.size());
 		
-		for (Item item : lista) {
+		for (Luogo item : lista) {
 			System.out.println(item.getNome());
 			System.out.println(item.getCoordinata());
 			System.out.println(item.getCoordinata().getLatitudine());

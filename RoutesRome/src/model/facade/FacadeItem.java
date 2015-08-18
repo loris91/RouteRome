@@ -2,7 +2,7 @@ package model.facade;
 
 import java.util.List;
 
-import model.Item;
+import model.Luogo;
 import persistence.clusterPoint.ItemDAOClusterPoint;
 
 public class FacadeItem {
@@ -13,15 +13,15 @@ public class FacadeItem {
 		this.dao = new ItemDAOClusterPoint();
 	}
 
-	public boolean addItem(int key, Item item) {
+	public boolean addItem(int key, Luogo item) {
 		return this.dao.insert(item);
 	}
 
-	public List<Item> getItemByCategoria(String tag) {
+	public List<Luogo> getItemByCategoria(String tag) {
 		return this.dao.findByCategoria(tag);
 	}
 	
-	public List<Item> getItems() {
+	public List<Luogo> getItems() {
 		return this.dao.findAll();
 	}
 }

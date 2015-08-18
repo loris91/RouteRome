@@ -1,13 +1,8 @@
 package model;
 
-import java.time.Duration;
 import java.time.LocalTime;
-import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import bho.CoordinateHelper;
 
 public class Itinerario {
 
@@ -61,7 +56,7 @@ public class Itinerario {
 		System.out.println("Ora Inizio: " + this.inizio);
 		System.out.println("Ora Fine: " + this.fine);
 		System.out.println("Coordinata di partenza: " + this.coordinataCorrente);
-		List<Item> luoghiVisitabili = this.utente.getLuoghiVisitabili();
+		List<Luogo> luoghiVisitabili = this.utente.getLuoghiVisitabili();
 		System.out.println(luoghiVisitabili.size());
 		int ora;
 		while (this.oraCorrente.isBefore(this.fine)) {
@@ -74,7 +69,7 @@ public class Itinerario {
 				this.oraCorrente.plusMinutes(80);				
 				System.out.println("Ora di Pappa");
 			} else {
-				Item nextStop = this.nextStop(luoghiVisitabili);
+				Luogo nextStop = this.nextStop(luoghiVisitabili);
 				System.out.println(nextStop.getNome());
 				this.itinerario.add(nextStop);
 				
@@ -85,13 +80,13 @@ public class Itinerario {
 		return this.itinerario;
 	}
 
-	public Item nextStop(List<Item> luoghiVisitabili) {
+	public Luogo nextStop(List<Luogo> luoghiVisitabili) {
 		System.out.println("\n***NEXT STOP***");
 
-		Item nextStop = null;
+		Luogo nextStop = null;
 		float minDistance = 500000; // MAXDISTANCE
 		float distance = 0;
-		for (Item item : luoghiVisitabili) {
+		for (Luogo item : luoghiVisitabili) {
 			distance = this.coordinataCorrente.distFrom(item.getCoordinata());
 			if (distance < minDistance) {
 				nextStop = item;

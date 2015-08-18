@@ -10,7 +10,7 @@ public class Utente {
 	private String email;
 	private String nome;
 	private String cognome;
-	private List<Item> luoghiVisitabili;
+	private List<Luogo> luoghiVisitabili;
 
 	public Utente() {
 		super();
@@ -76,11 +76,11 @@ public class Utente {
 		this.cognome = cognome;
 	}
 	
-	public List<Item> getLuoghiVisitabili() {
+	public List<Luogo> getLuoghiVisitabili() {
 		return luoghiVisitabili;
 	}
 
-	public void setLuoghiVisitabili(List<Item> luoghiVisitabili) {
+	public void setLuoghiVisitabili(List<Luogo> luoghiVisitabili) {
 		this.luoghiVisitabili = luoghiVisitabili;
 	}
 
