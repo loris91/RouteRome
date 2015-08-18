@@ -4,6 +4,8 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import model.facade.FacadeRistorante;
+
 public class Itinerario {
 
 	private Utente utente;
@@ -27,9 +29,9 @@ public class Itinerario {
 		this.inizio = inizio;
 		this.fine = fine;
 		this.itinerario = new ArrayList<Item>();
-		this.oraCorrente=inizio;
-		this.pranzo=false;
-		this.cena=false;
+		this.oraCorrente = inizio;
+		this.pranzo = false;
+		this.cena = false;
 	}
 
 	public Utente getUtente() {
@@ -55,29 +57,69 @@ public class Itinerario {
 	public List<Item> calcolaItinerario() {
 		System.out.println("Ora Inizio: " + this.inizio);
 		System.out.println("Ora Fine: " + this.fine);
-		System.out.println("Coordinata di partenza: " + this.coordinataCorrente);
+		System.out
+				.println("Coordinata di partenza: " + this.coordinataCorrente);
 		List<Luogo> luoghiVisitabili = this.utente.getLuoghiVisitabili();
 		System.out.println(luoghiVisitabili.size());
 		int ora;
 		while (this.oraCorrente.isBefore(this.fine)) {
 			ora = oraCorrente.getHour();
 			if (12 <= ora && ora < 15 && !pranzo) {
-				// Non inserisco il ristorante nell'itinerario perchè non ha coordinate
-//				Item ristorante = new Item("40", "Da Zia Pina", "Via vattela appesca", 60);
-//				this.itinerario.add(ristorante);
-				this.pranzo=true;
-				this.oraCorrente.plusMinutes(80);				
+				Ristorante nextStop = this.trovaRistorante();
+				this.itinerario.add(nextStop);
+				this.pranzo = true;
+				this.oraCorrente.plusMinutes(80);
 				System.out.println("Ora di Pappa");
 			} else {
-				Luogo nextStop = this.nextStop(luoghiVisitabili);
-				System.out.println(nextStop.getNome());
-				this.itinerario.add(nextStop);
-				
-				luoghiVisitabili.remove(nextStop);
+				if (19 <= ora && ora < 21 && !cena) {
+					Ristorante nextStop = this.trovaRistorante();
+					this.itinerario.add(nextStop);
+					this.cena = true;
+					this.oraCorrente.plusMinutes(80);
+					System.out.println("Ora di Pappa");
+				} else {
+					Luogo nextStop = this.nextStop(luoghiVisitabili);
+					System.out.println(nextStop.getNome());
+					this.itinerario.add(nextStop);
 
+					luoghiVisitabili.remove(nextStop);
+
+				}
 			}
 		}
 		return this.itinerario;
+	}
+
+	private Ristorante trovaRistorante() {
+		System.out.println("\n***NEXT STOP***");
+
+		Ristorante nextStop = null;
+		float minDistance = 500000; // MAXDISTANCE
+		float distance = 0;
+		FacadeRistorante facade = new FacadeRistorante();
+		List<Ristorante> ristoranti = facade.getRistoranti();
+		for (Ristorante ristorante : ristoranti) {
+			distance = this.coordinataCorrente.distFrom(ristorante
+					.getCoordinata());
+			if (distance < minDistance) {
+				nextStop = ristorante;
+				minDistance = distance;
+			}
+		}
+		if (nextStop != null) {
+			this.coordinataCorrente = nextStop.getCoordinata();
+
+			int tempoDiVisita = 60;
+			System.out.println("Durata Visita: " + tempoDiVisita);
+			this.oraCorrente = oraCorrente.plusMinutes((int) distance / 100);
+			this.oraCorrente = oraCorrente.plusMinutes(tempoDiVisita);
+			System.out.println("Ora aggiornata: " + oraCorrente);
+
+			System.out.println("Coordinata Corrente : "
+					+ coordinataCorrente.toString());
+		}
+		return nextStop;
+
 	}
 
 	public Luogo nextStop(List<Luogo> luoghiVisitabili) {
@@ -95,13 +137,13 @@ public class Itinerario {
 		}
 		if (nextStop != null) {
 			this.coordinataCorrente = nextStop.getCoordinata();
-			
+
 			int tempoDiVisita = nextStop.getDurata();
 			System.out.println("Durata Visita: " + tempoDiVisita);
-			this.oraCorrente = oraCorrente.plusMinutes((int)distance/100);
-			this. oraCorrente = oraCorrente.plusMinutes(tempoDiVisita);
+			this.oraCorrente = oraCorrente.plusMinutes((int) distance / 100);
+			this.oraCorrente = oraCorrente.plusMinutes(tempoDiVisita);
 			System.out.println("Ora aggiornata: " + oraCorrente);
-			
+
 			System.out.println("Coordinata Corrente : "
 					+ coordinataCorrente.toString());
 		}
