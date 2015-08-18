@@ -59,7 +59,7 @@ public class Itinerario {
 		System.out.println("Ora Fine: " + this.fine);
 		System.out
 				.println("Coordinata di partenza: " + this.coordinataCorrente);
-		List<Luogo> luoghiVisitabili = this.utente.getLuoghiVisitabili();
+		List<Luogo> luoghiVisitabili = new ArrayList<Luogo>(this.utente.getLuoghiVisitabili());
 		System.out.println(luoghiVisitabili.size());
 		int ora;
 		while (this.oraCorrente.isBefore(this.fine)) {

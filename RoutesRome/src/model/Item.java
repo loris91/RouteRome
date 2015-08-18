@@ -1,9 +1,11 @@
 package model;
 
-public class Item {
-
-	public Item() {
-		// TODO Auto-generated constructor stub
-	}
-
+public abstract class Item {
+	
+	public abstract String getNome();
+	
+	public abstract String getVia();
+	
+	public abstract Coordinata getCoordinata();
+	
 }

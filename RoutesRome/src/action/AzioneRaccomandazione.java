@@ -65,7 +65,10 @@ public class AzioneRaccomandazione extends Azione {
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("utente", utente);
-		request.setAttribute("itinerario", luoghiDaVisitare);		
+		session.setAttribute("inizio", inizio);
+		session.setAttribute("fine", fine);
+		session.setAttribute("coordinata", posizione);
+		session.setAttribute("itinerario", luoghiDaVisitare);		
 		
 		//Converto la lista con Json 
 		String json = new Gson().toJson(luoghiDaVisitare );

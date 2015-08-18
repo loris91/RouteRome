@@ -86,7 +86,8 @@ public class Controller extends HttpServlet {
 		this.comando2azione = new HashMap<String, String>();
 		this.comando2azione.put("login", "action.AzioneLogin");
 		this.comando2azione.put("registra", "action.AzioneRegistraUtente");
-		this.comando2azione.put("raccomanda", "action.AzioneRaccomandazione");		
+		this.comando2azione.put("raccomanda", "action.AzioneRaccomandazione");
+		this.comando2azione.put("modifica", "action.AzioneModificaItinerario");
 
 		/*
 		 * Mappa esito2pagina, ricevuto l'esito di un'azione ritorna rispettiva
@@ -99,7 +100,8 @@ public class Controller extends HttpServlet {
 		this.esito2pagina.put("registrazionePositiva", "/selezione.jsp");
 		this.esito2pagina.put("raccomandazioneFallita", "/selezione.jsp");
 		this.esito2pagina.put("raccomandazionePositiva", "/mappa.jsp");
+		this.esito2pagina.put("modificaFallita", "/error.jsp");
+		this.esito2pagina.put("modificaPositiva", "/mappa.jsp");
 		this.esito2pagina.put("errore", "/error.jsp");
-
 	}
 }

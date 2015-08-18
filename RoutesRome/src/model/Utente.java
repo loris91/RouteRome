@@ -142,4 +142,10 @@ public class Utente {
 				+ ", email=" + email + ", nome=" + nome + ", cognome="
 				+ cognome + "]";
 	}
+	
+	public void removeItems(List<Luogo> lista){
+		List<Luogo> list = this.luoghiVisitabili;
+		list.removeAll(lista);
+		this.setLuoghiVisitabili(list);
+	}
 }

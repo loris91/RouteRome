@@ -31,59 +31,59 @@
 			<h3>Itinerario Proposto</h3>
 		</legend>
 
-		<script type="text/javascript">
-		function initialize() {
-			var path = '${mete}';
-			var json = JSON.stringify(eval('('+path+')'));
-			json = JSON.parse(json);
-			var lat1 = json[0].coordinata.latitudine;
-			var lon1 = json[0].coordinata.longitudine;
-			
-			var mapCanvas = document.getElementById('map-canvas');
-			
-			var mapOptions = {
-				center : new google.maps.LatLng(lat1, lon1),
-				zoom : 15,
-				mapTypeId : google.maps.MapTypeId.ROADMAP
-			}
-			var map = new google.maps.Map(mapCanvas, mapOptions)
-			var iconBase = 'http://maps.google.com/mapfiles/kml/paddle/';	
+		<form action="modifica.do" method="post">
+			<script type="text/javascript">
+				function initialize() {
+					var path = '${mete}';
+					var json = JSON.stringify(eval('(' + path + ')'));
+					json = JSON.parse(json);
+					var lat1 = json[0].coordinata.latitudine;
+					var lon1 = json[0].coordinata.longitudine;
 
-			
-			
-			for (var i = 0; i < json.length; i++) {
-				var lat = json[i].coordinata.latitudine;
-				var lon = json[i].coordinata.longitudine;
-				var nome = json[i].nome;
-				var place = new google.maps.LatLng(lat, lon);
-				var marker = new google.maps.Marker({
-					position : place,
-					map : map,
-					icon : iconBase + (i+1)+'.png',
-					title : nome
-				});
-			}	
-		}
-		google.maps.event.addDomListener(window, 'load', initialize);
-		</script>
-		
-		<div id="map-canvas" align="center"></div>
+					var mapCanvas = document.getElementById('map-canvas');
 
+					var mapOptions = {
+						center : new google.maps.LatLng(lat1, lon1),
+						zoom : 15,
+						mapTypeId : google.maps.MapTypeId.ROADMAP
+					}
+					var map = new google.maps.Map(mapCanvas, mapOptions)
+					var iconBase = 'http://maps.google.com/mapfiles/kml/paddle/';
 
+					for (var i = 0; i < json.length; i++) {
+						var lat = json[i].coordinata.latitudine;
+						var lon = json[i].coordinata.longitudine;
+						var nome = json[i].nome;
+						var place = new google.maps.LatLng(lat, lon);
+						var marker = new google.maps.Marker({
+							position : place,
+							map : map,
+							icon : iconBase + (i + 1) + '.png',
+							title : nome
+						});
+					}
+				}
+				google.maps.event.addDomListener(window, 'load', initialize);
+			</script>
 
-		<table style="width: 100%">
-			<c:forEach var="item" items="${itinerario}">
-				<tr>
-					<td><img alt="${item.nome }" src="${item.immagine }"></td>
-					<td>${item.nome }</td>
-					<td>${item.via }</td>
-				</tr>
-			</c:forEach>
-		</table>
+			<div id="map-canvas" align="center"></div>
 
-
+			<c:set var="count" scope="page" value="${0}" />
+			<table style="width: 100%">
+				<c:forEach var="item" items="${itinerario}">
+					<tr>
+						<td><img alt="${item.nome }" src="${item.immagine }"></td>
+						<td>${item.nome }</td>
+						<td>${item.via }</td>
+						<td><input type="checkbox" name="sceltaLuoghi"
+							value="${count }"/> Rimuovi</td>
+					</tr>
+					<c:set var="count" value="${count + 1}" scope="page" />
+				</c:forEach>
+			</table>
+			<input type="submit" value="ModificaItinerario" name="bottone" />
+		</form>
 	</fieldset>
-	</form>
 	<%@ include file="diritti.jsp"%>
 </body>
 </html>
