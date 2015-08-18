@@ -15,12 +15,12 @@ import com.clusterpoint.api.response.CPSSearchResponse;
 
 import model.Coordinata;
 import model.Luogo;
-import persistence.ItemDAO;
+import persistence.LuogoDAO;
 
-public class ItemDAOClusterPoint implements ItemDAO {
+public class LuogoDAOClusterPoint implements LuogoDAO {
 	private DataSource data;
 
-	public ItemDAOClusterPoint() {
+	public LuogoDAOClusterPoint() {
 		this.data = new DataSource();
 	}
 

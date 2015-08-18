@@ -6,7 +6,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 import model.Coordinata;
 import model.Luogo;
-import model.facade.FacadeItem;
+import model.facade.FacadeLuogo;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -24,7 +24,7 @@ public class ParserXml {
 		String categoria;
 		int durata;
 		Luogo item;
-		FacadeItem facade = new FacadeItem();
+		FacadeLuogo facade = new FacadeLuogo();
 		
 		try {
 			DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();

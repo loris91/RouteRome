@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Luogo;
 
-public interface ItemDAO {
+public interface LuogoDAO {
 	
 	boolean insert(Luogo item);
 	

@@ -3,7 +3,7 @@ package test;
 import java.util.List;
 
 import model.Luogo;
-import model.facade.FacadeItem;
+import model.facade.FacadeLuogo;
 
 public class Main {
 	
@@ -11,7 +11,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		
-		FacadeItem facade = new FacadeItem();
+		FacadeLuogo facade = new FacadeLuogo();
 		
 		List<Luogo> lista = facade.getItems();
 		

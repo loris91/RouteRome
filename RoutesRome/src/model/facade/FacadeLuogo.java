@@ -3,14 +3,14 @@ package model.facade;
 import java.util.List;
 
 import model.Luogo;
-import persistence.clusterPoint.ItemDAOClusterPoint;
+import persistence.clusterPoint.LuogoDAOClusterPoint;
 
-public class FacadeItem {
-	private ItemDAOClusterPoint dao;
+public class FacadeLuogo {
+	private LuogoDAOClusterPoint dao;
 
-	public FacadeItem() {
+	public FacadeLuogo() {
 		super();
-		this.dao = new ItemDAOClusterPoint();
+		this.dao = new LuogoDAOClusterPoint();
 	}
 
 	public boolean addItem(int key, Luogo item) {
