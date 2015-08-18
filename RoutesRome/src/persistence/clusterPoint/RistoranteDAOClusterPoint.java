@@ -14,33 +14,31 @@ import com.clusterpoint.api.request.CPSSearchRequest;
 import com.clusterpoint.api.response.CPSSearchResponse;
 
 import model.Coordinata;
-import model.Item;
-import persistence.ItemDAO;
+import model.Ristorante;
+import persistence.RistoranteDAO;
 
-public class ItemDAOClusterPoint implements ItemDAO {
+public class RistoranteDAOClusterPoint implements RistoranteDAO {
 	private DataSource data;
 
-	public ItemDAOClusterPoint() {
+	public RistoranteDAOClusterPoint() {
 		this.data = new DataSource();
 	}
 
 	@Override
-	public boolean insert(Item item) {
+	public boolean insert(Ristorante ristorante) {
 		boolean esito = false;
 
 		CPSConnection connessione;
 		try {
-			connessione = this.data.getConnection("Luoghi");
+			connessione = this.data.getConnection("Ristoranti");
 
-			String id = item.getId();
-			String nome = item.getNome();
-			String via = item.getVia();
-			int durata = item.getDurata();
+			String id = ristorante.getId();
+			String nome = ristorante.getNome();
+			String via = ristorante.getVia();
 
 			List<String> docs = new ArrayList<String>();
 			docs.add("<document><id>" + id + "</id><nome>" + nome
-					+ "</nome><via>" + via + "</via><durata>" + durata
-					+ "</durata></document>");
+					+ "</nome><via>" + via + "</via><durata></document>");
 
 			// Create Insert request
 			CPSInsertRequest insert_req = new CPSInsertRequest();
@@ -58,20 +56,14 @@ public class ItemDAOClusterPoint implements ItemDAO {
 	}
 
 	@Override
-	public List<Item> findByCategoria(String tag) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	public List<Ristorante> findAll() {
 
-	@Override
-	public List<Item> findAll() {
-
-		List<Item> items = new ArrayList<Item>();
+		List<Ristorante> resturants = new ArrayList<Ristorante>();
 		
 		CPSConnection connessione;
 
 		try {
-			connessione = this.data.getConnection("Luoghi");
+			connessione = this.data.getConnection("Ristoranti");
 
 			String query = "*";
 
@@ -96,19 +88,18 @@ public class ItemDAOClusterPoint implements ItemDAO {
 					String id = attributes.item(0).getTextContent();
 					String nome = attributes.item(1).getTextContent();
 					String via = attributes.item(2).getTextContent();
-					int durata = Integer.parseInt(attributes.item(3).getTextContent());
-					double lat = Double.parseDouble(attributes.item(4).getChildNodes().item(0).getTextContent());
-					double lon = Double.parseDouble(attributes.item(4).getChildNodes().item(1).getTextContent());
+					double lat = Double.parseDouble(attributes.item(3).getChildNodes().item(0).getTextContent());
+					double lon = Double.parseDouble(attributes.item(3).getChildNodes().item(1).getTextContent());
 					Coordinata coordinata = new Coordinata(lat,lon); 
-					Item item = new Item(id, nome, via, "", durata, coordinata);
-					items.add(item);
+					Ristorante ristorante = new Ristorante(id, nome, via, coordinata);
+					resturants.add(ristorante);
 				}
 			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return items;
+		return resturants;
 
 	}
 

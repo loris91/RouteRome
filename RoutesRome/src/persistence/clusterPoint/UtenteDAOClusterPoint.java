@@ -1,7 +1,6 @@
 package persistence.clusterPoint;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +12,8 @@ import com.clusterpoint.api.CPSConnection;
 import com.clusterpoint.api.request.CPSDeleteRequest;
 import com.clusterpoint.api.request.CPSInsertRequest;
 import com.clusterpoint.api.request.CPSSearchRequest;
-import com.clusterpoint.api.response.CPSModifyResponse;
 import com.clusterpoint.api.response.CPSSearchResponse;
 
-import model.Item;
 import model.Utente;
 import persistence.UtenteDAO;
 
