@@ -22,7 +22,7 @@ public class AzioneModificaItinerario extends Azione {
 	@Override
 	public String esegui(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
-		
+		/* Porca Paletta */
 		Utente utente = (Utente) session.getAttribute("utente");
 		LocalTime inizio = (LocalTime) session.getAttribute("inizio");
 		LocalTime fine = (LocalTime) session.getAttribute("fine");
