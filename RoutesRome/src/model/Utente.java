@@ -1,7 +1,9 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import model.facade.FacadeLuoghiVisitati;
 import model.facade.FacadeLuogo;
 
 public class Utente {
@@ -18,12 +20,13 @@ public class Utente {
 
 	public Utente(String username, String password) {
 		super();
-		FacadeLuogo facadeItem = new FacadeLuogo();
+		FacadeLuogo facadeLuogo = new FacadeLuogo();
 		this.username = username;
-		this.password = password;	
-		this.luoghiVisitabili = facadeItem.getLuoghi();	
+		this.password = password;
+		this.luoghiVisitabili = filtraLuoghi(facadeLuogo.getLuoghi());	
 	}
 	
+
 	public Utente(String username, String password, String email, String nome,
 			String cognome) {
 		super();
@@ -33,7 +36,7 @@ public class Utente {
 		this.email = email;
 		this.nome = nome;
 		this.cognome = cognome;
-		this.luoghiVisitabili = facadeLuogo.getLuoghi();		
+		this.luoghiVisitabili = filtraLuoghi(facadeLuogo.getLuoghi());		
 	}
 
 	public String getUsername() {
@@ -147,5 +150,43 @@ public class Utente {
 		List<Luogo> list = this.luoghiVisitabili;
 		list.removeAll(lista);
 		this.setLuoghiVisitabili(list);
+	}
+	
+	private List<Luogo> filtraLuoghi(List<Luogo> luoghi) {
+		System.out.println("Dimensione lista inizio: " +luoghi.size());
+		
+		List<Luogo> luoghiFiltrati1 = new ArrayList<Luogo>(rimuoviVisitati(luoghi));
+		System.out.println("Dimensione lista meta: " +luoghiFiltrati1.size());
+		
+		List<Luogo> luoghiFiltrati2 = new ArrayList<Luogo>(rimuoviSgraditi(luoghiFiltrati1));
+		System.out.println("Dimensione lista fine: " +luoghiFiltrati2.size());
+		
+		return luoghiFiltrati2;
+	}
+
+
+	private List<Luogo> rimuoviVisitati(List<Luogo> luoghi) {
+		FacadeLuoghiVisitati facadeLuoghiVisitati = new FacadeLuoghiVisitati();
+		FacadeLuogo facadeLuogo = new FacadeLuogo();
+		List<Luogo> luoghiVisitabili = new ArrayList<Luogo>(luoghi);
+		
+		System.out.println("Dimensione inizio metodo: " + luoghiVisitabili.size());
+		
+		
+		List<String> luoghiVisitati = facadeLuoghiVisitati.getLuoghiVisitati(this.username);
+		
+		for (String string : luoghiVisitati) {
+			Luogo luogo = facadeLuogo.getLuogoById(string);
+			System.out.println(luogo.getNome());
+			luoghiVisitabili.remove(luogo);
+		}
+		
+		System.out.println("Dimensione fine metodo: " + luoghiVisitabili.size());
+		return luoghiVisitabili;
+	}
+	
+	private List<Luogo> rimuoviSgraditi(List<Luogo> luoghi) {
+		// TODO Auto-generated method stub
+		return luoghi;
 	}
 }

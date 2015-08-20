@@ -24,4 +24,8 @@ public class FacadeLuogo {
 	public List<Luogo> getLuoghi() {
 		return this.dao.findAll();
 	}
+
+	public Luogo getLuogoById(String idLuogo) {
+		return this.dao.getLuogoByID(idLuogo);
+	}
 }
