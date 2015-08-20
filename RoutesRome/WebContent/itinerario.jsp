@@ -28,7 +28,7 @@
 	</p>
 	<fieldset>
 		<legend>
-			<h3>Itinerario Proposto</h3>
+			<h3>Itinerario</h3>
 		</legend>
 
 		
@@ -75,19 +75,9 @@
 						<td><img alt="${item.nome }" src="${item.immagine }"></td>
 						<td>${item.nome }</td>
 						<td>${item.via }</td>
-						<td><input type="checkbox" name="sceltaLuoghi"
-							value="${count }"/> Rimuovi</td>
 					</tr>
-					<c:set var="count" value="${count + 1}" scope="page" />
 				</c:forEach>
 			</table>
-			<form action="modifica.do" method="post">
-				<input type="submit" value="ModificaItinerario" name="bottone" />
-			</form>
-			<form action="conferma.do" method="post">
-				<input type="submit" value="ConfermaItinerario" name="bottone" />
-			</form>
-			
 	</fieldset>
 	<%@ include file="diritti.jsp"%>
 </body>
