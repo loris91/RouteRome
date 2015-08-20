@@ -17,8 +17,8 @@ public class FacadeLuogo {
 		return this.dao.insert(luogo);
 	}
 
-	public List<Luogo> getLuogoByCategoria(String tag) {
-		return this.dao.findByCategoria(tag);
+	public List<Luogo> getLuogoByCategoria(String tag, Integer rate) {
+		return this.dao.findByCategoria(tag, rate);
 	}
 	
 	public List<Luogo> getLuoghi() {
