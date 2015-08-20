@@ -8,9 +8,11 @@ public class Coordinata {
 		this.latitudine = latitudine;
 		this.longitudine = longitudine;
 	}
+	
 	public Double getLatitudine() {
 		return latitudine;
 	}
+	
 	public Double getLongitudine() {
 		return longitudine;
 	}
