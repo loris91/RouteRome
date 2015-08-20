@@ -9,7 +9,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.clusterpoint.api.CPSConnection;
-import com.clusterpoint.api.request.CPSInsertRequest;
 import com.clusterpoint.api.request.CPSSearchRequest;
 import com.clusterpoint.api.request.CPSUpdateRequest;
 import com.clusterpoint.api.response.CPSModifyResponse;
@@ -57,7 +56,7 @@ public class LuoghiVisitatiDAOClusterPoint implements LuoghiVisitatiDAO {
 		try {
 			connessione = this.data.getConnection("LuoghiVisitati");
 
-			String query = "*";
+			String query = "<id>" + idUtente + "</id>";
 
 			// return documents starting with the first one - offset 0
 			int offset = 0;
