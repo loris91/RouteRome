@@ -148,6 +148,8 @@ public class Utente {
 		this.setLuoghiVisitabili(list);
 	}
 
+	
+	//Filtraggio della lista secondo i gusti
 	private List<Luogo> filtraLuoghi(List<Luogo> luoghi) {
 
 		luoghi = this.rimuoviVisitati(luoghi);
