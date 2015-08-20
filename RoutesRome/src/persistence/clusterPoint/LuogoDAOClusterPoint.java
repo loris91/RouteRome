@@ -25,17 +25,17 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 	}
 
 	@Override
-	public boolean insert(Luogo item) {
+	public boolean insert(Luogo luogo) {
 		boolean esito = false;
 
 		CPSConnection connessione;
 		try {
 			connessione = this.data.getConnection("Luoghi");
 
-			String id = item.getId();
-			String nome = item.getNome();
-			String via = item.getVia();
-			int durata = item.getDurata();
+			String id = luogo.getId();
+			String nome = luogo.getNome();
+			String via = luogo.getVia();
+			int durata = luogo.getDurata();
 
 			List<String> docs = new ArrayList<String>();
 			docs.add("<document><id>" + id + "</id><nome>" + nome
@@ -99,6 +99,9 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 					int durata = Integer.parseInt(attributes.item(3).getTextContent());
 					double lat = Double.parseDouble(attributes.item(4).getChildNodes().item(0).getTextContent());
 					double lon = Double.parseDouble(attributes.item(4).getChildNodes().item(1).getTextContent());
+					Map<String, Integer> tags = new HashMap<String, Integer>();
+//					String tag = attributes.item(5).getChildNodes().item(0).getChildNodes().item(0).getChildNodes().item(0);
+					
 					Coordinata coordinata = new Coordinata(lat,lon); 
 					Luogo item = new Luogo(id, nome, via, "", durata, coordinata);
 					items.add(item);

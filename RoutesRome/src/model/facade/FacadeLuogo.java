@@ -13,8 +13,8 @@ public class FacadeLuogo {
 		this.dao = new LuogoDAOClusterPoint();
 	}
 
-	public boolean addItem(int key, Luogo item) {
-		return this.dao.insert(item);
+	public boolean addItem(int key, Luogo luogo) {
+		return this.dao.insert(luogo);
 	}
 
 	public List<Luogo> getItemByCategoria(String tag) {
