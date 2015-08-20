@@ -10,7 +10,6 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import bho.CoordinateHelper;
 import model.Coordinata;
 import model.Item;
 import model.Luogo;

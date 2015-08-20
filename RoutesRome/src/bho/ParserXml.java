@@ -13,8 +13,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import com.sun.prism.image.Coords;
-
 public class ParserXml {
 	public static void main(String[] args) {
 		CoordinateHelper helper = new CoordinateHelper();

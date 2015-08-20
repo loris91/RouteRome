@@ -1,7 +1,5 @@
 package bho;
 
-import java.util.ArrayList;
-
 import model.Utente;
 import model.facade.FacadeUtente;
 
