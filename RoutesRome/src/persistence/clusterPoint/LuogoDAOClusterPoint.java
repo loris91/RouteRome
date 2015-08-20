@@ -101,15 +101,20 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 
 					Map<String, Integer> tags = new HashMap<String, Integer>();
 					NodeList tagNodes = attributes.item(5).getChildNodes();
-					for (int i = 0; i < tagNodes.getLength(); i++) {
+					for (int i = 0; i < tagNodes.getLength()-1; i++) {
 						Node tagNode = tagNodes.item(i);
+						System.out.println(tagNode.getTextContent());
 						String tagName = tagNode.getChildNodes().item(0).getTextContent();
-						int tagRate = Integer.parseInt(tagNode.getChildNodes().item(0).getTextContent());
+						System.out.println(tagName);
+						int tagRate = Integer.parseInt(tagNode.getChildNodes().item(1).getTextContent());
+						System.out.println(tagRate);
 						tags.put(tagName, tagRate);
 					}
-					Luogo item = new Luogo(id, nome, via, durata, coordinata, tags);
+					
+					System.out.println(tagNodes.getLength());
+					Luogo luoghi = new Luogo(id, nome, via, durata, coordinata, tags);
 
-					items.add(item);
+					items.add(luoghi);
 				}
 			}
 		} catch (Exception e) {

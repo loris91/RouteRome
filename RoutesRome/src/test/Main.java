@@ -13,7 +13,7 @@ public class Main {
 		
 		FacadeLuogo facade = new FacadeLuogo();
 		
-		List<Luogo> lista = facade.getItems();
+		List<Luogo> lista = facade.getLuoghi();
 		
 		System.out.println(lista.size());
 		

@@ -46,7 +46,7 @@ public class ParserXml {
 					coordinata = helper.getCoordinate(via);	
 					item = new Luogo(nome, via, categoria, durata, coordinata);
 					System.out.println(i);
-					facade.addItem(i,item);
+					facade.addLuogo(i,item);
 				}
 			}
 		} catch (Exception e) {

@@ -21,19 +21,19 @@ public class Utente {
 		FacadeLuogo facadeItem = new FacadeLuogo();
 		this.username = username;
 		this.password = password;	
-		this.luoghiVisitabili = facadeItem.getItems();	
+		this.luoghiVisitabili = facadeItem.getLuoghi();	
 	}
 	
 	public Utente(String username, String password, String email, String nome,
 			String cognome) {
 		super();
-		FacadeLuogo facadeItem = new FacadeLuogo();
+		FacadeLuogo facadeLuogo = new FacadeLuogo();
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.nome = nome;
 		this.cognome = cognome;
-		this.luoghiVisitabili = facadeItem.getItems();		
+		this.luoghiVisitabili = facadeLuogo.getLuoghi();		
 	}
 
 	public String getUsername() {

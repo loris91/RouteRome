@@ -126,10 +126,10 @@ public class Itinerario {
 		Luogo nextStop = null;
 		float minDistance = 500000; // MAXDISTANCE
 		float distance = 0;
-		for (Luogo item : luoghiVisitabili) {
-			distance = this.coordinataCorrente.distFrom(item.getCoordinata());
+		for (Luogo luogo : luoghiVisitabili) {
+			distance = this.coordinataCorrente.distFrom(luogo.getCoordinata());
 			if (distance < minDistance) {
-				nextStop = item;
+				nextStop = luogo;
 				minDistance = distance;
 			}
 		}
@@ -149,6 +149,7 @@ public class Itinerario {
 			for (String key : tags.keySet()) {
 				System.out.println(key + " - " + tags.get(key));
 			}
+			System.out.println();
 		}
 		return nextStop;
 	}
