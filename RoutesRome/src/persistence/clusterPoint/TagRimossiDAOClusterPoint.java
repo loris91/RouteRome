@@ -32,7 +32,8 @@ public class TagRimossiDAOClusterPoint implements TagRimossiDAO {
 			Map<String, Integer> tagRimossi = this.findByUtente(idUtente);
 			tagRimossi.put(tag, rate);
 
-			String doc = "<document><id>" + idUtente + "</id><tags>" + this.getStringa(tagRimossi) + "</tags></document>";
+			String doc = "<document><id>" + idUtente + "</id><tags>" + this.getStringa(tagRimossi)
+					+ "</tags></document>";
 			CPSUpdateRequest update_req = new CPSUpdateRequest(doc);
 			connessione.sendRequest(update_req);
 
@@ -52,7 +53,7 @@ public class TagRimossiDAOClusterPoint implements TagRimossiDAO {
 		try {
 			connessione = this.data.getConnection("TagRimossi");
 
-			String query = "*";
+			String query = "<id>" + idUtente + "</id>";
 
 			// return documents starting with the first one - offset 0
 			int offset = 0;
@@ -72,11 +73,12 @@ public class TagRimossiDAOClusterPoint implements TagRimossiDAO {
 					NodeList attributes = element.getChildNodes();
 					NodeList tags = attributes.item(1).getChildNodes();
 
+					System.out.println(tags.getLength());
 					for (int i = 0; i < tags.getLength() - 1; i++) {
-						NodeList tag = attributes.item(i).getChildNodes();
+						NodeList tag = tags.item(i).getChildNodes();
 						String tagName = tag.item(0).getTextContent();
-						int tagRate = Integer.parseInt(tag.item(1).getTextContent());
 						System.out.println("tagName: " + tagName);
+						int tagRate = Integer.parseInt(tag.item(1).getTextContent());
 						System.out.println("tagRate: " + tagRate);
 						tagRimossi.put(tagName, tagRate);
 					}
@@ -93,7 +95,9 @@ public class TagRimossiDAOClusterPoint implements TagRimossiDAO {
 		Set<String> keys = tagRimossi.keySet();
 
 		for (String key : keys) {
-			partOfQuery = partOfQuery.concat("<tag><tipo>" + key + "</tipo><rate>" + tagRimossi.get(key) + "</tag>");
+			partOfQuery = partOfQuery
+					.concat("<tag><tipo>" + key + "</tipo><rate>" + tagRimossi.get(key) + "</rate></tag>");
+			System.out.println(key + " - " + tagRimossi.get(key));
 		}
 
 		return partOfQuery;
