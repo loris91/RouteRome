@@ -1,6 +1,5 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import model.facade.FacadeLuoghiVisitati;
@@ -153,40 +152,29 @@ public class Utente {
 	}
 	
 	private List<Luogo> filtraLuoghi(List<Luogo> luoghi) {
-		System.out.println("Dimensione lista inizio: " +luoghi.size());
 		
-		List<Luogo> luoghiFiltrati1 = new ArrayList<Luogo>(rimuoviVisitati(luoghi));
-		System.out.println("Dimensione lista meta: " +luoghiFiltrati1.size());
+		rimuoviVisitati(luoghi);
 		
-		List<Luogo> luoghiFiltrati2 = new ArrayList<Luogo>(rimuoviSgraditi(luoghiFiltrati1));
-		System.out.println("Dimensione lista fine: " +luoghiFiltrati2.size());
+		rimuoviSgraditi(luoghi);			
 		
-		return luoghiFiltrati2;
+		return luoghi;
 	}
 
 
-	private List<Luogo> rimuoviVisitati(List<Luogo> luoghi) {
+	private void rimuoviVisitati(List<Luogo> luoghi) {
 		FacadeLuoghiVisitati facadeLuoghiVisitati = new FacadeLuoghiVisitati();
-		FacadeLuogo facadeLuogo = new FacadeLuogo();
-		List<Luogo> luoghiVisitabili = new ArrayList<Luogo>(luoghi);
+		FacadeLuogo facadeLuogo = new FacadeLuogo();			
 		
-		System.out.println("Dimensione inizio metodo: " + luoghiVisitabili.size());
-		
-		
-		List<String> luoghiVisitati = facadeLuoghiVisitati.getLuoghiVisitati(this.username);
-		
-		for (String string : luoghiVisitati) {
+		for (String string : facadeLuoghiVisitati.getLuoghiVisitati(this.username)) {
 			Luogo luogo = facadeLuogo.getLuogoById(string);
-			System.out.println(luogo.getNome());
-			luoghiVisitabili.remove(luogo);
+			luoghi.remove(luogo);
 		}
 		
-		System.out.println("Dimensione fine metodo: " + luoghiVisitabili.size());
-		return luoghiVisitabili;
+		return;
 	}
 	
-	private List<Luogo> rimuoviSgraditi(List<Luogo> luoghi) {
+	private void rimuoviSgraditi(List<Luogo> luoghi) {
 		// TODO Auto-generated method stub
-		return luoghi;
+		return;
 	}
 }

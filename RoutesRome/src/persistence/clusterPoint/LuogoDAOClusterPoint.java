@@ -103,15 +103,11 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 					NodeList tagNodes = attributes.item(5).getChildNodes();
 					for (int i = 0; i < tagNodes.getLength()-1; i++) {
 						Node tagNode = tagNodes.item(i);
-						System.out.println(tagNode.getTextContent());
 						String tagName = tagNode.getChildNodes().item(0).getTextContent();
-						System.out.println(tagName);
 						int tagRate = Integer.parseInt(tagNode.getChildNodes().item(1).getTextContent());
-						System.out.println(tagRate);
 						tags.put(tagName, tagRate);
 					}
 					
-					System.out.println(tagNodes.getLength());
 					Luogo luoghi = new Luogo(id, nome, via, durata, coordinata, tags);
 
 					items.add(luoghi);
@@ -163,21 +159,16 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 					NodeList tagNodes = attributes.item(5).getChildNodes();
 					for (int i = 0; i < tagNodes.getLength()-1; i++) {
 						Node tagNode = tagNodes.item(i);
-						//System.out.println(tagNode.getTextContent());
 						String tagName = tagNode.getChildNodes().item(0).getTextContent();
-						//System.out.println(tagName);
 						int tagRate = Integer.parseInt(tagNode.getChildNodes().item(1).getTextContent());
-						//System.out.println(tagRate);
 						tags.put(tagName, tagRate);
 					}
 					
-					//System.out.println(tagNodes.getLength());
 					luogo = new Luogo(id, nome, via, durata, coordinata, tags);
 
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return luogo;
