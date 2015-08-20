@@ -11,7 +11,6 @@ import org.w3c.dom.NodeList;
 import com.clusterpoint.api.CPSConnection;
 import com.clusterpoint.api.request.CPSSearchRequest;
 import com.clusterpoint.api.request.CPSUpdateRequest;
-import com.clusterpoint.api.response.CPSModifyResponse;
 import com.clusterpoint.api.response.CPSSearchResponse;
 
 import persistence.LuoghiVisitatiDAO;
@@ -25,7 +24,7 @@ public class LuoghiVisitatiDAOClusterPoint implements LuoghiVisitatiDAO {
 	}
 
 	@Override
-	public boolean insert(String idUtente, List luoghiRaccomandati) {
+	public boolean insert(String idUtente, List<String> luoghiRaccomandati) {
 		boolean esito = false;
 
 		CPSConnection connessione;
@@ -38,7 +37,7 @@ public class LuoghiVisitatiDAOClusterPoint implements LuoghiVisitatiDAO {
 
 			String doc = "<document><id>"+idUtente+"</id><luoghi>"+getStringa(luoghiVisitati)+"</luoghi></document>";
 			CPSUpdateRequest update_req = new CPSUpdateRequest(doc);
-			CPSModifyResponse update_resp = (CPSModifyResponse) connessione.sendRequest(update_req);
+			connessione.sendRequest(update_req);
 
 			esito = true;
 

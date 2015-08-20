@@ -1,9 +1,9 @@
 package persistence.clusterPoint;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -11,7 +11,6 @@ import org.w3c.dom.NodeList;
 import com.clusterpoint.api.CPSConnection;
 import com.clusterpoint.api.request.CPSSearchRequest;
 import com.clusterpoint.api.request.CPSUpdateRequest;
-import com.clusterpoint.api.response.CPSModifyResponse;
 import com.clusterpoint.api.response.CPSSearchResponse;
 
 import persistence.TagRimossiDAO;
@@ -28,14 +27,21 @@ public class TagRimossiDAOClusterPoint implements TagRimossiDAO {
 		boolean esito = false;
 
 		CPSConnection connessione;
-		 try {
-		 connessione = this.data.getConnection("TagRimossi");
-		 Map<String, Integer> tagRimossi = this.findByUtente(idUtente);
-		 //...		
-		 } catch (Exception e) {
-		 // TODO Auto-generated catch block
-		 e.printStackTrace();
-		 }
+		try {
+			connessione = this.data.getConnection("TagRimossi");
+			Map<String, Integer> tagRimossi = this.findByUtente(idUtente);
+			tagRimossi.put(tag, rate);
+
+			String doc = "<document><id>" + idUtente + "</id><tags>" + this.getStringa(tagRimossi) + "</tags></document>";
+			CPSUpdateRequest update_req = new CPSUpdateRequest(doc);
+			connessione.sendRequest(update_req);
+
+			esito = true;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return esito;
 	}
 
@@ -82,4 +88,14 @@ public class TagRimossiDAOClusterPoint implements TagRimossiDAO {
 		return tagRimossi;
 	}
 
+	private String getStringa(Map<String, Integer> tagRimossi) {
+		String partOfQuery = "";
+		Set<String> keys = tagRimossi.keySet();
+
+		for (String key : keys) {
+			partOfQuery = partOfQuery.concat("<tag><tipo>" + key + "</tipo><rate>" + tagRimossi.get(key) + "</tag>");
+		}
+
+		return partOfQuery;
+	}
 }
