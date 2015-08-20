@@ -88,6 +88,7 @@ public class Controller extends HttpServlet {
 		this.comando2azione.put("registra", "action.AzioneRegistraUtente");
 		this.comando2azione.put("raccomanda", "action.AzioneRaccomandazione");
 		this.comando2azione.put("modifica", "action.AzioneModificaItinerario");
+		this.comando2azione.put("conferma", "action.AzioneConfermaItinerario");
 
 		/*
 		 * Mappa esito2pagina, ricevuto l'esito di un'azione ritorna rispettiva
@@ -102,6 +103,8 @@ public class Controller extends HttpServlet {
 		this.esito2pagina.put("raccomandazionePositiva", "/mappa.jsp");
 		this.esito2pagina.put("modificaFallita", "/error.jsp");
 		this.esito2pagina.put("modificaPositiva", "/mappa.jsp");
+		this.esito2pagina.put("confermaFallita", "/error.jsp");
+		this.esito2pagina.put("confermaPositiva", "/itinerario.jsp");
 		this.esito2pagina.put("errore", "/error.jsp");
 	}
 }
