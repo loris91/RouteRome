@@ -3,36 +3,46 @@ package model;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Luogo extends Item{
+public class Luogo extends Item {
 	private String id;
 	private String nome;
 	private String via;
-	private String categoria;
 	private int durata;
 	private Coordinata coordinata;
 	private String immagine;
 	private Map<String, Integer> tags;
 	
+	
+	public Luogo(String id, String nome, String via, int durata, Coordinata coordinata,
+			Map<String, Integer> tags) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.via = via;
+		this.durata = durata;
+		this.coordinata = coordinata;
+		this.immagine = "images\\luoghi\\" + nome + ".jpg";
+		this.tags = tags;
+	}
+	
+	public Luogo(String id, String nome, String via, int durata, Coordinata coordinata) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.via = via;
+		this.durata = durata;
+		this.coordinata = coordinata;
+		this.immagine = "images\\luoghi\\" + nome + ".jpg";
+		this.tags = new HashMap<String, Integer>();
+	}
+
 	public Luogo(String id, String nome, String via, int durata) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.via = via;
 		this.durata = durata;
-		this.immagine = "images\\luoghi\\"+nome+".jpg";
-		this.tags = new HashMap<String, Integer>();
-	}
-	
-	public Luogo(String id, String nome, String via, String categoria, int durata,
-			Coordinata coordinata) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.via = via;
-		this.categoria = categoria;
-		this.durata = durata;
-		this.coordinata = coordinata;
-		this.immagine = "images\\luoghi\\"+nome+".jpg";
+		this.immagine = "images\\luoghi\\" + nome + ".jpg";
 		this.tags = new HashMap<String, Integer>();
 	}
 
@@ -46,10 +56,6 @@ public class Luogo extends Item{
 
 	public String getVia() {
 		return via;
-	}
-
-	public String getCategoria() {
-		return categoria;
 	}
 
 	public int getDurata() {
@@ -74,10 +80,6 @@ public class Luogo extends Item{
 
 	public void setVia(String via) {
 		this.via = via;
-	}
-
-	public void setCategoria(String categoria) {
-		this.categoria = categoria;
 	}
 
 	public void setDurata(int durata) {

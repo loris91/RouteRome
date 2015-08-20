@@ -44,7 +44,7 @@ public class ParserXml {
 							.item(0).getFirstChild().getNodeValue();
 					durata = Integer.parseInt(elemento.getElementsByTagName("durata").item(0).getFirstChild().getNodeValue());
 					coordinata = helper.getCoordinate(via);	
-					item = new Luogo(nome, via, categoria, categoria, durata, coordinata);
+					item = new Luogo(nome, via, categoria, durata, coordinata);
 					System.out.println(i);
 					facade.addItem(i,item);
 				}

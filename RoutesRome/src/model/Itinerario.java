@@ -3,6 +3,8 @@ package model;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import model.facade.FacadeRistorante;
 
@@ -21,8 +23,7 @@ public class Itinerario {
 		super();
 	}
 
-	public Itinerario(Utente utente, Coordinata coordinataCorrente,
-			LocalTime inizio, LocalTime fine) {
+	public Itinerario(Utente utente, Coordinata coordinataCorrente, LocalTime inizio, LocalTime fine) {
 		super();
 		this.utente = utente;
 		this.coordinataCorrente = coordinataCorrente;
@@ -57,8 +58,7 @@ public class Itinerario {
 	public List<Item> calcolaItinerario() {
 		System.out.println("Ora Inizio: " + this.inizio);
 		System.out.println("Ora Fine: " + this.fine);
-		System.out
-				.println("Coordinata di partenza: " + this.coordinataCorrente);
+		System.out.println("Coordinata di partenza: " + this.coordinataCorrente);
 		List<Luogo> luoghiVisitabili = new ArrayList<Luogo>(this.utente.getLuoghiVisitabili());
 		System.out.println(luoghiVisitabili.size());
 		int ora;
@@ -99,8 +99,7 @@ public class Itinerario {
 		FacadeRistorante facade = new FacadeRistorante();
 		List<Ristorante> ristoranti = facade.getRistoranti();
 		for (Ristorante ristorante : ristoranti) {
-			distance = this.coordinataCorrente.distFrom(ristorante
-					.getCoordinata());
+			distance = this.coordinataCorrente.distFrom(ristorante.getCoordinata());
 			if (distance < minDistance) {
 				nextStop = ristorante;
 				minDistance = distance;
@@ -115,8 +114,7 @@ public class Itinerario {
 			this.oraCorrente = oraCorrente.plusMinutes(tempoDiVisita);
 			System.out.println("Ora aggiornata: " + oraCorrente);
 
-			System.out.println("Coordinata Corrente : "
-					+ coordinataCorrente.toString());
+			System.out.println("Coordinata Corrente : " + coordinataCorrente.toString());
 		}
 		return nextStop;
 
@@ -144,8 +142,13 @@ public class Itinerario {
 			this.oraCorrente = oraCorrente.plusMinutes(tempoDiVisita);
 			System.out.println("Ora aggiornata: " + oraCorrente);
 
-			System.out.println("Coordinata Corrente : "
-					+ coordinataCorrente.toString());
+			System.out.println("Coordinata Corrente : " + coordinataCorrente.toString());
+
+			System.out.println("TAGS:");
+			Map<String, Integer> tags = nextStop.getTags();
+			for (String key : tags.keySet()) {
+				System.out.println(key + " - " + tags.get(key));
+			}
 		}
 		return nextStop;
 	}

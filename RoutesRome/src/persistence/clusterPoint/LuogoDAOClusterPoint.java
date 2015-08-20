@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import com.clusterpoint.api.CPSConnection;
@@ -38,8 +39,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 			int durata = luogo.getDurata();
 
 			List<String> docs = new ArrayList<String>();
-			docs.add("<document><id>" + id + "</id><nome>" + nome
-					+ "</nome><via>" + via + "</via><durata>" + durata
+			docs.add("<document><id>" + id + "</id><nome>" + nome + "</nome><via>" + via + "</via><durata>" + durata
 					+ "</durata></document>");
 
 			// Create Insert request
@@ -67,7 +67,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 	public List<Luogo> findAll() {
 
 		List<Luogo> items = new ArrayList<Luogo>();
-		
+
 		CPSConnection connessione;
 
 		try {
@@ -83,10 +83,8 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 			Map<String, String> list = new HashMap<String, String>();
 			list.put("id", "yes");
 
-			CPSSearchRequest search_req = new CPSSearchRequest(query, offset,
-					docs, list);
-			CPSSearchResponse search_resp = (CPSSearchResponse) connessione
-					.sendRequest(search_req);
+			CPSSearchRequest search_req = new CPSSearchRequest(query, offset, docs, list);
+			CPSSearchResponse search_resp = (CPSSearchResponse) connessione.sendRequest(search_req);
 
 			if (search_resp.getHits() > 0) {
 				List<Element> documents = search_resp.getDocuments();
@@ -99,11 +97,18 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 					int durata = Integer.parseInt(attributes.item(3).getTextContent());
 					double lat = Double.parseDouble(attributes.item(4).getChildNodes().item(0).getTextContent());
 					double lon = Double.parseDouble(attributes.item(4).getChildNodes().item(1).getTextContent());
+					Coordinata coordinata = new Coordinata(lat, lon);
+
 					Map<String, Integer> tags = new HashMap<String, Integer>();
-//					String tag = attributes.item(5).getChildNodes().item(0).getChildNodes().item(0).getChildNodes().item(0);
-					
-					Coordinata coordinata = new Coordinata(lat,lon); 
-					Luogo item = new Luogo(id, nome, via, "", durata, coordinata);
+					NodeList tagNodes = attributes.item(5).getChildNodes();
+					for (int i = 0; i < tagNodes.getLength(); i++) {
+						Node tagNode = tagNodes.item(i);
+						String tagName = tagNode.getChildNodes().item(0).getTextContent();
+						int tagRate = Integer.parseInt(tagNode.getChildNodes().item(0).getTextContent());
+						tags.put(tagName, tagRate);
+					}
+					Luogo item = new Luogo(id, nome, via, durata, coordinata, tags);
+
 					items.add(item);
 				}
 			}
