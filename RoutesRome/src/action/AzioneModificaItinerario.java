@@ -15,6 +15,7 @@ import model.Item;
 import model.Luogo;
 import model.Itinerario;
 import model.Utente;
+import model.helper.LuoghiSgraditiHelper;
 
 public class AzioneModificaItinerario extends Azione {
 
@@ -27,13 +28,16 @@ public class AzioneModificaItinerario extends Azione {
 		Coordinata posizione = (Coordinata) session.getAttribute("coordinata");
 		List<Item> luoghiRaccomandati = (List<Item>) session.getAttribute("itinerario");
 		List<Luogo> luoghiSgraditi = new ArrayList<Luogo>();
+		LuoghiSgraditiHelper luoghiSgraditiHelper = new LuoghiSgraditiHelper();
 		
 		String[] sceltaLuoghi = request.getParameterValues("sceltaLuoghi");
 		for (String string : sceltaLuoghi) {
 			System.out.println(string);
-			int v = Integer.parseInt(string);
-			luoghiSgraditi.add((Luogo) luoghiRaccomandati.get(v));		
-			System.out.println(luoghiRaccomandati.get(v).getNome());
+			int idLuogo = Integer.parseInt(string);
+			Luogo luogoSgradito = (Luogo) luoghiRaccomandati.get(idLuogo);
+			luoghiSgraditi.add(luogoSgradito);
+			luoghiSgraditiHelper.addTags(luogoSgradito,utente.getUsername());
+			System.out.println(luoghiRaccomandati.get(idLuogo).getNome());
 		}
 		
 		utente.removeItems(luoghiSgraditi);

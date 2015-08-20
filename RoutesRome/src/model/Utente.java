@@ -1,9 +1,12 @@
 package model;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import model.facade.FacadeLuoghiVisitati;
 import model.facade.FacadeLuogo;
+import model.facade.FacadeTagRimossi;
 
 public class Utente {
 	private String username;
@@ -22,12 +25,10 @@ public class Utente {
 		FacadeLuogo facadeLuogo = new FacadeLuogo();
 		this.username = username;
 		this.password = password;
-		this.luoghiVisitabili = filtraLuoghi(facadeLuogo.getLuoghi());	
+		this.luoghiVisitabili = filtraLuoghi(facadeLuogo.getLuoghi());
 	}
-	
 
-	public Utente(String username, String password, String email, String nome,
-			String cognome) {
+	public Utente(String username, String password, String email, String nome, String cognome) {
 		super();
 		FacadeLuogo facadeLuogo = new FacadeLuogo();
 		this.username = username;
@@ -35,7 +36,7 @@ public class Utente {
 		this.email = email;
 		this.nome = nome;
 		this.cognome = cognome;
-		this.luoghiVisitabili = filtraLuoghi(facadeLuogo.getLuoghi());		
+		this.luoghiVisitabili = filtraLuoghi(facadeLuogo.getLuoghi());
 	}
 
 	public String getUsername() {
@@ -77,7 +78,7 @@ public class Utente {
 	public void setCognome(String cognome) {
 		this.cognome = cognome;
 	}
-	
+
 	public List<Luogo> getLuoghiVisitabili() {
 		return luoghiVisitabili;
 	}
@@ -86,7 +87,6 @@ public class Utente {
 		this.luoghiVisitabili = luoghiVisitabili;
 	}
 
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -94,10 +94,8 @@ public class Utente {
 		result = prime * result + ((cognome == null) ? 0 : cognome.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result
-				+ ((password == null) ? 0 : password.hashCode());
-		result = prime * result
-				+ ((username == null) ? 0 : username.hashCode());
+		result = prime * result + ((password == null) ? 0 : password.hashCode());
+		result = prime * result + ((username == null) ? 0 : username.hashCode());
 		return result;
 	}
 
@@ -140,41 +138,48 @@ public class Utente {
 
 	@Override
 	public String toString() {
-		return "Utente [username=" + username + ", password=" + password
-				+ ", email=" + email + ", nome=" + nome + ", cognome="
-				+ cognome + "]";
+		return "Utente [username=" + username + ", password=" + password + ", email=" + email + ", nome=" + nome
+				+ ", cognome=" + cognome + "]";
 	}
-	
-	public void removeItems(List<Luogo> lista){
+
+	public void removeItems(List<Luogo> lista) {
 		List<Luogo> list = this.luoghiVisitabili;
 		list.removeAll(lista);
 		this.setLuoghiVisitabili(list);
 	}
-	
+
 	private List<Luogo> filtraLuoghi(List<Luogo> luoghi) {
-		
-		rimuoviVisitati(luoghi);
-		
-		rimuoviSgraditi(luoghi);			
-		
+
+		luoghi = this.rimuoviVisitati(luoghi);
+		luoghi = this.rimuoviSgraditi(luoghi);
 		return luoghi;
 	}
 
-
-	private void rimuoviVisitati(List<Luogo> luoghi) {
+	private List<Luogo> rimuoviVisitati(List<Luogo> luoghiVisitabili) {
 		FacadeLuoghiVisitati facadeLuoghiVisitati = new FacadeLuoghiVisitati();
-		FacadeLuogo facadeLuogo = new FacadeLuogo();			
-		
+		FacadeLuogo facadeLuogo = new FacadeLuogo();
+
 		for (String string : facadeLuoghiVisitati.getLuoghiVisitati(this.username)) {
 			Luogo luogo = facadeLuogo.getLuogoById(string);
-			luoghi.remove(luogo);
+			luoghiVisitabili.remove(luogo);
 		}
-		
-		return;
+		return luoghiVisitabili;
 	}
-	
-	private void rimuoviSgraditi(List<Luogo> luoghi) {
-		// TODO Auto-generated method stub
-		return;
+
+	private List<Luogo> rimuoviSgraditi(List<Luogo> luoghiVisitabili) {
+		FacadeTagRimossi facadeTagRimossi = new FacadeTagRimossi();
+		FacadeLuogo facadeLuogo = new FacadeLuogo();
+
+		Map<String, Integer> tags = facadeTagRimossi.getTagRimossi(this.username);
+		Set<String> keys = tags.keySet();
+
+		for (String key : keys) {
+			for (int i = tags.get(key); i > 0; i--) {
+				List<Luogo> luoghi = facadeLuogo.getLuogoByCategoria(key, i);
+				this.luoghiVisitabili.removeAll(luoghi);
+			}
+		}
+
+		return luoghiVisitabili;
 	}
 }
