@@ -55,12 +55,7 @@ public class AzioneRaccomandazione extends Azione {
 		
 		
 		Itinerario itinerario = new Itinerario(utente, posizione, inizio, fine);
-		List<Item> luoghiDaVisitare = itinerario.calcolaItinerario();
-		
-//		System.out.println(luoghiDaVisitare.size());
-//		for (Item item : luoghiDaVisitare) {
-//			System.out.println(item.getNome());
-//		}		
+		List<Item> luoghiDaVisitare = itinerario.calcolaItinerario();		
 		
 		HttpSession session = request.getSession();
 		session.setAttribute("utente", utente);
@@ -72,7 +67,6 @@ public class AzioneRaccomandazione extends Azione {
 		//Converto la lista con Json 
 		String json = new Gson().toJson(luoghiDaVisitare );
 		request.setAttribute("mete", json);
-		
 
 		return "raccomandazionePositiva";
 	}

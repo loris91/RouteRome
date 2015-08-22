@@ -23,7 +23,7 @@ public class AzioneRegistraUtente extends Azione {
 		if (helper.verifica()) {
 			this.utente = helper.makeUtente();
 			if (!facade.addUtente(utente)) {
-				request.setAttribute("erroreUsername", "Esiste già un utente con questo Username");
+				request.setAttribute("erroreUsername", "Esiste gia' un utente con questo Username");
 				return "registrazioneFallita";
 			}
 			sessione.setAttribute("utente", this.utente);

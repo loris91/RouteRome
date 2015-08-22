@@ -29,34 +29,38 @@ public class AzioneModificaItinerario extends Azione {
 		List<Item> luoghiRaccomandati = (List<Item>) session.getAttribute("itinerario");
 		List<Luogo> luoghiSgraditi = new ArrayList<Luogo>();
 		LuoghiSgraditiHelper luoghiSgraditiHelper = new LuoghiSgraditiHelper();
-		
-		String[] sceltaLuoghi = request.getParameterValues("sceltaLuoghi");
-		for (String string : sceltaLuoghi) {
-			System.out.println(string);
-			int idLuogo = Integer.parseInt(string);
+
+		String[] idsLuoghiRimossi = request.getParameterValues("sceltaLuoghi");
+
+		if (idsLuoghiRimossi == null) {
+			System.out.println("SCELTA LUOGHI NULL");
+		}
+
+		System.out.println(idsLuoghiRimossi.length);
+		for (String luogo : idsLuoghiRimossi) {
+			System.out.println(luogo);
+			int idLuogo = Integer.parseInt(luogo);
 			Luogo luogoSgradito = (Luogo) luoghiRaccomandati.get(idLuogo);
 			luoghiSgraditi.add(luogoSgradito);
-			luoghiSgraditiHelper.addTags(luogoSgradito,utente.getUsername());
+			luoghiSgraditiHelper.addTags(luogoSgradito, utente.getUsername());
 			System.out.println(luoghiRaccomandati.get(idLuogo).getNome());
 		}
-		
+
 		utente.removeItems(luoghiSgraditi);
-		
+
 		Itinerario itinerario = new Itinerario(utente, posizione, inizio, fine);
 		List<Item> luoghiDaVisitare = itinerario.calcolaItinerario();
-				
-		
+
 		session.setAttribute("utente", utente);
 		session.setAttribute("inizio", inizio);
 		session.setAttribute("fine", fine);
 		session.setAttribute("coordinata", posizione);
-		session.setAttribute("itinerario", luoghiDaVisitare);		
-		
-		//Converto la lista con Json 
-		String json = new Gson().toJson(luoghiDaVisitare );
+		session.setAttribute("itinerario", luoghiDaVisitare);
+
+		// Converto la lista con Json
+		String json = new Gson().toJson(luoghiDaVisitare);
 		request.setAttribute("mete", json);
-		
-		
+
 		return "modificaPositiva";
-	}	
+	}
 }
