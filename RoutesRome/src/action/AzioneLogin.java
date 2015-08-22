@@ -16,6 +16,7 @@ public class AzioneLogin extends Azione {
 			HttpServletResponse response) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		this.facade = new FacadeUtente();
 		
 		System.out.println(username);
 		System.out.println(password);
@@ -30,15 +31,15 @@ public class AzioneLogin extends Azione {
 			return "accessoFallito";
 		}
 		
-
-		this.facade = new FacadeUtente();
 		this.utente = this.facade.findUtente(username);
 		
-		if(utente!=null)
-			System.out.println(utente.toString());
+		if(this.utente.getPassword()==null) {
+			request.setAttribute("erroreAccesso", "Non è stato trovato alcun account 2MSoft con questo username.\n"+
+								"Riprova reinserendo i dati richiesti.");
+			return "accessoFallito";
+		}
 
-		if (this.utente == null
-				|| (!this.utente.getPassword().equals(password))) {
+		if (!this.utente.getPassword().equals(password)) {
 			request.setAttribute(
 					"erroreAccesso",
 					"L'username e/o la password inseriti non corrispondono ad alcun account 2MSoft.\n"

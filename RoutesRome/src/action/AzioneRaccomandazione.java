@@ -74,10 +74,7 @@ public class AzioneRaccomandazione extends Azione {
 	private Coordinata converti(String posizioneInput) {
 		Coordinata coordinata = null;
 
-		if (posizioneInput.charAt(0) == '1' || posizioneInput.charAt(0) == '2' || posizioneInput.charAt(0) == '3'
-				|| posizioneInput.charAt(0) == '4' || posizioneInput.charAt(0) == '5' || posizioneInput.charAt(0) == '6'
-				|| posizioneInput.charAt(0) == '7' || posizioneInput.charAt(0) == '8'
-				|| posizioneInput.charAt(0) == '9') {
+		if (posizioneInput.substring(0,1).matches("[0-9]")) {
 			double d1 = Double.parseDouble(posizioneInput.split(",", 2)[0]);
 			double d2 = Double.parseDouble(posizioneInput.split(",", 2)[1]);
 			coordinata = new Coordinata(d1, d2);			

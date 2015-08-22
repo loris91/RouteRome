@@ -58,6 +58,9 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 	}
 
 	@Override
+	/* 
+	 * Metodo da rivedere poichè ritorna sempre liste non nulle ma vuote
+	 */
 	public List<Luogo> findByCategoria(String tag, Integer rate) {
 
 		List<Luogo> items = new ArrayList<Luogo>();

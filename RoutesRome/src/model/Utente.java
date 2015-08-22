@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.itextpdf.text.log.SysoCounter;
+
 import model.facade.FacadeLuoghiVisitati;
 import model.facade.FacadeLuogo;
 import model.facade.FacadeTagRimossi;
@@ -174,14 +176,40 @@ public class Utente {
 
 		Map<String, Integer> tags = facadeTagRimossi.getTagRimossi(this.username);
 		Set<String> keys = tags.keySet();
+		
+		System.out.println("Dimensione luoghi visitabili: " + luoghiVisitabili.size());
+		System.out.println("Dimensione chiavi: "+ keys.size());
 
 		for (String key : keys) {
 			for (int i = tags.get(key); i > 0; i--) {
+				System.out.println("Valore chiave: "+ key);
+				System.out.println("Valore i: " + i);
+				
+				// Il metodo getLuogoByCategoria ritorna sempre liste non nulle ma vuote
 				List<Luogo> luoghi = facadeLuogo.getLuogoByCategoria(key, i);
-				this.luoghiVisitabili.removeAll(luoghi);
+				
+				stampaLuoghi(luoghi);
+				
+				System.out.println("Verifica lista nulla: " + luoghi==null);
+				if (luoghi!=null)
+					luoghiVisitabili.removeAll(luoghi);
 			}
 		}
 
 		return luoghiVisitabili;
+	}
+
+	
+	/*
+	 * Metodo da cancellare, stampa i luoghi ritrovati con i tag rimossi
+	 */
+	private void stampaLuoghi(List<Luogo> luoghi) {
+		if (luoghi!=null) {
+			System.out.println("Stampa luoghi trovati:");
+			System.out.println("Dimensione luoghi trovati: " + luoghi.size());
+			for (Luogo luogo : luoghi) {
+				System.out.println("Nome luogo: "+ luogo.getNome());
+			}			
+		}		
 	}
 }

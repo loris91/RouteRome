@@ -31,8 +31,8 @@
 			<h3>Itinerario Proposto</h3>
 		</legend>
 
-		
-			<script type="text/javascript">
+
+		<script type="text/javascript">
 				function initialize() {
 					var path = '${mete}';
 					var json = JSON.stringify(eval('(' + path + ')'));
@@ -66,8 +66,8 @@
 				google.maps.event.addDomListener(window, 'load', initialize);
 			</script>
 
-			<div id="map-canvas" align="center"></div>
-
+		<div id="map-canvas" align="center"></div>
+		<form action="modifica.do" method="post">
 			<c:set var="count" scope="page" value="${0}" />
 			<table style="width: 100%">
 				<c:forEach var="item" items="${itinerario}">
@@ -76,18 +76,18 @@
 						<td>${item.nome }</td>
 						<td>${item.via }</td>
 						<td><input type="checkbox" name="sceltaLuoghi"
-							value="${count }"/> Rimuovi</td>
+							value="${count }" /> Rimuovi</td>
 					</tr>
 					<c:set var="count" value="${count + 1}" scope="page" />
 				</c:forEach>
 			</table>
-			<form action="modifica.do" method="post">
-				<input type="submit" value="ModificaItinerario" name="bottone" />
-			</form>
-			<form action="conferma.do" method="post">
-				<input type="submit" value="ConfermaItinerario" name="bottone" />
-			</form>
-			
+
+			<input type="submit" value="ModificaItinerario" name="bottone" />
+		</form>
+		<form action="conferma.do" method="post">
+			<input type="submit" value="ConfermaItinerario" name="bottone" />
+		</form>
+
 	</fieldset>
 	<%@ include file="diritti.jsp"%>
 </body>
