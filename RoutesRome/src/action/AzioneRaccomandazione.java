@@ -24,13 +24,10 @@ public class AzioneRaccomandazione extends Azione {
 		String posizioneInput = request.getParameter("posizione");
 		HttpSession sessione = request.getSession();
 		Utente utente = (Utente) sessione.getAttribute("utente");
-		
-		System.out.println(utente.getUsername());
-		System.out.println(utente.getPassword());
 
-		System.out.println(inizioInput);
-		System.out.println(fineInput);
-		System.out.println(posizioneInput);
+		System.out.println("Orario di inizio itinerario: "+ inizioInput);
+		System.out.println("Orario di fine itinerario: "+ fineInput);
+		System.out.println("Posizione iniziale: "+ posizioneInput);
 
 		if (inizioInput.equals("null")) {
 			request.setAttribute("erroreInizio", "Devi selezionare un orario di inizio visita.");

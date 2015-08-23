@@ -70,8 +70,8 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 		try {
 			connessione = this.data.getConnection("Luoghi");
 
-			String query = "<document><tags><tag><tipo>" + tag + "</tipo><rate>" + rate
-					+ "</rate></tag></tags></document>";
+			String query = "<tags><tag><tipo>" + tag + "</tipo><rate>" + rate
+					+ "</rate></tag></tags>";
 
 			// return documents starting with the first one - offset 0
 			int offset = 0;

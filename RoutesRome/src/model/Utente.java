@@ -185,7 +185,11 @@ public class Utente {
 				System.out.println("Valore chiave: "+ key);
 				System.out.println("Valore i: " + i);
 				
-				// Il metodo getLuogoByCategoria ritorna sempre liste non nulle ma vuote
+				/*
+				 * TODO
+				 * Il metodo getLuogoByCategoria ritorna i luoghi in cui compare la key e il valore
+				 * i in un qualsiasi dei suoi tag. 
+				 */
 				List<Luogo> luoghi = facadeLuogo.getLuogoByCategoria(key, i);
 				
 				stampaLuoghi(luoghi);

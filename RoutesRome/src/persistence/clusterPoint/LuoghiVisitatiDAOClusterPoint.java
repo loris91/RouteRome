@@ -31,11 +31,9 @@ public class LuoghiVisitatiDAOClusterPoint implements LuoghiVisitatiDAO {
 		try {
 			connessione = this.data.getConnection("LuoghiVisitati");
 			List<String> luoghiVisitati = this.luoghiVisitati(idUtente);
-			System.out.println("Dimensione lista prima: "+ luoghiVisitati.size());
 			luoghiVisitati.addAll(luoghiRaccomandati);
-			System.out.println("Dimensione lista dopo: "+ luoghiVisitati.size());
 
-			String doc = "<document><id>"+idUtente+"</id><luoghi>"+getStringa(luoghiVisitati)+"</luoghi></document>";
+			String doc = "<document><id>"+idUtente+"</id><luoghi>"+getPartOfQuery(luoghiVisitati)+"</luoghi></document>";
 			CPSUpdateRequest update_req = new CPSUpdateRequest(doc);
 			connessione.sendRequest(update_req);
 
@@ -77,7 +75,6 @@ public class LuoghiVisitatiDAOClusterPoint implements LuoghiVisitatiDAO {
 
 					for (int i = 0; i < luoghi.getLength()-1; i++) {
 						String idLuogo = luoghi.item(i).getTextContent();
-						System.out.println("idLuogo: " + idLuogo);
 						luoghiVisitati.add(idLuogo);
 					}
 				}
@@ -88,7 +85,7 @@ public class LuoghiVisitatiDAOClusterPoint implements LuoghiVisitatiDAO {
 		return luoghiVisitati;
 	}
 
-	private String getStringa(List<String> luoghiVisitati) {
+	private String getPartOfQuery(List<String> luoghiVisitati) {
 		String partOfQuery = "";
 
 		for (String string : luoghiVisitati) {

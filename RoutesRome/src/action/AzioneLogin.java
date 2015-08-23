@@ -17,9 +17,6 @@ public class AzioneLogin extends Azione {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
 		this.facade = new FacadeUtente();
-		
-		System.out.println(username);
-		System.out.println(password);
 
 		if (username.isEmpty()) {
 			request.setAttribute("erroreUsername", "Devi inserire un username.");

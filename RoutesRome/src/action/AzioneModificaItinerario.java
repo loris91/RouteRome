@@ -36,14 +36,11 @@ public class AzioneModificaItinerario extends Azione {
 			System.out.println("SCELTA LUOGHI NULL");
 		}
 
-		System.out.println(idsLuoghiRimossi.length);
 		for (String luogo : idsLuoghiRimossi) {
-			System.out.println(luogo);
 			int idLuogo = Integer.parseInt(luogo);
 			Luogo luogoSgradito = (Luogo) luoghiRaccomandati.get(idLuogo);
 			luoghiSgraditi.add(luogoSgradito);
 			luoghiSgraditiHelper.addTags(luogoSgradito, utente.getUsername());
-			System.out.println(luoghiRaccomandati.get(idLuogo).getNome());
 		}
 
 		utente.removeItems(luoghiSgraditi);
