@@ -14,19 +14,19 @@ public abstract class Item {
 	}
 
 	public String getId() {
-		return id;
+		return this.id;
 	}
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	public String getVia() {
-		return via;
+		return this.via;
 	}
 
 	public Coordinata getCoordinata() {
-		return coordinata;
+		return this.coordinata;
 	}
 
 	public void setId(String id) {
