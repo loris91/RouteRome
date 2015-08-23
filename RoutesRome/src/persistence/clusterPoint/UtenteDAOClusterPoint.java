@@ -36,8 +36,7 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 			String password = utente.getPassword();
 
 			List<String> docs = new ArrayList<String>();
-			docs.add("<document><id>" + username + "</id><password>" + password
-					+ "</password></document>");
+			docs.add("<document><id>" + username + "</id><password>" + password + "</password></document>");
 
 			// Create Insert request
 			CPSInsertRequest insert_req = new CPSInsertRequest();
@@ -48,15 +47,15 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 			esito = true;
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Inserimento Utente: " + esito);
 		return esito;
 	}
 
 	@Override
 	public boolean delete(Utente utente) {
-		Boolean esito = false;
+		boolean esito = false;
 
 		CPSConnection connessione;
 		try {
@@ -68,15 +67,15 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 
 			esito = true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Eliminazione Utente: " + esito);
 		return esito;
 	}
 
 	@Override
 	public boolean deleteAll() {
-		Boolean esito = false;
+		boolean esito = false;
 
 		List<Utente> utenti = this.findAll();
 
@@ -85,11 +84,14 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 		}
 
 		esito = true;
+
+		System.out.println("Esito Inserimento tutti gli Utenti: " + esito);
 		return esito;
 	}
 
 	@Override
 	public Utente findByUsername(String username) {
+		boolean esito = false;
 
 		Utente utente = new Utente();
 
@@ -108,10 +110,8 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 			Map<String, String> list = new HashMap<String, String>();
 			list.put("id", "yes");
 
-			CPSSearchRequest search_req = new CPSSearchRequest(query, offset,
-					docs, list);
-			CPSSearchResponse search_resp = (CPSSearchResponse) connessione
-					.sendRequest(search_req);
+			CPSSearchRequest search_req = new CPSSearchRequest(query, offset, docs, list);
+			CPSSearchResponse search_resp = (CPSSearchResponse) connessione.sendRequest(search_req);
 
 			if (search_resp.getHits() > 0) {
 				List<Element> documents = search_resp.getDocuments();
@@ -121,12 +121,13 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 					String id = attributes.item(0).getTextContent();
 					String password = attributes.item(1).getTextContent();
 					utente = new Utente(id, password);
+					esito = true;
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Recupero Utente in base al suo Username: " + esito);
 		return utente;
 
 	}
@@ -139,6 +140,8 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 
 	@Override
 	public List<Utente> findAll() {
+		boolean esito = false;
+		
 		List<Utente> utenti = new ArrayList<Utente>();
 
 		CPSConnection connessione;
@@ -156,10 +159,8 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 			Map<String, String> list = new HashMap<String, String>();
 			list.put("id", "yes");
 
-			CPSSearchRequest search_req = new CPSSearchRequest(query, offset,
-					docs, list);
-			CPSSearchResponse search_resp = (CPSSearchResponse) connessione
-					.sendRequest(search_req);
+			CPSSearchRequest search_req = new CPSSearchRequest(query, offset, docs, list);
+			CPSSearchResponse search_resp = (CPSSearchResponse) connessione.sendRequest(search_req);
 
 			if (search_resp.getHits() > 0) {
 				List<Element> documents = search_resp.getDocuments();
@@ -170,12 +171,13 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 					String password = attributes.item(1).getTextContent();
 					Utente utente = new Utente(id, password);
 					utenti.add(utente);
+					esito = true;
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Recupero tutti gli Utenti: " + esito);
 		return utenti;
 
 	}

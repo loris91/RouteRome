@@ -47,16 +47,16 @@ public class RistoranteDAOClusterPoint implements RistoranteDAO {
 			// Send request
 			connessione.sendRequest(insert_req);
 			esito = true;
-
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Inserimento Ristorante: " + esito);
 		return esito;
 	}
 
 	@Override
 	public List<Ristorante> findAll() {
+		boolean esito = false;
 
 		List<Ristorante> resturants = new ArrayList<Ristorante>();
 		
@@ -93,12 +93,13 @@ public class RistoranteDAOClusterPoint implements RistoranteDAO {
 					Coordinata coordinata = new Coordinata(lat,lon); 
 					Ristorante ristorante = new Ristorante(id, nome, via, coordinata);
 					resturants.add(ristorante);
+					esito = true;
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Recupero tutti i Ristoranti: " + esito);
 		return resturants;
 
 	}

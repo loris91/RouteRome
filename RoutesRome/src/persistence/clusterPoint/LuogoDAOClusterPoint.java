@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.xml.transform.TransformerFactoryConfigurationError;
+
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -51,17 +53,18 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 			esito = true;
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Inserimento Luogo: " + esito);
 		return esito;
 	}
 
 	@Override
-	/* 
-	 * Metodo da rivedere poichè ritorna sempre liste non nulle ma vuote
+	/*
+	 * Metodo da rivedere poiche' ritorna sempre liste non nulle ma vuote
 	 */
 	public List<Luogo> findByCategoria(String tag, Integer rate) {
+		boolean esito = false;
 
 		List<Luogo> items = new ArrayList<Luogo>();
 
@@ -70,8 +73,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 		try {
 			connessione = this.data.getConnection("Luoghi");
 
-			String query = "<tags><tag><tipo>" + tag + "</tipo><rate>" + rate
-					+ "</rate></tag></tags>";
+			String query = "<tags><tag><tipo>" + tag + "</tipo><rate>" + rate + "</rate></tag></tags>";
 
 			// return documents starting with the first one - offset 0
 			int offset = 0;
@@ -109,17 +111,19 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 					Luogo luoghi = new Luogo(id, nome, via, durata, coordinata, tags);
 
 					items.add(luoghi);
+					esito = true;
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Recupero Luogo in base alla Categoria: " + esito);
 		return items;
 	}
 
 	@Override
 	public List<Luogo> findAll() {
+		boolean esito = false;
 
 		List<Luogo> items = new ArrayList<Luogo>();
 
@@ -166,17 +170,20 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 					Luogo luoghi = new Luogo(id, nome, via, durata, coordinata, tags);
 
 					items.add(luoghi);
+					esito = true;
 				}
 			}
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Recupero tutti i Luoghi: " + esito);
 		return items;
 
 	}
 
 	public Luogo getLuogoByID(String idLuogo) {
+		boolean esito = false;
+		
 		Luogo luogo = null;
 
 		CPSConnection connessione;
@@ -220,12 +227,13 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 					}
 
 					luogo = new Luogo(id, nome, via, durata, coordinata, tags);
-
+					esito = true;
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Recupero Luogo in base al suo ID: " + esito);
 		return luogo;
 	}
 

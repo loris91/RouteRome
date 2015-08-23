@@ -19,7 +19,7 @@ public class FacadeLuoghiVisitati {
 	}
 	
 	public List<String> getLuoghiVisitati(String idUtente){
-		return this.dao.luoghiVisitati(idUtente);
+		return this.dao.findByID(idUtente);
 	}
 
 }

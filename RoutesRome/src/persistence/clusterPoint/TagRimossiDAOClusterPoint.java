@@ -36,20 +36,21 @@ public class TagRimossiDAOClusterPoint implements TagRimossiDAO {
 					+ "</tags></document>";
 			CPSUpdateRequest update_req = new CPSUpdateRequest(doc);
 			connessione.sendRequest(update_req);
-
 			esito = true;
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Inserimento Tag Rimossi: " + esito);
 		return esito;
 	}
 
 	@Override
 	public Map<String, Integer> findByUtente(String idUtente) {
+		boolean esito = false;
 		Map<String, Integer> tagRimossi = new HashMap<String, Integer>();
 		CPSConnection connessione;
+		
 		try {
 			connessione = this.data.getConnection("TagRimossi");
 
@@ -78,12 +79,14 @@ public class TagRimossiDAOClusterPoint implements TagRimossiDAO {
 						String tagName = tag.item(0).getTextContent();
 						int tagRate = Integer.parseInt(tag.item(1).getTextContent());
 						tagRimossi.put(tagName, tagRate);
+						esito = true;
 					}
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Recupero Tag Rimossi di un Utente: " + esito);
 		return tagRimossi;
 	}
 

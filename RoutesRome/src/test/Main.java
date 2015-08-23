@@ -1,10 +1,7 @@
 package test;
 
-import java.util.List;
-
 import model.Luogo;
 import model.facade.FacadeLuogo;
-import model.facade.FacadeTagRimossi;
 
 public class Main {
 
@@ -12,14 +9,11 @@ public class Main {
 
 		FacadeLuogo facade = new FacadeLuogo();
 		
-		List<Luogo> variabile = facade.getLuogoByCategoria("Musei", 1);
-		
-		
-		System.out.println(variabile.size());
-		
-		for (Luogo luogo : variabile) {
-			System.out.println(luogo.getNome());
-		}
+		Luogo luogo = null;
+		int key = 0;
+		String tag = null;
+		Integer rate = null;
+		facade.getLuoghi();
 
 	}
 

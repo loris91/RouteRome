@@ -30,7 +30,7 @@ public class LuoghiVisitatiDAOClusterPoint implements LuoghiVisitatiDAO {
 		CPSConnection connessione;
 		try {
 			connessione = this.data.getConnection("LuoghiVisitati");
-			List<String> luoghiVisitati = this.luoghiVisitati(idUtente);
+			List<String> luoghiVisitati = this.findByID(idUtente);
 			luoghiVisitati.addAll(luoghiRaccomandati);
 
 			String doc = "<document><id>"+idUtente+"</id><luoghi>"+getPartOfQuery(luoghiVisitati)+"</luoghi></document>";
@@ -40,16 +40,19 @@ public class LuoghiVisitatiDAOClusterPoint implements LuoghiVisitatiDAO {
 			esito = true;
 
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Inserimento Luoghi Visitati: " + esito);
 		return esito;
 	}
 
 	@Override
-	public List<String> luoghiVisitati(String idUtente) {
+	public List<String> findByID(String idUtente) {
+		boolean esito = false;
+		
 		List<String> luoghiVisitati = new ArrayList<String>();
 		CPSConnection connessione;
+		
 		try {
 			connessione = this.data.getConnection("LuoghiVisitati");
 
@@ -76,22 +79,23 @@ public class LuoghiVisitatiDAOClusterPoint implements LuoghiVisitatiDAO {
 					for (int i = 0; i < luoghi.getLength()-1; i++) {
 						String idLuogo = luoghi.item(i).getTextContent();
 						luoghiVisitati.add(idLuogo);
+						esito = true;
 					}
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			System.out.println(e.toString());
 		}
+		System.out.println("Esito Recupero Luoghi Visitati in base al suo ID: " + esito);
 		return luoghiVisitati;
 	}
 
 	private String getPartOfQuery(List<String> luoghiVisitati) {
 		String partOfQuery = "";
 
-		for (String string : luoghiVisitati) {
-			partOfQuery = partOfQuery.concat("<luogo>" + string + "</luogo>");
+		for (String luogoVisitato : luoghiVisitati) {
+			partOfQuery = partOfQuery.concat("<luogo>" + luogoVisitato + "</luogo>");
 		}
-
 		return partOfQuery;
 	}
 

@@ -3,9 +3,7 @@ package bho;
 import java.util.ArrayList;
 import java.util.List;
 
-import model.Utente;
 import model.facade.FacadeLuoghiVisitati;
-import model.facade.FacadeUtente;
 
 public class Main {
 

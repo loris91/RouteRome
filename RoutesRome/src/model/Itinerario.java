@@ -4,7 +4,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import model.facade.FacadeRistorante;
 
@@ -59,8 +58,8 @@ public class Itinerario {
 		System.out.println("Ora Inizio: " + this.inizio);
 		System.out.println("Ora Fine: " + this.fine);
 		System.out.println("Coordinata di partenza: " + this.coordinataCorrente);
+		
 		List<Luogo> luoghiVisitabili = new ArrayList<Luogo>(this.utente.getLuoghiVisitabili());
-		System.out.println(luoghiVisitabili.size());
 		int ora;
 		while (this.oraCorrente.isBefore(this.fine)) {
 			ora = oraCorrente.getHour();
@@ -69,14 +68,12 @@ public class Itinerario {
 				this.itinerario.add(nextStop);
 				this.pranzo = true;
 				this.oraCorrente.plusMinutes(80);
-				System.out.println("Ora di Pappa");
 			} else {
 				if (19 <= ora && ora < 21 && !cena) {
 					Ristorante nextStop = this.trovaRistorante();
 					this.itinerario.add(nextStop);
 					this.cena = true;
 					this.oraCorrente.plusMinutes(80);
-					System.out.println("Ora di Pappa");
 				} else {
 					Luogo nextStop = this.nextStop(luoghiVisitabili);
 					System.out.println(nextStop.getNome());

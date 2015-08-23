@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.itextpdf.text.log.SysoCounter;
-
 import model.facade.FacadeLuoghiVisitati;
 import model.facade.FacadeLuogo;
 import model.facade.FacadeTagRimossi;

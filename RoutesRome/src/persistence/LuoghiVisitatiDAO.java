@@ -6,6 +6,6 @@ public interface LuoghiVisitatiDAO {
 	
 	boolean insert(String idUtente,List<String> luoghiRaccomandati);
 	
-	List<String> luoghiVisitati(String idUtente);
+	List<String> findByID(String idUtente);
 
 }
