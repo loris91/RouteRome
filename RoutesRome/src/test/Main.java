@@ -11,13 +11,14 @@ public class Main {
 
 		String id = "1";
 		Map<String, Integer> tags = null;
-		int durata = 0;
+		int durata = 55;
 		String via = null;
 		String nome = "prova";
 		Coordinata coordinata = null;
-		Luogo luogo = new Luogo(id, nome, via, durata, coordinata, tags);
+		Luogo luogo = new Luogo(id, nome, via, coordinata, durata, tags);
 		System.out.println(luogo.getId());
 		System.out.println(luogo.getNome());
+		System.out.println(luogo.getDurata());
 
 	}
 

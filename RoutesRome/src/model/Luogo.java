@@ -4,25 +4,24 @@ import java.util.Map;
 
 public class Luogo extends Item {
 	private String immagine;
-	
-	private int durata;
-
+	protected int durata;
 	private Map<String, Integer> tags;
 	
 	
-	public Luogo(String id, String nome, String via, int durata, Coordinata coordinata,
+	public Luogo(String id, String nome, String via, Coordinata coordinata, int durata,
 			Map<String, Integer> tags) {
 		super(id, nome, via, coordinata);
+		this.durata = durata;
 		this.immagine = "images\\luoghi\\" + nome + ".jpg";
 		this.tags = tags;
 	}
 
 	public int getDurata() {
-		return durata;
+		return this.durata;
 	}
 
 	public String getImmagine() {
-		return immagine;
+		return this.immagine;
 	}
 
 	public void setDurata(int durata) {
@@ -34,7 +33,7 @@ public class Luogo extends Item {
 	}
 
 	public Map<String, Integer> getTags() {
-		return tags;
+		return this.tags;
 	}
 
 	public void setTags(Map<String, Integer> tags) {

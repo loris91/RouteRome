@@ -10,7 +10,7 @@ public class Ristorante extends Item{
 	}
 
 	public String getImmagine() {
-		return immagine;
+		return this.immagine;
 	}
 
 	public void setImmagine(String immagine) {

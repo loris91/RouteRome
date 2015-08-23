@@ -76,7 +76,7 @@ public class Itinerario {
 					this.oraCorrente.plusMinutes(80);
 				} else {
 					Luogo nextStop = this.nextStop(luoghiVisitabili);
-//					System.out.println(nextStop.getNome());
+					System.out.println(nextStop.getNome());
 					this.itinerario.add(nextStop);
 
 					luoghiVisitabili.remove(nextStop);

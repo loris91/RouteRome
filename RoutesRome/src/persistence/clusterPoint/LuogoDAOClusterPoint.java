@@ -108,7 +108,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 						tags.put(tagName, tagRate);
 					}
 
-					Luogo luoghi = new Luogo(id, nome, via, durata, coordinata, tags);
+					Luogo luoghi = new Luogo(id, nome, via, coordinata, durata, tags);
 
 					items.add(luoghi);
 					esito = true;
@@ -167,7 +167,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 						tags.put(tagName, tagRate);
 					}
 
-					Luogo luoghi = new Luogo(id, nome, via, durata, coordinata, tags);
+					Luogo luoghi = new Luogo(id, nome, via, coordinata, durata, tags);
 
 					items.add(luoghi);
 					esito = true;
@@ -226,7 +226,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 						tags.put(tagName, tagRate);
 					}
 
-					luogo = new Luogo(id, nome, via, durata, coordinata, tags);
+					luogo = new Luogo(id, nome, via, coordinata, durata, tags);
 					esito = true;
 				}
 			}
