@@ -1,49 +1,24 @@
 package model;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class Luogo extends Item {
 	private String id;
 	private String nome;
 	private String via;
-	private int durata;
 	private Coordinata coordinata;
 	private String immagine;
+	
+	private int durata;
+
 	private Map<String, Integer> tags;
 	
 	
 	public Luogo(String id, String nome, String via, int durata, Coordinata coordinata,
 			Map<String, Integer> tags) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.via = via;
-		this.durata = durata;
-		this.coordinata = coordinata;
+		super(id, nome, via, coordinata);
 		this.immagine = "images\\luoghi\\" + nome + ".jpg";
 		this.tags = tags;
-	}
-	
-	public Luogo(String id, String nome, String via, int durata, Coordinata coordinata) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.via = via;
-		this.durata = durata;
-		this.coordinata = coordinata;
-		this.immagine = "images\\luoghi\\" + nome + ".jpg";
-		this.tags = new HashMap<String, Integer>();
-	}
-
-	public Luogo(String id, String nome, String via, int durata) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.via = via;
-		this.durata = durata;
-		this.immagine = "images\\luoghi\\" + nome + ".jpg";
-		this.tags = new HashMap<String, Integer>();
 	}
 
 	public String getId() {
