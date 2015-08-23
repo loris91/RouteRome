@@ -1,10 +1,10 @@
 package model;
 
 public abstract class Item {
-	private String id;
-	private String nome;
-	private String via;
-	private Coordinata coordinata;	
+	protected String id;
+	protected String nome;
+	protected String via;
+	protected Coordinata coordinata;	
 
 	public Item(String id, String nome, String via, Coordinata coordinata) {
 		this.id = id;
