@@ -55,10 +55,7 @@ public class Itinerario {
 	}
 
 	public List<Item> calcolaItinerario() {
-		System.out.println("Ora Inizio: " + this.inizio);
-		System.out.println("Ora Fine: " + this.fine);
-		System.out.println("Coordinata di partenza: " + this.coordinataCorrente);
-		
+
 		List<Luogo> luoghiVisitabili = new ArrayList<Luogo>(this.utente.getLuoghiVisitabili());
 		int ora;
 		while (this.oraCorrente.isBefore(this.fine)) {
@@ -76,9 +73,7 @@ public class Itinerario {
 					this.oraCorrente.plusMinutes(80);
 				} else {
 					Luogo nextStop = this.nextStop(luoghiVisitabili);
-					System.out.println(nextStop.getNome());
 					this.itinerario.add(nextStop);
-
 					luoghiVisitabili.remove(nextStop);
 
 				}
@@ -88,8 +83,6 @@ public class Itinerario {
 	}
 
 	private Ristorante trovaRistorante() {
-		System.out.println("\n***NEXT STOP***");
-
 		Ristorante nextStop = null;
 		float minDistance = 500000; // MAXDISTANCE
 		float distance = 0;
@@ -106,20 +99,14 @@ public class Itinerario {
 			this.coordinataCorrente = nextStop.getCoordinata();
 
 			int tempoDiVisita = 60;
-			System.out.println("Durata Visita: " + tempoDiVisita);
 			this.oraCorrente = oraCorrente.plusMinutes((int) distance / 100);
 			this.oraCorrente = oraCorrente.plusMinutes(tempoDiVisita);
-			System.out.println("Ora aggiornata: " + oraCorrente);
-
-			System.out.println("Coordinata Corrente : " + coordinataCorrente.toString());
 		}
 		return nextStop;
 
 	}
 
 	public Luogo nextStop(List<Luogo> luoghiVisitabili) {
-		System.out.println("\n***NEXT STOP***");
-
 		Luogo nextStop = null;
 		float minDistance = 500000; // MAXDISTANCE
 		float distance = 0;
@@ -134,19 +121,8 @@ public class Itinerario {
 			this.coordinataCorrente = nextStop.getCoordinata();
 
 			int tempoDiVisita = nextStop.getDurata();
-			System.out.println("Durata Visita: " + tempoDiVisita);
 			this.oraCorrente = oraCorrente.plusMinutes((int) distance / 100);
 			this.oraCorrente = oraCorrente.plusMinutes(tempoDiVisita);
-			System.out.println("Ora aggiornata: " + oraCorrente);
-
-			System.out.println("Coordinata Corrente : " + coordinataCorrente.toString());
-
-			System.out.println("TAGS:");
-			Map<String, Integer> tags = nextStop.getTags();
-			for (String key : tags.keySet()) {
-				System.out.println(key + " - " + tags.get(key));
-			}
-			System.out.println();
 		}
 		return nextStop;
 	}

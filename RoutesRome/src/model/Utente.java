@@ -148,8 +148,7 @@ public class Utente {
 		this.setLuoghiVisitabili(list);
 	}
 
-	
-	//Filtraggio della lista secondo i gusti
+	// Filtraggio della lista secondo i gusti
 	private List<Luogo> filtraLuoghi(List<Luogo> luoghi) {
 
 		luoghi = this.rimuoviVisitati(luoghi);
@@ -174,44 +173,21 @@ public class Utente {
 
 		Map<String, Integer> tags = facadeTagRimossi.getTagRimossi(this.username);
 		Set<String> keys = tags.keySet();
-		
-		System.out.println("Dimensione luoghi visitabili: " + luoghiVisitabili.size());
-		System.out.println("Dimensione chiavi: "+ keys.size());
 
 		for (String key : keys) {
 			for (int i = tags.get(key); i > 0; i--) {
-				System.out.println("Valore chiave: "+ key);
-				System.out.println("Valore i: " + i);
-				
+
 				/*
-				 * TODO
-				 * Il metodo getLuogoByCategoria ritorna i luoghi in cui compare la key e il valore
-				 * i in un qualsiasi dei suoi tag. 
+				 * TODO Il metodo getLuogoByCategoria ritorna i luoghi in cui
+				 * compare la key e il valore i in un qualsiasi dei suoi tag.
 				 */
 				List<Luogo> luoghi = facadeLuogo.getLuogoByCategoria(key, i);
-				
-				stampaLuoghi(luoghi);
-				
-				System.out.println("Verifica lista nulla: " + luoghi==null);
-				if (luoghi!=null)
+
+				if (luoghi != null)
 					luoghiVisitabili.removeAll(luoghi);
 			}
 		}
 
 		return luoghiVisitabili;
-	}
-
-	
-	/*
-	 * Metodo da cancellare, stampa i luoghi ritrovati con i tag rimossi
-	 */
-	private void stampaLuoghi(List<Luogo> luoghi) {
-		if (luoghi!=null) {
-			System.out.println("Stampa luoghi trovati:");
-			System.out.println("Dimensione luoghi trovati: " + luoghi.size());
-			for (Luogo luogo : luoghi) {
-				System.out.println("Nome luogo: "+ luogo.getNome());
-			}			
-		}		
 	}
 }
