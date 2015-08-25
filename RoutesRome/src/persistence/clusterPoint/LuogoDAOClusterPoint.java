@@ -58,20 +58,17 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 	}
 
 	@Override
-	/*
-	 * Metodo da rivedere poiche' ritorna sempre liste non nulle ma vuote
-	 */
 	public List<Luogo> findByCategoria(String tag, Integer rate) {
 		boolean esito = false;
 
-		List<Luogo> items = new ArrayList<Luogo>();
+		List<Luogo> luoghi = new ArrayList<Luogo>();
 
 		CPSConnection connessione;
 
 		try {
 			connessione = this.data.getConnection("Luoghi");
 
-			String query = "<tags><tag><tipo>" + tag + "</tipo><rate>" + rate + "</rate></tag></tags>";
+			String query = "<tags><tag><tipo>" + tag + "</tipo></tag></tags>";
 
 			// return documents starting with the first one - offset 0
 			int offset = 0;
@@ -106,9 +103,10 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 						tags.put(tagName, tagRate);
 					}
 
-					Luogo luoghi = new Luogo(id, nome, via, coordinata, durata, tags);
-
-					items.add(luoghi);
+					Luogo luogo = new Luogo(id, nome, via, coordinata, durata, tags);
+					if (luogo.hasTag(tag, rate)) {
+						luoghi.add(luogo);
+					}
 					esito = true;
 				}
 			}
@@ -116,7 +114,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 			System.out.println(e.toString());
 		}
 		System.out.println("Esito Recupero Luogo in base alla Categoria: " + esito);
-		return items;
+		return luoghi;
 	}
 
 	@Override
@@ -181,7 +179,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 
 	public Luogo getLuogoByID(String idLuogo) {
 		boolean esito = false;
-		
+
 		Luogo luogo = null;
 
 		CPSConnection connessione;

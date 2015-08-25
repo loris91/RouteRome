@@ -1,25 +1,22 @@
 package test;
 
-import java.util.Map;
-
-import model.Coordinata;
+import java.util.List;
 import model.Luogo;
+import model.facade.FacadeLuogo;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		String id = "1";
-		Map<String, Integer> tags = null;
-		int durata = 55;
-		String via = null;
-		String nome = "prova";
-		Coordinata coordinata = null;
-		Luogo luogo = new Luogo(id, nome, via, coordinata, durata, tags);
-		System.out.println(luogo.getId());
-		System.out.println(luogo.getNome());
-		System.out.println(luogo.getDurata());
+		FacadeLuogo facade = new FacadeLuogo();
 
+		String tag = "Musei";
+		int rate = 2;
+		List<Luogo> luoghi = facade.getLuogoByCategoria(tag, rate);
+		
+		for (Luogo luogo : luoghi) {
+			System.out.println(luogo.toString());
+		}
 	}
 
 }

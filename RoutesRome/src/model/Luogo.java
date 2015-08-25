@@ -1,15 +1,14 @@
 package model;
 
 import java.util.Map;
+import java.util.Set;
 
 public class Luogo extends Item {
 	private String immagine;
 	protected int durata;
 	private Map<String, Integer> tags;
-	
-	
-	public Luogo(String id, String nome, String via, Coordinata coordinata, int durata,
-			Map<String, Integer> tags) {
+
+	public Luogo(String id, String nome, String via, Coordinata coordinata, int durata, Map<String, Integer> tags) {
 		super(id, nome, via, coordinata);
 		this.durata = durata;
 		this.immagine = "images\\luoghi\\" + nome + ".jpg";
@@ -39,7 +38,7 @@ public class Luogo extends Item {
 	public void setTags(Map<String, Integer> tags) {
 		this.tags = tags;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -63,6 +62,17 @@ public class Luogo extends Item {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	public boolean hasTag(String tag, Integer rate) {
+		boolean esito = false;
+		Set<String> keys = this.tags.keySet();
+		for (String key : keys) {
+			if(key.equals(tag) && this.tags.get(key).equals(rate)) {
+				esito = true;
+			}
+		}
+		return esito;
 	}
 
 }

@@ -45,4 +45,9 @@ public abstract class Item {
 		this.coordinata = coordinata;
 	}
 
+	@Override
+	public String toString() {
+		return "Item [id=" + id + ", nome=" + nome + ", via=" + via + ", coordinata=" + coordinata + "]";
+	}
+
 }

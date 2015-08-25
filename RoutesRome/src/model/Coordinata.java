@@ -35,7 +35,7 @@ public class Coordinata {
 	} 
 	
 	public String toString() {
-		return this.latitudine + " , " + this.longitudine + "\n";
+		return this.latitudine + " , " + this.longitudine;
 	}
 
 }
