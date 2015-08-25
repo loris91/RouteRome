@@ -3,7 +3,6 @@ package model;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import model.facade.FacadeRistorante;
 
@@ -12,7 +11,6 @@ public class Itinerario {
 	private Utente utente;
 	private Coordinata coordinataCorrente;
 	private List<Item> itinerario;
-	private LocalTime inizio;
 	private LocalTime fine;
 	private LocalTime oraCorrente;
 	private boolean pranzo;
@@ -26,7 +24,6 @@ public class Itinerario {
 		super();
 		this.utente = utente;
 		this.coordinataCorrente = coordinataCorrente;
-		this.inizio = inizio;
 		this.fine = fine;
 		this.itinerario = new ArrayList<Item>();
 		this.oraCorrente = inizio;
