@@ -176,11 +176,6 @@ public class Utente {
 
 		for (String key : keys) {
 			for (int i = tags.get(key); i > 0; i--) {
-
-				/*
-				 * TODO Il metodo getLuogoByCategoria ritorna i luoghi in cui
-				 * compare la key e il valore i in un qualsiasi dei suoi tag.
-				 */
 				List<Luogo> luoghi = facadeLuogo.getLuogoByCategoria(key, i);
 
 				if (luoghi != null)
