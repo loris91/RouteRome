@@ -17,10 +17,10 @@ import com.clusterpoint.api.response.CPSSearchResponse;
 import model.Utente;
 import persistence.UtenteDAO;
 
-public class UtenteDAOClusterPoint implements UtenteDAO {
+public class SummonerDAOClusterPoint implements UtenteDAO {
 	private DataSource data;
 
-	public UtenteDAOClusterPoint() {
+	public SummonerDAOClusterPoint() {
 		this.data = new DataSource();
 	}
 

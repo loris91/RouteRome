@@ -1,14 +1,14 @@
 package model.facade;
 
 import model.Utente;
-import persistence.clusterPoint.UtenteDAOClusterPoint;
+import persistence.clusterPoint.SummonerDAOClusterPoint;
 
 public class FacadeUtente {
-	private UtenteDAOClusterPoint dao;
+	private SummonerDAOClusterPoint dao;
 	
 	public FacadeUtente() {
 		super();
-		this.dao = new UtenteDAOClusterPoint();
+		this.dao = new SummonerDAOClusterPoint();
 	}
 
 	public boolean addUtente(Utente utente) {
