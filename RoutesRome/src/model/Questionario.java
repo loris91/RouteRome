@@ -2,6 +2,8 @@ package model;
 
 import com.sun.javafx.collections.MappingChange.Map;
 
+//Ora come ora neanche serve visto che interagirà solo con il DB TagRImossi. Se in futuro vogliamo renderli persistenti allora DAJE!
+
 public class Questionario {
 
 	private Utente utente;
