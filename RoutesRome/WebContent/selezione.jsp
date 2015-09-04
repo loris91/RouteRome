@@ -13,13 +13,19 @@
 	<p align="center">
 	<a href="index.jsp"> <img alt="RouteRome - Logo" src="images\copertina.png" width="100%">
 	</a></p>
-	<form action="raccomanda.do" method="post">
+	
 	
 		<fieldset>
 			<legend>
 				<h3>Selezione Orari</h3>
 			</legend>
-			<p>Ciao ${utente.nome}!</p>
+			<p>Ciao ${utente.nome}!
+			
+			<c:if test="${utente.incompilato}">
+   			<a href="questionario.jsp">Compila il questionario!</a>
+			</c:if>
+			</p>			
+			<form action="raccomanda.do" method="post">
 			<p>Seleziona l'orario in cui vuoi iniziare e finire di visitare Roma.</p>
 			<h5>
 				Inizio: <select name="inizio">

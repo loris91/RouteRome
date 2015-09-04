@@ -15,6 +15,7 @@ public class Utente {
 	private String nome;
 	private String cognome;
 	private List<Luogo> luoghiVisitabili;
+	private boolean incompilato;
 
 	public Utente() {
 		super();
@@ -26,6 +27,7 @@ public class Utente {
 		this.username = username;
 		this.password = password;
 		this.luoghiVisitabili = filtraLuoghi(facadeLuogo.getLuoghi());
+		this.incompilato = true;
 	}
 
 	public Utente(String username, String password, String email, String nome, String cognome) {
@@ -37,6 +39,7 @@ public class Utente {
 		this.nome = nome;
 		this.cognome = cognome;
 		this.luoghiVisitabili = filtraLuoghi(facadeLuogo.getLuoghi());
+		this.incompilato = true;
 	}
 
 	public String getUsername() {
@@ -82,10 +85,19 @@ public class Utente {
 	public List<Luogo> getLuoghiVisitabili() {
 		return luoghiVisitabili;
 	}
+	
+	public boolean getIncompilato() {
+		return this.incompilato;
+	}
 
 	public void setLuoghiVisitabili(List<Luogo> luoghiVisitabili) {
 		this.luoghiVisitabili = luoghiVisitabili;
 	}
+	
+	public void setIncompilato(boolean incompilato) {
+		this.incompilato = incompilato;
+	}
+	
 
 	@Override
 	public int hashCode() {
