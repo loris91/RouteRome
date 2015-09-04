@@ -11,5 +11,7 @@ public interface QuestionarioDAO {
 	Questionario findByID(String id);
 	
 	List<Questionario> findAll();
+	
+	boolean exist(String id);
 
 }

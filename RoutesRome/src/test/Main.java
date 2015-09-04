@@ -1,22 +1,22 @@
 package test;
 
-import java.util.List;
-import model.Luogo;
-import model.facade.FacadeLuogo;
+import java.util.HashMap;
+import java.util.Map;
+
+import model.Questionario;
+import model.facade.FacadeQuestionario;
 
 public class Main {
 
 	public static void main(String[] args) {
 
-		FacadeLuogo facade = new FacadeLuogo();
+		FacadeQuestionario facade = new FacadeQuestionario();
 
-		String tag = "Musei";
-		int rate = 2;
-		List<Luogo> luoghi = facade.getLuogoByCategoria(tag, rate);
-		
-		for (Luogo luogo : luoghi) {
-			System.out.println(luogo.toString());
-		}
+		String id = "Frappo";
+		Map<String, Integer> preferenze = new HashMap<String, Integer>();
+		preferenze.put("Musei", 3);
+		Questionario questionario = new Questionario(id, preferenze);
+		facade.addQuestionario(questionario);
 	}
 
 }

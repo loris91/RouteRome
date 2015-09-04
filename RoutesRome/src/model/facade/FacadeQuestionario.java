@@ -24,5 +24,9 @@ public class FacadeQuestionario {
 	public List<Questionario> getQuestionari() {
 		return this.dao.findAll();
 	}
+	
+	public boolean existQuestionario(String id) {
+		return this.dao.exist(id);
+	}
 
 }

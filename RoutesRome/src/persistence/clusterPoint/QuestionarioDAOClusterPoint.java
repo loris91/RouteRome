@@ -14,8 +14,6 @@ import com.clusterpoint.api.request.CPSSearchRequest;
 import com.clusterpoint.api.response.CPSSearchResponse;
 
 import model.Questionario;
-import model.Utente;
-import model.facade.FacadeUtente;
 import persistence.QuestionarioDAO;
 
 public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
@@ -24,7 +22,7 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 	public QuestionarioDAOClusterPoint() {
 		this.data = new DataSource();
 	}
-	
+
 	@Override
 	public boolean insert(Questionario questionario) {
 		boolean esito = false;
@@ -37,7 +35,12 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 			Map<String, Integer> preferene = questionario.getPreferenze();
 
 			List<String> docs = new ArrayList<String>();
-			docs.add("<document><id>" + id + "</id><musei>" + preferene.get("Musei") + "</musei><chiesa>" + preferene.get("Chiesa") + "</chiesa><sitiStorici>" + preferene.get("SitiStorici") + "</sitiStorici><arene>" + preferene.get("Arene") + "</arene><edificiArchitettonici>" + preferene.get("EdificiArchitettonici") + "</edificiArchitettonici><sitiReligiosi>" + preferene.get("SitiReligiosi") + "</sitiReligiosi><villa>" + preferene.get("Villa") + "</villa></document>");
+			docs.add("<document><id>" + id + "</id><musei>" + preferene.get("Musei") + "</musei><chiesa>"
+					+ preferene.get("Chiesa") + "</chiesa><sitiStorici>" + preferene.get("SitiStorici")
+					+ "</sitiStorici><arene>" + preferene.get("Arene") + "</arene><edificiArchitettonici>"
+					+ preferene.get("EdificiArchitettonici") + "</edificiArchitettonici><sitiReligiosi>"
+					+ preferene.get("SitiReligiosi") + "</sitiReligiosi><villa>" + preferene.get("Villa")
+					+ "</villa></document>");
 
 			// Create Insert request
 			CPSInsertRequest insert_req = new CPSInsertRequest();
@@ -108,13 +111,45 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 		System.out.println("Esito Recupero Questionario in base al suo Username: " + esito);
 		return questionario;
 
-
 	}
 
 	@Override
 	public List<Questionario> findAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public boolean exist(String id) {
+		boolean esito = false;
+
+		CPSConnection connessione;
+		try {
+			connessione = this.data.getConnection("Questionario");
+
+			String query = "<id>" + id + "</id>";
+
+			// return documents starting with the first one - offset 0
+			int offset = 0;
+			// return not more than 5 documents
+			int docs = 5;
+			// return these fields from the documents
+			Map<String, String> list = new HashMap<String, String>();
+			list.put("id", "yes");
+
+			CPSSearchRequest search_req = new CPSSearchRequest(query, offset, docs, list);
+			CPSSearchResponse search_resp = (CPSSearchResponse) connessione.sendRequest(search_req);
+
+			if (search_resp.getHits() > 0) {
+				esito = true;
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		System.out.println("Esito Verifica Esistenza Questionario in base al suo Username: " + esito);
+		return esito;
+
 	}
 
 }
