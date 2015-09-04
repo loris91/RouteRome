@@ -14,7 +14,7 @@ public class Main {
 //		Questionario questionario = new Questionario(id, preferenze);
 //		facade.addQuestionario(questionario);
 		
-		System.out.println(facade.getQuestionarioByID("a"));
+		System.out.println(facade.getQuestionarioByID("a").toString());
 	}
 
 }

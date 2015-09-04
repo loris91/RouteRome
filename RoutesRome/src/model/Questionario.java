@@ -34,6 +34,11 @@ public class Questionario {
 	public void setPreferenze(Map<String, Integer> preferenze) {
 		this.preferenze = preferenze;
 	}
+
+	@Override
+	public String toString() {
+		return "Questionario [id=" + id + ", preferenze=" + preferenze + "]";
+	}
 	
 	
 }
