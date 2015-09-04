@@ -66,7 +66,7 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 
 		CPSConnection connessione;
 		try {
-			connessione = this.data.getConnection("Questionario");
+			connessione = this.data.getConnection("Questionari");
 
 			String query = "<id>" + id + "</id>";
 
@@ -125,7 +125,7 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 
 		CPSConnection connessione;
 		try {
-			connessione = this.data.getConnection("Questionario");
+			connessione = this.data.getConnection("Questionari");
 
 			String query = "<id>" + id + "</id>";
 
@@ -143,9 +143,9 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 			if (search_resp.getHits() > 0) {
 				esito = true;
 			}
-			
+
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Verifica Esistenza Questionario in base al suo Username: " + esito);
 		return esito;
