@@ -1,5 +1,6 @@
 package persistence.clusterPoint;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
 import com.clusterpoint.api.CPSConnection;
+import com.clusterpoint.api.request.CPSInsertRequest;
 import com.clusterpoint.api.request.CPSSearchRequest;
 import com.clusterpoint.api.response.CPSSearchResponse;
 
@@ -25,20 +27,41 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 	
 	@Override
 	public boolean insert(Questionario questionario) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean esito = false;
+
+		CPSConnection connessione;
+		try {
+			connessione = this.data.getConnection("Questionari");
+
+			String id = questionario.getId();
+			Map<String, Integer> preferene = questionario.getPreferenze();
+
+			List<String> docs = new ArrayList<String>();
+			docs.add("<document><id>" + id + "</id><musei>" + preferene.get("Musei") + "</musei><chiesa>" + preferene.get("Chiesa") + "</chiesa><sitiStorici>" + preferene.get("SitiStorici") + "</sitiStorici><arene>" + preferene.get("Arene") + "</arene><edificiArchitettonici>" + preferene.get("EdificiArchitettonici") + "</edificiArchitettonici><sitiReligiosi>" + preferene.get("SitiReligiosi") + "</sitiReligiosi><villa>" + preferene.get("Villa") + "</villa></document>");
+
+			// Create Insert request
+			CPSInsertRequest insert_req = new CPSInsertRequest();
+			// Add documents to request
+			insert_req.setStringDocuments(docs);
+			// Send request
+			connessione.sendRequest(insert_req);
+			esito = true;
+
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		}
+		System.out.println("Esito Inserimento Questionario: " + esito);
+		return esito;
+
 	}
 
 	@Override
 	public Questionario findByID(String id) {
 		boolean esito = false;
-		FacadeUtente facadeUtente = new FacadeUtente();
 
 		Questionario questionario = new Questionario();
 
 		CPSConnection connessione;
-
-		Utente utente = facadeUtente.findUtente(id);
 		try {
 			connessione = this.data.getConnection("Questionario");
 
@@ -75,14 +98,14 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 					preferenze.put("EdificiArchitettonici", edificiArchitettonici);
 					preferenze.put("SitiReligiosi", sitiReligiosi);
 					preferenze.put("Villa", villa);
-					questionario = new Questionario(utente, preferenze);
+					questionario = new Questionario(id, preferenze);
 					esito = true;
 				}
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
 		}
-		System.out.println("Esito Recupero Utente in base al suo Username: " + esito);
+		System.out.println("Esito Recupero Questionario in base al suo Username: " + esito);
 		return questionario;
 
 
