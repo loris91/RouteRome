@@ -5,10 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Utente;
+import model.facade.FacadeQuestionario;
 import model.facade.FacadeUtente;
 
 public class AzioneLogin extends Azione {
-	private FacadeUtente facade;
+	private FacadeUtente facadeUtente;
+	private FacadeQuestionario facadeQuestionario;
 	private Utente utente;
 
 	@Override
@@ -16,7 +18,8 @@ public class AzioneLogin extends Azione {
 			HttpServletResponse response) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		this.facade = new FacadeUtente();
+		this.facadeUtente = new FacadeUtente();
+		this.facadeQuestionario = new FacadeQuestionario();
 
 		if (username.isEmpty()) {
 			request.setAttribute("erroreUsername", "Devi inserire un username.");
@@ -28,7 +31,7 @@ public class AzioneLogin extends Azione {
 			return "accessoFallito";
 		}
 		
-		this.utente = this.facade.findUtente(username);
+		this.utente = this.facadeUtente.findUtente(username);
 		
 		if(this.utente.getPassword()==null) {
 			request.setAttribute("erroreAccesso", "Non è stato trovato alcun account 2MSoft con questo username.\n"+
@@ -44,6 +47,7 @@ public class AzioneLogin extends Azione {
 			return "accessoFallito";
 		} else {
 			HttpSession session = request.getSession();
+			this.utente.setIncompilato(facadeQuestionario.existQuestionario(username));
 			session.setAttribute("utente", this.utente);
 			return "accessoEffettuato";
 		}
