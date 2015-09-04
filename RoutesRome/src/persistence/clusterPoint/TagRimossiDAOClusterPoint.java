@@ -39,7 +39,7 @@ public class TagRimossiDAOClusterPoint implements TagRimossiDAO {
 			esito = true;
 
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Inserimento Tag Rimossi: " + esito);
 		return esito;
@@ -84,7 +84,7 @@ public class TagRimossiDAOClusterPoint implements TagRimossiDAO {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Recupero Tag Rimossi di un Utente: " + esito);
 		return tagRimossi;

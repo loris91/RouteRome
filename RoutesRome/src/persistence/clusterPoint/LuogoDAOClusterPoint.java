@@ -51,7 +51,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 			esito = true;
 
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Inserimento Luogo: " + esito);
 		return esito;
@@ -111,7 +111,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Recupero Luogo in base alla Categoria: " + esito);
 		return luoghi;
@@ -170,7 +170,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Recupero tutti i Luoghi: " + esito);
 		return items;
@@ -227,7 +227,7 @@ public class LuogoDAOClusterPoint implements LuogoDAO {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Recupero Luogo in base al suo ID: " + esito);
 		return luogo;

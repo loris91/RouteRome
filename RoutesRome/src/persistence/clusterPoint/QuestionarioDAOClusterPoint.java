@@ -51,7 +51,7 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 			esito = true;
 
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Inserimento Questionario: " + esito);
 		return esito;

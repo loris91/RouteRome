@@ -48,7 +48,7 @@ public class RistoranteDAOClusterPoint implements RistoranteDAO {
 			connessione.sendRequest(insert_req);
 			esito = true;
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Inserimento Ristorante: " + esito);
 		return esito;
@@ -97,7 +97,7 @@ public class RistoranteDAOClusterPoint implements RistoranteDAO {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Recupero tutti i Ristoranti: " + esito);
 		return resturants;

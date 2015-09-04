@@ -47,7 +47,7 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 			esito = true;
 
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Inserimento Utente: " + esito);
 		return esito;
@@ -67,7 +67,7 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 
 			esito = true;
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Eliminazione Utente: " + esito);
 		return esito;
@@ -125,7 +125,7 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Recupero Utente in base al suo Username: " + esito);
 		return utente;
@@ -147,7 +147,7 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 		CPSConnection connessione;
 
 		try {
-			connessione = this.data.getConnection("Luoghi");
+			connessione = this.data.getConnection("User");
 
 			String query = "*";
 
@@ -175,7 +175,7 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Recupero tutti gli Utenti: " + esito);
 		return utenti;

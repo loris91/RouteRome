@@ -6,6 +6,7 @@ import java.util.Set;
 
 import model.facade.FacadeLuoghiVisitati;
 import model.facade.FacadeLuogo;
+import model.facade.FacadeQuestionario;
 import model.facade.FacadeTagRimossi;
 
 public class Utente {
@@ -85,7 +86,7 @@ public class Utente {
 	public List<Luogo> getLuoghiVisitabili() {
 		return luoghiVisitabili;
 	}
-	
+
 	public boolean getIncompilato() {
 		return this.incompilato;
 	}
@@ -93,11 +94,10 @@ public class Utente {
 	public void setLuoghiVisitabili(List<Luogo> luoghiVisitabili) {
 		this.luoghiVisitabili = luoghiVisitabili;
 	}
-	
+
 	public void setIncompilato(boolean incompilato) {
 		this.incompilato = incompilato;
 	}
-	
 
 	@Override
 	public int hashCode() {
@@ -165,6 +165,7 @@ public class Utente {
 
 		luoghi = this.rimuoviVisitati(luoghi);
 		luoghi = this.rimuoviSgraditi(luoghi);
+		luoghi = this.rimuoviQuestionario(luoghi);
 		return luoghi;
 	}
 
@@ -192,6 +193,27 @@ public class Utente {
 
 				if (luoghi != null)
 					luoghiVisitabili.removeAll(luoghi);
+			}
+		}
+
+		return luoghiVisitabili;
+	}
+
+	private List<Luogo> rimuoviQuestionario(List<Luogo> luoghiVisitabili) {
+		FacadeQuestionario facadeQuestionario = new FacadeQuestionario();
+		FacadeLuogo facadeLuogo = new FacadeLuogo();
+
+		Map<String, Integer> preferenze = facadeQuestionario.getQuestionarioByID(this.username).getPreferenze();
+		if (preferenze != null) {
+			Set<String> keys = preferenze.keySet();
+
+			for (String key : keys) {
+				for (int i = preferenze.get(key); i > 0; i--) {
+					List<Luogo> luoghi = facadeLuogo.getLuogoByCategoria(key, i);
+
+					if (luoghi != null)
+						luoghiVisitabili.removeAll(luoghi);
+				}
 			}
 		}
 

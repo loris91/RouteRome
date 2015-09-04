@@ -34,7 +34,7 @@ public class AzioneLogin extends Azione {
 		this.utente = this.facadeUtente.findUtente(username);
 		
 		if(this.utente.getPassword()==null) {
-			request.setAttribute("erroreAccesso", "Non è stato trovato alcun account 2MSoft con questo username.\n"+
+			request.setAttribute("erroreAccesso", "Non ï¿½ stato trovato alcun account 2MSoft con questo username.\n"+
 								"Riprova reinserendo i dati richiesti.");
 			return "accessoFallito";
 		}
@@ -47,7 +47,7 @@ public class AzioneLogin extends Azione {
 			return "accessoFallito";
 		} else {
 			HttpSession session = request.getSession();
-			this.utente.setIncompilato(facadeQuestionario.existQuestionario(username));
+			this.utente.setIncompilato(!facadeQuestionario.existQuestionario(username));
 			session.setAttribute("utente", this.utente);
 			return "accessoEffettuato";
 		}
