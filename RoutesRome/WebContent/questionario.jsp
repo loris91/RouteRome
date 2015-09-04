@@ -19,21 +19,70 @@
 			<legend>
 				<h3>Questionario</h3>
 			</legend>	
+			<p>Compila il questionario per poterci aiutare a personalizzare il sistema e per raccomandarti i luoghi più adatti per te!</p>
 			
-			<table style="width: 100%">
-				<tr>
-					<td>Musei</td>
-					<td>
-						<fieldset>
-					        HTML <input type="radio" name="musei" value="1"/>
-					        CSS  <input type="radio" name="musei" value="2"/>
-					        JavaScript <input type="radio" name="musei" value="3"/>
-    					</fieldset>
-    				</td>
-				</tr>
-			</table>
-				
-
+			<form action="questionario.do" method="post">
+				<table style="width: 100%">
+					<tr>
+						<td>Musei</td>
+						<td>
+						        Fa schifo <input type="radio" name="musei" value="1"/>
+						        Gnhé <input type="radio" name="musei" value="2"/>
+						        Troppo togo! <input type="radio" name="musei" value="3"/>
+	    				</td>
+					</tr>
+					<tr>
+						<td>Chiesa</td>
+						<td>
+						        Fa Schifo <input type="radio" name="chiesa" value="1"/>
+						        Gnhé <input type="radio" name="chiesa" value="2"/>
+						        Troppo togo! <input type="radio" name="chiesa" value="3"/>
+	    				</td>
+					</tr>
+					<tr>
+						<td>Siti Storici</td>
+						<td>
+						        Fa Schifo <input type="radio" name="sitiStorici" value="1"/>
+						        Gnhé <input type="radio" name="sitiStorici" value="2"/>
+						        Troppo togo! <input type="radio" name="sitiStorici" value="3"/>
+	    				</td>
+					</tr>
+					<tr>
+						<td>Arene</td>
+						<td>
+						        Fa Schifo <input type="radio" name="arena" value="1"/>
+						        Gnhé <input type="radio" name="arena" value="2"/>
+						        Troppo togo! <input type="radio" name="arena" value="3"/>
+	    				</td>
+					</tr>
+					<tr>
+						<td>Edifici Architettonici</td>
+						<td>
+						        Fa Schifo <input type="radio" name="edifici" value="1"/>
+						        Gnhé <input type="radio" name="edifici" value="2"/>
+						        Troppo togo! <input type="radio" name="edifici" value="3"/>
+	    				</td>
+					</tr>
+					<tr>
+						<td>Siti Religiosi</td>
+						<td>
+						        Fa Schifo <input type="radio" name="sitiReligiosi" value="1"/>
+						        Gnhé <input type="radio" name="sitiReligiosi" value="2"/>
+						        Troppo togo! <input type="radio" name="sitiReligiosi" value="3"/>
+	    				</td>
+					</tr>
+					<tr>
+						<td>Villa</td>
+						<td>
+						        Fa Schifo <input type="radio" name="villa" value="1"/>
+						        Gnhé <input type="radio" name="villa" value="2"/>
+						        Troppo togo! <input type="radio" name="villa" value="3"/>
+	    				</td>
+					</tr>
+				</table>
+				<br>
+				<input type="submit" value="Conferma!" name="bottone" />
+			</form>
 
 		</fieldset>
 	</form>
