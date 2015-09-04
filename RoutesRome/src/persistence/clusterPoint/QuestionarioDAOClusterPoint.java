@@ -106,7 +106,7 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 				}
 			}
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 		}
 		System.out.println("Esito Recupero Questionario in base al suo Username: " + esito);
 		return questionario;

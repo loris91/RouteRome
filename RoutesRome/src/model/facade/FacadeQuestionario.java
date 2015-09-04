@@ -17,7 +17,7 @@ public class FacadeQuestionario {
 		return this.dao.insert(questionario);
 	}
 
-	public Questionario getLuogoByID(String id) {
+	public Questionario getQuestionarioByID(String id) {
 		return this.dao.findByID(id);
 	}
 	

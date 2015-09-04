@@ -1,9 +1,5 @@
 package test;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import model.Questionario;
 import model.facade.FacadeQuestionario;
 
 public class Main {
@@ -12,11 +8,13 @@ public class Main {
 
 		FacadeQuestionario facade = new FacadeQuestionario();
 
-		String id = "Frappo";
-		Map<String, Integer> preferenze = new HashMap<String, Integer>();
-		preferenze.put("Musei", 3);
-		Questionario questionario = new Questionario(id, preferenze);
-		facade.addQuestionario(questionario);
+//		String id = "Frappo";
+//		Map<String, Integer> preferenze = new HashMap<String, Integer>();
+//		preferenze.put("Musei", 3);
+//		Questionario questionario = new Questionario(id, preferenze);
+//		facade.addQuestionario(questionario);
+		
+		System.out.println(facade.getQuestionarioByID("a"));
 	}
 
 }
