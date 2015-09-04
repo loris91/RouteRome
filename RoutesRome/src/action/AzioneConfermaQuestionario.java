@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Utente;
+import model.facade.FacadeQuestionario;
 
 public class AzioneConfermaQuestionario extends Azione {
 
@@ -12,6 +13,7 @@ public class AzioneConfermaQuestionario extends Azione {
 	public String esegui(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		Utente utente = (Utente) session.getAttribute("utente");
+		FacadeQuestionario facadeQuestionario = new FacadeQuestionario();
 		
 		String musei=(String)request.getParameter("musei");
 		String chiesa=(String)request.getParameter("chiesa");
@@ -21,18 +23,24 @@ public class AzioneConfermaQuestionario extends Azione {
 		String sitiReligiosi=(String)request.getParameter("sitiReligiosi");
 		String villa=(String)request.getParameter("villa");
 		
-		System.out.println("Musei: " + musei);
-		System.out.println("Chiesa: " + chiesa);
-		System.out.println("Siti Storici:" + sitiStorici);
-		System.out.println("Arene: " + arene);
-		System.out.println("Edifici Architettonici: " + edificiArchitettonici);
-		System.out.println("Siti Religiosi: " + sitiReligiosi);
-		System.out.println("Villa: " + villa);
+		if (musei==null)
+			musei = "3";
+		if (chiesa==null)
+			chiesa = "3";
+		if (sitiStorici==null)
+			sitiStorici = "3";
+		if (arene==null)
+			arene = "3";
+		if (edificiArchitettonici==null)
+			edificiArchitettonici = "3";
+		if (sitiReligiosi==null)
+			sitiReligiosi = "3";
+		if (villa==null)
+			villa = "3";
+
 		
-		
-		
-		
-		
+
+		utente.setIncompilato(false);
 		return "compilazionePositiva";		
 	}
 
