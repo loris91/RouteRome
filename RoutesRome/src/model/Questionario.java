@@ -1,6 +1,6 @@
 package model;
 
-import com.sun.javafx.collections.MappingChange.Map;
+import java.util.Map;
 
 //Ora come ora neanche serve visto che interagirà solo con il DB TagRImossi. Se in futuro vogliamo renderli persistenti allora DAJE!
 
@@ -9,12 +9,16 @@ public class Questionario {
 	private Utente utente;
 	private Map<String, Integer> preferenze;
 	
+	public Questionario() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	public Questionario(Utente utente, Map<String, Integer> preferenze) {
 		super();
 		this.utente = utente;
 		this.preferenze = preferenze;
 	}
-	
+
 	public Utente getUtente() {
 		return utente;
 	}

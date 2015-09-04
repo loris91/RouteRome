@@ -12,5 +12,4 @@ public interface LuogoDAO {
 	
 	List<Luogo> findAll();
 
-
 }
