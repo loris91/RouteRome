@@ -16,6 +16,7 @@ import com.clusterpoint.api.response.CPSSearchResponse;
 
 import model.Utente;
 import persistence.UtenteDAO;
+import persistence.proxy.UtenteProxy;
 
 public class UtenteDAOClusterPoint implements UtenteDAO {
 	private DataSource data;
@@ -93,8 +94,7 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 	public Utente findByUsername(String username) {
 		boolean esito = false;
 
-		Utente utente = new Utente();
-
+		Utente utente = null;
 		CPSConnection connessione;
 
 		try {
@@ -120,7 +120,9 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 					NodeList attributes = element.getChildNodes();
 					String id = attributes.item(0).getTextContent();
 					String password = attributes.item(1).getTextContent();
-					utente = new Utente(id, password);
+					utente = new UtenteProxy();
+					utente.setUsername(id);
+					utente.setPassword(password);
 					esito = true;
 				}
 			}
@@ -169,7 +171,9 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 					NodeList attributes = element.getChildNodes();
 					String id = attributes.item(0).getTextContent();
 					String password = attributes.item(1).getTextContent();
-					Utente utente = new Utente(id, password);
+					Utente utente = new UtenteProxy();
+					utente.setUsername(id);
+					utente.setPassword(password);
 					utenti.add(utente);
 					esito = true;
 				}
@@ -179,7 +183,5 @@ public class UtenteDAOClusterPoint implements UtenteDAO {
 		}
 		System.out.println("Esito Recupero tutti gli Utenti: " + esito);
 		return utenti;
-
 	}
-
 }

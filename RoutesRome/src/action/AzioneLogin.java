@@ -16,40 +16,48 @@ public class AzioneLogin extends Azione {
 	@Override
 	public String esegui(HttpServletRequest request,
 			HttpServletResponse response) {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		this.facadeUtente = new FacadeUtente();
-		this.facadeQuestionario = new FacadeQuestionario();
-
-		if (username.isEmpty()) {
-			request.setAttribute("erroreUsername", "Devi inserire un username.");
-			return "accessoFallito";
-		}
-
-		if (password.isEmpty()) {
-			request.setAttribute("errorePassword", "Inserisci la password.");
-			return "accessoFallito";
-		}
 		
-		this.utente = this.facadeUtente.findUtente(username);
-		
-		if(this.utente.getPassword()==null) {
-			request.setAttribute("erroreAccesso", "Non ï¿½ stato trovato alcun account 2MSoft con questo username.\n"+
-								"Riprova reinserendo i dati richiesti.");
-			return "accessoFallito";
-		}
+		try {
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			this.facadeUtente = new FacadeUtente();
+			this.facadeQuestionario = new FacadeQuestionario();
 
-		if (!this.utente.getPassword().equals(password)) {
-			request.setAttribute(
-					"erroreAccesso",
-					"L'username e/o la password inseriti non corrispondono ad alcun account 2MSoft.\n"
-							+ "Se consideri i dati inseriti corretti, riprova dopo aver eliminato i cookies e i contenuti della cache del tuo browser.");
-			return "accessoFallito";
-		} else {
-			HttpSession session = request.getSession();
-			this.utente.setIncompilato(!facadeQuestionario.existQuestionario(username));
-			session.setAttribute("utente", this.utente);
-			return "accessoEffettuato";
+			if (username.isEmpty()) {
+				request.setAttribute("erroreUsername", "Devi inserire un username.");
+				return "accessoFallito";
+			}
+
+			if (password.isEmpty()) {
+				request.setAttribute("errorePassword", "Inserisci la password.");
+				return "accessoFallito";
+			}
+			
+			this.utente = this.facadeUtente.findUtente(username);
+			
+			if(this.utente==null) {
+				request.setAttribute("erroreAccesso", "Non è stato trovato alcun account con questo username.\n"+
+									"Riprova reinserendo i dati richiesti.");
+				return "accessoFallito";
+			}
+
+			if (!this.utente.getPassword().equals(password)) {
+				request.setAttribute(
+						"erroreAccesso",
+						"L'username e/o la password inseriti non corrispondono ad alcun account.\n"
+								+ "Se consideri i dati inseriti corretti, riprova dopo aver eliminato i cookies e i contenuti della cache del tuo browser.");
+				return "accessoFallito";
+			} else {
+				HttpSession session = request.getSession();
+				this.utente.setIncompilato(!facadeQuestionario.existQuestionario(username));
+				session.setAttribute("utente", this.utente);
+				return "accessoEffettuato";
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errore", "Errore nel Login");
+			return "errore";
 		}
 	}
 

@@ -1,102 +1,95 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import model.facade.FacadeLuoghiVisitati;
-import model.facade.FacadeLuogo;
-import model.facade.FacadeQuestionario;
-import model.facade.FacadeTagRimossi;
 
 public class Utente {
-	private String username;
+	protected String username;
 	private String password;
 	private String email;
 	private String nome;
 	private String cognome;
-	private List<Luogo> luoghiVisitabili;
 	private boolean incompilato;
+	protected List<Luogo> luoghiVisitabili;
 
 	public Utente() {
 		super();
+		this.luoghiVisitabili = new ArrayList<Luogo>();
 	}
 
 	public Utente(String username, String password) {
 		super();
-		FacadeLuogo facadeLuogo = new FacadeLuogo();
 		this.username = username;
 		this.password = password;
-		this.luoghiVisitabili = filtraLuoghi(facadeLuogo.getLuoghi());
 		this.incompilato = true;
+		this.luoghiVisitabili = new ArrayList<Luogo>();
 	}
 
 	public Utente(String username, String password, String email, String nome, String cognome) {
 		super();
-		FacadeLuogo facadeLuogo = new FacadeLuogo();
 		this.username = username;
 		this.password = password;
 		this.email = email;
 		this.nome = nome;
 		this.cognome = cognome;
-		this.luoghiVisitabili = filtraLuoghi(facadeLuogo.getLuoghi());
 		this.incompilato = true;
-	}
+		this.luoghiVisitabili = new ArrayList<Luogo>();
+	}	
 
 	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
+		return username;
 	}
 
 	public String getPassword() {
-		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
+		return password;
 	}
 
 	public String getEmail() {
-		return this.email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+		return email;
 	}
 
 	public String getNome() {
-		return this.nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+		return nome;
 	}
 
 	public String getCognome() {
-		return this.cognome;
+		return cognome;
 	}
 
-	public void setCognome(String cognome) {
-		this.cognome = cognome;
+	public boolean isIncompilato() {
+		return incompilato;
 	}
 
 	public List<Luogo> getLuoghiVisitabili() {
 		return luoghiVisitabili;
 	}
 
-	public boolean getIncompilato() {
-		return this.incompilato;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public void setLuoghiVisitabili(List<Luogo> luoghiVisitabili) {
-		this.luoghiVisitabili = luoghiVisitabili;
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
 	}
 
 	public void setIncompilato(boolean incompilato) {
 		this.incompilato = incompilato;
+	}
+
+	public void setLuoghiVisitabili(List<Luogo> luoghiVisitabili) {
+		this.luoghiVisitabili = luoghiVisitabili;
 	}
 
 	@Override
@@ -160,63 +153,4 @@ public class Utente {
 		this.setLuoghiVisitabili(list);
 	}
 
-	// Filtraggio della lista secondo i gusti
-	private List<Luogo> filtraLuoghi(List<Luogo> luoghi) {
-
-		luoghi = this.rimuoviVisitati(luoghi);
-		luoghi = this.rimuoviSgraditi(luoghi);
-		luoghi = this.rimuoviQuestionario(luoghi);
-		return luoghi;
-	}
-
-	private List<Luogo> rimuoviVisitati(List<Luogo> luoghiVisitabili) {
-		FacadeLuoghiVisitati facadeLuoghiVisitati = new FacadeLuoghiVisitati();
-		FacadeLuogo facadeLuogo = new FacadeLuogo();
-
-		for (String string : facadeLuoghiVisitati.getLuoghiVisitati(this.username)) {
-			Luogo luogo = facadeLuogo.getLuogoById(string);
-			luoghiVisitabili.remove(luogo);
-		}
-		return luoghiVisitabili;
-	}
-
-	private List<Luogo> rimuoviSgraditi(List<Luogo> luoghiVisitabili) {
-		FacadeTagRimossi facadeTagRimossi = new FacadeTagRimossi();
-		FacadeLuogo facadeLuogo = new FacadeLuogo();
-
-		Map<String, Integer> tags = facadeTagRimossi.getTagRimossi(this.username);
-		Set<String> keys = tags.keySet();
-
-		for (String key : keys) {
-			for (int i = tags.get(key); i > 0; i--) {
-				List<Luogo> luoghi = facadeLuogo.getLuogoByCategoria(key, i);
-
-				if (luoghi != null)
-					luoghiVisitabili.removeAll(luoghi);
-			}
-		}
-
-		return luoghiVisitabili;
-	}
-
-	private List<Luogo> rimuoviQuestionario(List<Luogo> luoghiVisitabili) {
-		FacadeQuestionario facadeQuestionario = new FacadeQuestionario();
-		FacadeLuogo facadeLuogo = new FacadeLuogo();
-
-		Map<String, Integer> preferenze = facadeQuestionario.getQuestionarioByID(this.username).getPreferenze();
-		if (preferenze != null) {
-			Set<String> keys = preferenze.keySet();
-
-			for (String key : keys) {
-				for (int i = preferenze.get(key); i > 0; i--) {
-					List<Luogo> luoghi = facadeLuogo.getLuogoByCategoria(key, i);
-
-					if (luoghi != null)
-						luoghiVisitabili.removeAll(luoghi);
-				}
-			}
-		}
-
-		return luoghiVisitabili;
-	}
 }

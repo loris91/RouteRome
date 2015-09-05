@@ -18,21 +18,28 @@ public class AzioneConfermaItinerario extends Azione{
 
 	@Override
 	public String esegui(HttpServletRequest request, HttpServletResponse response) {
-		FacadeLuoghiVisitati facadeLuoghiVisitati = new FacadeLuoghiVisitati();
+		try {
+			FacadeLuoghiVisitati facadeLuoghiVisitati = new FacadeLuoghiVisitati();
+			
+			HttpSession session = request.getSession();
+			Utente utente = (Utente) session.getAttribute("utente");
+			List<Item> luoghiRaccomandati = (List<Item>) session.getAttribute("itinerario");
+			
+			facadeLuoghiVisitati.addList(utente.getUsername(), getListaIdLuoghiRaccomandati(luoghiRaccomandati));
+			
+			session.setAttribute("itinerario", luoghiRaccomandati);		
+			
+			//Converto la lista con Json 
+			String json = new Gson().toJson(luoghiRaccomandati );
+			request.setAttribute("mete", json);
+			
+			return "confermaPositiva";
 		
-		HttpSession session = request.getSession();
-		Utente utente = (Utente) session.getAttribute("utente");
-		List<Item> luoghiRaccomandati = (List<Item>) session.getAttribute("itinerario");
-		
-		facadeLuoghiVisitati.addList(utente.getUsername(), getListaIdLuoghiRaccomandati(luoghiRaccomandati));
-		
-		session.setAttribute("itinerario", luoghiRaccomandati);		
-		
-		//Converto la lista con Json 
-		String json = new Gson().toJson(luoghiRaccomandati );
-		request.setAttribute("mete", json);
-		
-		return "confermaPositiva";
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errore", "Errore nella conferma dell'itinerario");
+			return "errore";
+		}
 	}
 
 	private List<String> getListaIdLuoghiRaccomandati(List<Item> luoghiRaccomandati) {
@@ -42,8 +49,7 @@ public class AzioneConfermaItinerario extends Azione{
 			if (item instanceof Luogo) {
 				listaIdLuoghiRaccomandati.add(((Luogo) item).getId());
 			}
-		}
-		
+		}		
 		return listaIdLuoghiRaccomandati;
 	}
 

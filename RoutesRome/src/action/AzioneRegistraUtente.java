@@ -14,22 +14,28 @@ public class AzioneRegistraUtente extends Azione {
 	private Utente utente;
 
 	@Override
-	public String esegui(HttpServletRequest request,
-			HttpServletResponse response) {
-		HttpSession sessione = request.getSession();
-		this.facade = new FacadeUtente();
-		helper = new UtenteHelper(request);
+	public String esegui(HttpServletRequest request,HttpServletResponse response) {
+		try {
+			HttpSession sessione = request.getSession();
+			this.facade = new FacadeUtente();
+			helper = new UtenteHelper(request);
 
-		if (helper.verifica()) {
-			this.utente = helper.makeUtente();
-			if (!facade.addUtente(utente)) {
-				request.setAttribute("erroreUsername", "Esiste gia' un utente con questo Username");
+			if (helper.verifica()) {
+				this.utente = helper.makeUtente();
+				if (!facade.addUtente(utente)) {
+					request.setAttribute("erroreUsername", "Esiste gia' un utente con questo Username");
+					return "registrazioneFallita";
+				}
+				sessione.setAttribute("utente", this.utente);
+				return "registrazionePositiva";
+			} else {
 				return "registrazioneFallita";
 			}
-			sessione.setAttribute("utente", this.utente);
-			return "registrazionePositiva";
-		} else {
-			return "registrazioneFallita";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			request.setAttribute("errore", "Errore nella registrazione dell'utente");
+			return "errore";
 		}
 	}
 
