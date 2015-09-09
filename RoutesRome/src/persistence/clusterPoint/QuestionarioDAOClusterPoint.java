@@ -35,12 +35,17 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 			Map<String, Integer> preferene = questionario.getPreferenze();
 
 			List<String> docs = new ArrayList<String>();
-			docs.add("<document><id>" + id + "</id><musei>" + preferene.get("Musei") + "</musei><chiesa>"
-					+ preferene.get("Chiesa") + "</chiesa><sitiStorici>" + preferene.get("SitiStorici")
-					+ "</sitiStorici><arene>" + preferene.get("Arene") + "</arene><edificiArchitettonici>"
-					+ preferene.get("EdificiArchitettonici") + "</edificiArchitettonici><sitiReligiosi>"
-					+ preferene.get("SitiReligiosi") + "</sitiReligiosi><villa>" + preferene.get("Villa")
-					+ "</villa></document>");
+			docs.add("<document><id>" + id + "</id><arena>" + preferene.get("Arena") + "</arena><castello>"
+			+ preferene.get("Castello") + "</castello><chiesa>" + preferene.get("Chiesa") + "</chiesa><cimitero>" 
+			+ preferene.get("Cimitero") + "</cimitero><edificio>" + preferene.get("EdificioArchitettonico") 
+			+ "</edificio><fontana>" + preferene.get("Fontana") + "</fontana><giardino>" + preferene.get("Giardino") 
+			+ "</giardino><monumento>" + preferene.get("Monumento") + "</monumento><marte>" + preferene.get("MuseoArte") 
+			+ "</marte><msettore>" + preferene.get("MuseoSettore") + "</msettore><mstorico>" + preferene.get("MuseoStorico") 
+			+ "</mstorico><palazzo>" + preferene.get("Palazzo") + "</palazzo><parco>" + preferene.get("ParchiNatura") 
+			+ "</parco><passeggiata>" + preferene.get("PasseggiateSitoStorico") + "</passeggiata><piazza>" + preferene.get("Piazza") 
+			+ "</piazza><ponte>" + preferene.get("Ponte") + "</ponte><rovine>" + preferene.get("RovineAntiche") + "</rovine><sreligioso>" 
+			+ preferene.get("SitoReligioso") + "</sreligioso><sstorico>" + preferene.get("SitoStorico") + "</sstorico><villa>"
+			+ preferene.get("Villa") + "</villa></document>");
 
 			// Create Insert request
 			CPSInsertRequest insert_req = new CPSInsertRequest();
@@ -86,22 +91,49 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 
 				for (Element element : documents) {
 					NodeList attributes = element.getChildNodes();
-					int musei = Integer.parseInt(attributes.item(1).getTextContent());
-					int chiesa = Integer.parseInt(attributes.item(2).getTextContent());
-					int sitiStorici = Integer.parseInt(attributes.item(3).getTextContent());
-					int arene = Integer.parseInt(attributes.item(4).getTextContent());
-					int edificiArchitettonici = Integer.parseInt(attributes.item(5).getTextContent());
-					int sitiReligiosi = Integer.parseInt(attributes.item(6).getTextContent());
-					int villa = Integer.parseInt(attributes.item(7).getTextContent());
+					int arena = Integer.parseInt(attributes.item(1).getTextContent());
+					int castello = Integer.parseInt(attributes.item(2).getTextContent());
+					int chiesa = Integer.parseInt(attributes.item(3).getTextContent());
+					int cimitero = Integer.parseInt(attributes.item(4).getTextContent());
+					int edificio = Integer.parseInt(attributes.item(5).getTextContent());
+					int fontana = Integer.parseInt(attributes.item(6).getTextContent());
+					int giardino = Integer.parseInt(attributes.item(7).getTextContent());
+					int monumento = Integer.parseInt(attributes.item(8).getTextContent());
+					int marte = Integer.parseInt(attributes.item(9).getTextContent());
+					int msettore = Integer.parseInt(attributes.item(10).getTextContent());
+					int mstorico = Integer.parseInt(attributes.item(11).getTextContent());
+					int palazzo = Integer.parseInt(attributes.item(12).getTextContent());
+					int parco = Integer.parseInt(attributes.item(13).getTextContent());
+					int passeggiata = Integer.parseInt(attributes.item(14).getTextContent());
+					int piazza = Integer.parseInt(attributes.item(15).getTextContent());
+					int ponte = Integer.parseInt(attributes.item(16).getTextContent());
+					int rovine = Integer.parseInt(attributes.item(17).getTextContent());
+					int sreligioso = Integer.parseInt(attributes.item(18).getTextContent());
+					int sstorico = Integer.parseInt(attributes.item(19).getTextContent());
+					int villa = Integer.parseInt(attributes.item(20).getTextContent());
+					
 					Map<String, Integer> preferenze = new HashMap<String, Integer>();
-					preferenze.put("Musei", musei);
+					
+					preferenze.put("Arena", arena);
+					preferenze.put("Castello", castello);
 					preferenze.put("Chiesa", chiesa);
-					preferenze.put("SitiStorici", sitiStorici);
-					preferenze.put("Arene", arene);
-					preferenze.put("EdificiArchitettonici", edificiArchitettonici);
-					preferenze.put("SitiReligiosi", sitiReligiosi);
+					preferenze.put("Cimitero", cimitero);
+					preferenze.put("EdificioArchitettonico", edificio);
+					preferenze.put("Fontana", fontana);
+					preferenze.put("Giardino", giardino);
+					preferenze.put("Monumento", monumento);
+					preferenze.put("MuseoArte", marte);
+					preferenze.put("MuseoSettore", msettore);
+					preferenze.put("MuseoStorico", mstorico);
+					preferenze.put("Palazzo", palazzo);
+					preferenze.put("ParchiNatura", parco);
+					preferenze.put("PasseggiateSitoStorico", passeggiata);
+					preferenze.put("Piazza", piazza);
+					preferenze.put("Ponte", ponte);
+					preferenze.put("RovineAntiche", rovine);
+					preferenze.put("SitoReligioso", sreligioso);
+					preferenze.put("SitoStorico", sstorico);
 					preferenze.put("Villa", villa);
-					questionario = new Questionario(id, preferenze);
 					esito = true;
 				}
 			}

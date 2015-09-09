@@ -85,7 +85,6 @@ public class UtenteProxy extends Utente {
 				}
 			}
 		}
-
 		return luoghiVisitabili;
 	}
 
