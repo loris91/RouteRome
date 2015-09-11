@@ -1,7 +1,6 @@
 package model.helper;
 
 import java.util.Map;
-import java.util.Set;
 
 import model.Luogo;
 import model.facade.FacadeTagRimossi;
@@ -18,9 +17,7 @@ public class LuoghiSgraditiHelper {
 		Map<String, Integer> tagLuogo = luogo.getTags();
 		Map<String, Integer> tagRimossi = facadeTagRimossi.getTagRimossi(idUtente);
 
-		Set<String> keys = tagLuogo.keySet();
-
-		for (String key : keys) {
+		for (String key : tagLuogo.keySet()) {
 			Integer value = tagLuogo.get(key);
 			
 			if (tagRimossi.containsKey(key)) {

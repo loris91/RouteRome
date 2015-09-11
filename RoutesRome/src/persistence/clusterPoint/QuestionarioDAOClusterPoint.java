@@ -37,14 +37,14 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 			List<String> docs = new ArrayList<String>();
 			docs.add("<document><id>" + id + "</id><arena>" + preferene.get("Arena") + "</arena><castello>"
 			+ preferene.get("Castello") + "</castello><chiesa>" + preferene.get("Chiesa") + "</chiesa><cimitero>" 
-			+ preferene.get("Cimitero") + "</cimitero><edificio>" + preferene.get("EdificioArchitettonico") 
+			+ preferene.get("Cimitero") + "</cimitero><edificio>" + preferene.get("Edificio Architettonico") 
 			+ "</edificio><fontana>" + preferene.get("Fontana") + "</fontana><giardino>" + preferene.get("Giardino") 
-			+ "</giardino><monumento>" + preferene.get("Monumento") + "</monumento><marte>" + preferene.get("MuseoArte") 
-			+ "</marte><msettore>" + preferene.get("MuseoSettore") + "</msettore><mstorico>" + preferene.get("MuseoStorico") 
-			+ "</mstorico><palazzo>" + preferene.get("Palazzo") + "</palazzo><parco>" + preferene.get("ParchiNatura") 
-			+ "</parco><passeggiata>" + preferene.get("PasseggiateSitoStorico") + "</passeggiata><piazza>" + preferene.get("Piazza") 
-			+ "</piazza><ponte>" + preferene.get("Ponte") + "</ponte><rovine>" + preferene.get("RovineAntiche") + "</rovine><sreligioso>" 
-			+ preferene.get("SitoReligioso") + "</sreligioso><sstorico>" + preferene.get("SitoStorico") + "</sstorico><villa>"
+			+ "</giardino><monumento>" + preferene.get("Monumento") + "</monumento><marte>" + preferene.get("Museo d'Arte") 
+			+ "</marte><msettore>" + preferene.get("Museo di Settore") + "</msettore><mstorico>" + preferene.get("Museo Storico") 
+			+ "</mstorico><palazzo>" + preferene.get("Palazzo") + "</palazzo><parco>" + preferene.get("Parchi e Natura") 
+			+ "</parco><passeggiata>" + preferene.get("Passeggiate in Sito Storico") + "</passeggiata><piazza>" + preferene.get("Piazza") 
+			+ "</piazza><ponte>" + preferene.get("Ponte") + "</ponte><rovine>" + preferene.get("Rovine Antiche") + "</rovine><sreligioso>" 
+			+ preferene.get("Sito Religioso") + "</sreligioso><sstorico>" + preferene.get("Sito Storico") + "</sstorico><villa>"
 			+ preferene.get("Villa") + "</villa></document>");
 
 			// Create Insert request

@@ -3,15 +3,13 @@ package persistence.proxy;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import model.Luogo;
 import model.Utente;
-import model.facade.FacadeLuoghiVisitati;
-import model.facade.FacadeLuogo;
-import model.facade.FacadeQuestionario;
-import model.facade.FacadeTagRimossi;
+import persistence.clusterPoint.LuoghiVisitatiDAOClusterPoint;
 import persistence.clusterPoint.LuogoDAOClusterPoint;
+import persistence.clusterPoint.QuestionarioDAOClusterPoint;
+import persistence.clusterPoint.TagRimossiDAOClusterPoint;
 
 public class UtenteProxy extends Utente {
 	private boolean caricato = false;
@@ -19,8 +17,8 @@ public class UtenteProxy extends Utente {
 	public List<Luogo> getLuoghiVisitabili() {
 		if (!this.caricato) {
 			List<Luogo> luoghiVisitabili = new ArrayList<Luogo>();
-			LuogoDAOClusterPoint dao = new LuogoDAOClusterPoint();
-			luoghiVisitabili = filtraLuoghi(dao.findAll());
+			LuogoDAOClusterPoint luogoDao = new LuogoDAOClusterPoint();
+			luoghiVisitabili = filtraLuoghi(luogoDao.findAll());
 			this.setLuoghiVisitabili(luoghiVisitabili);
 			return luoghiVisitabili;
 		}
@@ -37,54 +35,66 @@ public class UtenteProxy extends Utente {
 
 	// Elimina dai luoghi visitabili quelli che l'utente ha gia visitato
 	private List<Luogo> rimuoviVisitati(List<Luogo> luoghiVisitabili) {
-		FacadeLuoghiVisitati facadeLuoghiVisitati = new FacadeLuoghiVisitati();
-		FacadeLuogo facadeLuogo = new FacadeLuogo();
+		LuoghiVisitatiDAOClusterPoint luoghiVisiratiDAO = new LuoghiVisitatiDAOClusterPoint();
+		LuogoDAOClusterPoint luogoDAO = new LuogoDAOClusterPoint();
 
-		for (String string : facadeLuoghiVisitati.getLuoghiVisitati(this.username)) {
-			Luogo luogo = facadeLuogo.getLuogoById(string);
+		for (String string : luoghiVisiratiDAO.findByID(super.username)) {
+			Luogo luogo = luogoDAO.getLuogoByID(string);
 			luoghiVisitabili.remove(luogo);
 		}
+
 		return luoghiVisitabili;
 	}
 
-	
-	//Elimina dai luoghi vititabili quelli che l'utente ha scartato dalla raccomandazione
+	// Elimina dai luoghi vititabili quelli che l'utente ha scartato dalla
+	// raccomandazione
 	private List<Luogo> rimuoviSgraditi(List<Luogo> luoghiVisitabili) {
-		FacadeTagRimossi facadeTagRimossi = new FacadeTagRimossi();
-		FacadeLuogo facadeLuogo = new FacadeLuogo();
+		TagRimossiDAOClusterPoint tagRimossiDAO = new TagRimossiDAOClusterPoint();
+		Map<String, Integer> tags = tagRimossiDAO.findByUtente(super.username);
 
-		Map<String, Integer> tags = facadeTagRimossi.getTagRimossi(this.username);
-		Set<String> keys = tags.keySet();
+		List<Luogo> luoghiDaCanc = new ArrayList<Luogo>();
 
-		for (String key : keys) {
-			for (int i = tags.get(key); i > 0; i--) {
-				List<Luogo> luoghi = facadeLuogo.getLuogoByCategoria(key, i);
-
-				if (luoghi != null)
-					luoghiVisitabili.removeAll(luoghi);
-			}
-		}
-		return luoghiVisitabili;
-	}
-
-	// Filtra i luoghi visitabili in base alle preferenze selezionate nel questionario
-	private List<Luogo> rimuoviQuestionario(List<Luogo> luoghiVisitabili) {
-		FacadeQuestionario facadeQuestionario = new FacadeQuestionario();
-		FacadeLuogo facadeLuogo = new FacadeLuogo();
-
-		Map<String, Integer> preferenze = facadeQuestionario.getQuestionarioByID(super.username).getPreferenze();
-		if (preferenze != null) {
-			Set<String> keys = preferenze.keySet();
-
-			for (String key : keys) {
-				for (int i = preferenze.get(key); i > 0; i--) {
-					List<Luogo> luoghi = facadeLuogo.getLuogoByCategoria(key, i);
-
-					if (luoghi != null)
-						luoghiVisitabili.removeAll(luoghi);
+		for (Luogo luogo : luoghiVisitabili) {
+			Map<String, Integer> tagsLuogo = luogo.getTags();
+			for (String tipo : tagsLuogo.keySet()) {
+				int value = tagsLuogo.get(tipo);
+				if (tags.containsKey(tipo)) {
+					if (value <= tags.get(tipo)) {
+						luoghiDaCanc.add(luogo);
+					}
 				}
 			}
 		}
+
+		luoghiVisitabili.removeAll(luoghiDaCanc);
+
+		return luoghiVisitabili;
+	}
+
+	// Filtra i luoghi visitabili in base alle preferenze selezionate nel
+	// questionario
+	private List<Luogo> rimuoviQuestionario(List<Luogo> luoghiVisitabili) {
+		QuestionarioDAOClusterPoint questionarioDAO = new QuestionarioDAOClusterPoint();
+		Map<String, Integer> preferenze = questionarioDAO.findByID(super.username).getPreferenze();
+		List<Luogo> luoghiDaCanc = new ArrayList<Luogo>();
+
+		if (preferenze != null) {
+			for (Luogo luogo : luoghiVisitabili) {
+				Map<String, Integer> tagsLuogo = luogo.getTags();
+				for (String tipo : tagsLuogo.keySet()) {
+					int value = tagsLuogo.get(tipo);
+					if (preferenze.containsKey(tipo)) {
+						if (value <= preferenze.get(tipo)) {
+							luoghiDaCanc.add(luogo);
+						}
+					}
+
+				}
+			}
+		}
+
+		luoghiVisitabili.removeAll(luoghiDaCanc);
+
 		return luoghiVisitabili;
 	}
 

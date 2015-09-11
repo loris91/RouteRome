@@ -45,65 +45,65 @@ public class AzioneConfermaQuestionario extends Azione {
 			String villa=(String)request.getParameter("villa");
 			
 			if (arena==null)
-				arena = "3";
+				arena = "0";
 			if (castello==null)
-				castello = "3";
+				castello = "0";
 			if (chiesa==null)
-				chiesa = "3";
+				chiesa = "0";
 			if (cimitero==null)
-				cimitero = "3";
+				cimitero = "0";
 			if (edificio==null)
-				edificio = "3";
+				edificio = "0";
 			if (fontana==null)
-				fontana = "3";
+				fontana = "0";
 			if (giardino==null)
-				giardino = "3";
+				giardino = "0";
 			if (monumento==null)
-				monumento = "3";
+				monumento = "0";
 			if (marte==null)
-				marte = "3";
+				marte = "0";
 			if (msettore==null)
-				msettore = "3";
+				msettore = "0";
 			if (mstorico==null)
-				mstorico = "3";
+				mstorico = "0";
 			if (palazzo==null)
-				palazzo = "3";
+				palazzo = "0";
 			if (parco==null)
-				parco = "3";
+				parco = "0";
 			if (passeggiata==null)
-				passeggiata = "3";
+				passeggiata = "0";
 			if (piazza==null)
-				piazza = "3";
+				piazza = "0";
 			if (ponte==null)
-				ponte = "3";
+				ponte = "0";
 			if (rovine==null)
-				rovine = "3";
+				rovine = "0";
 			if (sreligioso==null)
-				sreligioso = "3";
+				sreligioso = "0";
 			if (sstorico==null)
-				sstorico = "3";
+				sstorico = "0";
 			if (villa==null)
-				villa = "3";
+				villa = "0";
 			
 			preferenze.put("Arena", Integer.parseInt(arena));
 			preferenze.put("Castello", Integer.parseInt(castello));
 			preferenze.put("Chiesa", Integer.parseInt(chiesa));
 			preferenze.put("Cimitero", Integer.parseInt(cimitero));
-			preferenze.put("EdificioArchitettonico", Integer.parseInt(edificio));
+			preferenze.put("Edificio Architettonico", Integer.parseInt(edificio));
 			preferenze.put("Fontana", Integer.parseInt(fontana));
 			preferenze.put("Giardino", Integer.parseInt(giardino));
 			preferenze.put("Monumento", Integer.parseInt(monumento));
-			preferenze.put("MuseoArte", Integer.parseInt(marte));
-			preferenze.put("MuseoSettore", Integer.parseInt(msettore));
-			preferenze.put("MuseoStorico", Integer.parseInt(mstorico));
+			preferenze.put("Museo d'Arte", Integer.parseInt(marte));
+			preferenze.put("Museo di Settore", Integer.parseInt(msettore));
+			preferenze.put("Museo Storico", Integer.parseInt(mstorico));
 			preferenze.put("Palazzo", Integer.parseInt(palazzo));
-			preferenze.put("ParchiNatura", Integer.parseInt(parco));
-			preferenze.put("PasseggiateSitoStorico", Integer.parseInt(passeggiata));
+			preferenze.put("Parchi e Natura", Integer.parseInt(parco));
+			preferenze.put("Passeggiate in Sito Storico", Integer.parseInt(passeggiata));
 			preferenze.put("Piazza", Integer.parseInt(piazza));
 			preferenze.put("Ponte", Integer.parseInt(ponte));
-			preferenze.put("RovineAntiche", Integer.parseInt(rovine));
-			preferenze.put("SitoReligioso", Integer.parseInt(sreligioso));
-			preferenze.put("SitoStorico", Integer.parseInt(sstorico));
+			preferenze.put("Rovine Antiche", Integer.parseInt(rovine));
+			preferenze.put("Sito Religioso", Integer.parseInt(sreligioso));
+			preferenze.put("Sito Storico", Integer.parseInt(sstorico));
 			preferenze.put("Villa", Integer.parseInt(villa));
 
 			Questionario questionario = new Questionario(utente.getUsername(), preferenze);
