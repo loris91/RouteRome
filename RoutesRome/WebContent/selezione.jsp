@@ -17,7 +17,7 @@
 	
 		<fieldset>
 			<legend>
-				<h3>Selezione Orari</h3>
+				<h3>Richiesta Itinerario</h3>
 			</legend>
 			<p>Ciao ${utente.nome}!
 			
