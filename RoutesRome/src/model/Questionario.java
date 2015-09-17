@@ -2,8 +2,6 @@ package model;
 
 import java.util.Map;
 
-//Ora come ora neanche serve visto che interagirà solo con il DB TagRImossi. Se in futuro vogliamo renderli persistenti allora DAJE!
-
 public class Questionario {
 
 	private String id;
