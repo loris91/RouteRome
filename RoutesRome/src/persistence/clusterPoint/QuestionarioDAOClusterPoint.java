@@ -118,22 +118,24 @@ public class QuestionarioDAOClusterPoint implements QuestionarioDAO {
 					preferenze.put("Castello", castello);
 					preferenze.put("Chiesa", chiesa);
 					preferenze.put("Cimitero", cimitero);
-					preferenze.put("EdificioArchitettonico", edificio);
+					preferenze.put("Edificio Architettonico", edificio);
 					preferenze.put("Fontana", fontana);
 					preferenze.put("Giardino", giardino);
 					preferenze.put("Monumento", monumento);
-					preferenze.put("MuseoArte", marte);
-					preferenze.put("MuseoSettore", msettore);
-					preferenze.put("MuseoStorico", mstorico);
+					preferenze.put("Museo d'Arte", marte);
+					preferenze.put("Museo di Settore", msettore);
+					preferenze.put("Museo Storico", mstorico);
 					preferenze.put("Palazzo", palazzo);
-					preferenze.put("ParchiNatura", parco);
-					preferenze.put("PasseggiateSitoStorico", passeggiata);
+					preferenze.put("Parchi e Natura", parco);
+					preferenze.put("Passeggiate in Sito Storico", passeggiata);
 					preferenze.put("Piazza", piazza);
 					preferenze.put("Ponte", ponte);
-					preferenze.put("RovineAntiche", rovine);
-					preferenze.put("SitoReligioso", sreligioso);
-					preferenze.put("SitoStorico", sstorico);
+					preferenze.put("Rovine Antiche", rovine);
+					preferenze.put("Sito Religioso", sreligioso);
+					preferenze.put("Sito Storico", sstorico);
 					preferenze.put("Villa", villa);
+					
+					questionario = new Questionario(id, preferenze);
 					esito = true;
 				}
 			}

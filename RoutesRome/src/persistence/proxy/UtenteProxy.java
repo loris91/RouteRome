@@ -78,6 +78,7 @@ public class UtenteProxy extends Utente {
 		Map<String, Integer> preferenze = questionarioDAO.findByID(super.username).getPreferenze();
 		List<Luogo> luoghiDaCanc = new ArrayList<Luogo>();
 
+		System.out.println(super.username.toString());
 		if (preferenze != null) {
 			for (Luogo luogo : luoghiVisitabili) {
 				Map<String, Integer> tagsLuogo = luogo.getTags();
