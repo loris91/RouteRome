@@ -33,18 +33,17 @@ public class AzioneModificaItinerario extends Azione {
 
 			String[] idsLuoghiRimossi = request.getParameterValues("sceltaLuoghi");
 
-			if (idsLuoghiRimossi == null) {
-				System.out.println("SCELTA LUOGHI NULL");
-			}
+			if (idsLuoghiRimossi != null) {
+				for (String luogo : idsLuoghiRimossi) {
+					int idLuogo = Integer.parseInt(luogo);
+					Luogo luogoSgradito = (Luogo) luoghiRaccomandati.get(idLuogo);
+					luoghiSgraditi.add(luogoSgradito);
+					luoghiSgraditiHelper.addTags(luogoSgradito, utente.getUsername());
+				}
 
-			for (String luogo : idsLuoghiRimossi) {
-				int idLuogo = Integer.parseInt(luogo);
-				Luogo luogoSgradito = (Luogo) luoghiRaccomandati.get(idLuogo);
-				luoghiSgraditi.add(luogoSgradito);
-				luoghiSgraditiHelper.addTags(luogoSgradito, utente.getUsername());
-			}
+				utente.removeItems(luoghiSgraditi);
 
-			utente.removeItems(luoghiSgraditi);
+			}
 
 			Itinerario itinerario = new Itinerario(utente, posizione, inizio, fine);
 			List<Item> luoghiDaVisitare = itinerario.calcolaItinerario();
@@ -60,7 +59,7 @@ public class AzioneModificaItinerario extends Azione {
 			request.setAttribute("mete", json);
 
 			return "modificaPositiva";
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			request.setAttribute("errore", "Errore nella modifica dell'itinerario");
