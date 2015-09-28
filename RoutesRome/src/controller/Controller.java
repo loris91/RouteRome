@@ -99,7 +99,7 @@ public class Controller extends HttpServlet {
 		this.esito2pagina.put("accessoFallito", "/index.jsp");
 		this.esito2pagina.put("accessoEffettuato", "/selezione.jsp");
 		this.esito2pagina.put("registrazioneFallita", "/registrazione.jsp");
-		this.esito2pagina.put("registrazionePositiva", "/selezione.jsp");
+		this.esito2pagina.put("registrazionePositiva", "/index.jsp");
 		this.esito2pagina.put("raccomandazioneFallita", "/selezione.jsp");
 		this.esito2pagina.put("raccomandazionePositiva", "/mappa.jsp");
 		this.esito2pagina.put("modificaFallita", "/error.jsp");
